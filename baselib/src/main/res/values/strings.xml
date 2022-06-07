@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BaseApp</string>
+    <string name="no_internet">No internet</string>
+
+
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_confirm">OK</string>
+</resources>
