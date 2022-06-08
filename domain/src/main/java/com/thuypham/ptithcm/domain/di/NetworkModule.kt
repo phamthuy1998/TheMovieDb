@@ -1,14 +1,13 @@
-package com.thuypham.ptithcm.data.di
+package com.thuypham.ptithcm.domain.di
 
-import android.content.Context
 import androidx.databinding.library.BuildConfig
 import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.thuypham.ptithcm.data.remote.api.MainApiService
+import com.thuypham.ptithcm.data.remote.api.MovieV3Api
+import com.thuypham.ptithcm.data.util.ApiHelper
 import com.thuypham.ptithcm.data.util.Constant
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,21 +15,20 @@ import java.util.concurrent.TimeUnit
 
 val networkModule = module {
     single { provideGson() }
-    single { provideClient(get()) }
-    factory { createService(get(named(Constant.MAIN_API)), MainApiService::class.java) }
-    scope<MainApiService> {
-        factory { params -> provideRetrofit(params[0], get()) } // Only 1 params
-    }
+    single { provideClient() }
+    single { createService(get(), MovieV3Api::class.java) }
+    single { provideRetrofit(get()) }
 }
+
 
 
 inline fun <reified T> createService(retrofit: Retrofit, apiService: Class<T>): T {
     return retrofit.create(apiService)
 }
 
-fun provideRetrofit(baseUrl: String, client: OkHttpClient): Retrofit {
+fun provideRetrofit(client: OkHttpClient): Retrofit {
     return Retrofit.Builder()
-        .baseUrl(baseUrl)
+        .baseUrl(ApiHelper.baseMovieV3Url())
         .addConverterFactory(GsonConverterFactory.create())
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
@@ -38,7 +36,7 @@ fun provideRetrofit(baseUrl: String, client: OkHttpClient): Retrofit {
         .build()
 }
 
-fun provideClient(context: Context): OkHttpClient {
+fun provideClient(): OkHttpClient {
     val builder =
         OkHttpClient.Builder()
             .callTimeout(Constant.CONNECTION_TIME_OUT_SECOND, TimeUnit.SECONDS)
@@ -56,6 +54,5 @@ fun provideClient(context: Context): OkHttpClient {
 }
 
 fun provideGson(): Gson {
-
     return Gson()
 }

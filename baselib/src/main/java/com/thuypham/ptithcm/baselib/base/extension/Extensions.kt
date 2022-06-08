@@ -8,10 +8,13 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.Uri
 import android.net.wifi.WifiManager
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
+import com.thuypham.ptithcm.baselib.BuildConfig
 import java.io.File
 import java.io.FileInputStream
 import java.net.InetAddress
@@ -22,6 +25,11 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.util.*
+
+fun <T> getViewBinding(inflater: LayoutInflater, clazz: Class<T>) =
+    clazz.getMethod("inflate", LayoutInflater::class.java)
+        .invoke(null, inflater)
+        .convert<T>()
 
 fun Context.getSharePref(): SharedPreferences {
     return getSharedPreferences(packageName, Context.MODE_PRIVATE)
@@ -183,5 +191,11 @@ fun String.toLongNumber(): Long? {
         toLong()
     } catch (e: Exception) {
         null
+    }
+}
+
+fun String.showLog(tag: String = "CUSTOM_LOG") {
+    if (BuildConfig.DEBUG) {
+        Log.d(tag, this)
     }
 }

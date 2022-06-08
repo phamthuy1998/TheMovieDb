@@ -31,5 +31,6 @@ android {
 
 dependencies {
     api project(":baselib")
+    api project(":data")
 
 }

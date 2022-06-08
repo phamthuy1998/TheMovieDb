@@ -12,5 +12,5 @@ abstract class BaseUseCaseSuspendNoParam<Result> {
 
 
 abstract class BaseUseCaseNoParam<Result> {
-    abstract  operator fun invoke(): Result
+    abstract suspend operator fun invoke(): Result
 }
