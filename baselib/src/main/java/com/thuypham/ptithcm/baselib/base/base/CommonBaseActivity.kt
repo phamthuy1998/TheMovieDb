@@ -25,7 +25,7 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
     protected lateinit var binding: T
     private lateinit var dialog: Dialog
     protected var isAutoHideKeyboard = true
-    private val isHandleNetworkState = true
+    private val isHandleNetworkState = false
     private lateinit var connectivityManager: ConnectivityManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +33,7 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
         binding = DataBindingUtil.setContentView(this, layoutId)
         binding.lifecycleOwner = this
         connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        getData()
         setupLogic()
         setupView()
         setupDataObserver()
@@ -48,6 +49,7 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
 
     }
 
+    open fun getData(){}
     open fun setupLogic() {}
     abstract fun setupView()
     open fun setupDataObserver() {}

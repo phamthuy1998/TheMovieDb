@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">BaseApp</string>
+    <string name="app_name">Movie Db</string>
+    <string name="bot_nav_home">Home</string>
+    <string name="bot_nav_search">Search</string>
+    <string name="bot_nav_watch_list">Watch list</string>
+    <string name="bot_nav_profile">Profile</string>
 </resources>
