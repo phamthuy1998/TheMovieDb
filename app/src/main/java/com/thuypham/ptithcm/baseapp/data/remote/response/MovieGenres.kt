@@ -6,7 +6,6 @@ import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.model.CategorySubItem
-import com.thuypham.ptithcm.baseapp.ui.adapter.ItemModel
 
 @Parcelize
 data class MovieGenres(
@@ -21,8 +20,5 @@ data class MovieGenre(
     var id: Int?,
     @SerializedName("name")
     var name: String?
-) : ItemModel, Parcelable {
-    override fun layoutId(): Int {
-        return R.layout.item_genre
-    }
+) : Parcelable {
 }

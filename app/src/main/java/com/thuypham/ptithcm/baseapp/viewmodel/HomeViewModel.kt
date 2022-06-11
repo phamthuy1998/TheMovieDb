@@ -16,7 +16,6 @@ import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
 import com.thuypham.ptithcm.baseapp.model.HomeCategory
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
-import com.thuypham.ptithcm.baseapp.ui.adapter.ItemModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
@@ -134,7 +133,7 @@ class HomeViewModel(
         when (val result = getMovieGenresUseCase.invoke()) {
             is ResponseHandler.Success -> {
                 logD("getMovieGenres: $result")
-                categoryData.listItems = result.data.genres as ArrayList<ItemModel>
+                categoryData.listItems = result.data.genres as ArrayList<Any>
                 _notifyItemChangePosition.value = categoryData.position
             }
             is ResponseHandler.Failure -> {
@@ -152,7 +151,7 @@ class HomeViewModel(
     private fun handleMovieListResponse(result: ResponseHandler<MovieResponse>, categoryData: HomeCategoryData) {
         when (result) {
             is ResponseHandler.Success -> {
-                categoryData.listItems = result.data.results as ArrayList<ItemModel>
+                categoryData.listItems = result.data.results as ArrayList<Any>
                 _notifyItemChangePosition.value = categoryData.position
             }
             is ResponseHandler.Failure -> {

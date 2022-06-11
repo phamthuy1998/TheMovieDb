@@ -6,12 +6,11 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_confirm">OK</string>
 
-
     <string name="movie_trending">Trending</string>
     <string name="movie_now_playing">Now playing</string>
     <string name="movie_up_coming">Up coming</string>
     <string name="movie_popular">Popular</string>
     <string name="movie_top_rate">Top Rate</string>
     <string name="movie_genres">Genres</string>
-    <string name="movie_"></string>
+    <string name="popular_people">Popular people</string>
 </resources>

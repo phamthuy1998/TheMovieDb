@@ -5,10 +5,10 @@
         android:id="@+id/tvGenreTitle"
         style="@style/TextGenre"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/item_genre_height"
         android:layout_marginEnd="@dimen/default_margin"
         android:maxLines="1"
+        android:gravity="center"
         android:paddingHorizontal="@dimen/default_padding"
-        android:paddingVertical="8dp"
         tools:text="Genre tile" />
 </layout>

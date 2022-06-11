@@ -5,4 +5,7 @@
     <dimen name="default_padding">12dp</dimen>
     <dimen name="item_home_movie_width">120dp</dimen>
     <dimen name="item_home_movie_height">180dp</dimen>
+    <dimen name="item_title_movie_height">40dp</dimen>
+    <dimen name="item_rc_movie_height">220dp</dimen>
+    <dimen name="item_genre_height">40dp</dimen>
 </resources>

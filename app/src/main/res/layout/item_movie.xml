@@ -20,7 +20,7 @@
             android:id="@+id/tvMovieName"
             style="@style/TextMovieTitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/item_title_movie_height"
             android:ellipsize="end"
             android:lines="2"
             android:maxLines="2"

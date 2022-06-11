@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextTitle"
@@ -30,14 +29,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvItem"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/item_rc_movie_height"
+
+            android:layout_height="@dimen/item_genre_height"
             android:clipToPadding="false"
+            tools:listitem="@layout/item_genre"
             android:orientation="horizontal"
             android:paddingStart="12dp"
             android:paddingEnd="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle"
-            tools:listitem="@layout/item_movie" />
+            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
         <ViewStub
             android:id="@+id/viewStubEmpty"

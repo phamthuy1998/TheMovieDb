@@ -2,8 +2,6 @@ package com.thuypham.ptithcm.baseapp.model
 
 import android.content.Context
 import com.thuypham.ptithcm.baseapp.R
-import com.thuypham.ptithcm.baseapp.data.remote.response.Movie
-import com.thuypham.ptithcm.baseapp.ui.adapter.ItemModel
 
 data class HomeCategory(
     val id: Int,
@@ -28,23 +26,21 @@ data class HomeCategory(
             HomeCategoryType.MOVIE_POPULAR -> context.getString(R.string.movie_popular)
             HomeCategoryType.MOVIE_TOP_RATE -> context.getString(R.string.movie_top_rate)
             HomeCategoryType.MOVIE_GENRES -> context.getString(R.string.movie_genres)
+            HomeCategoryType.POPULAR_PEOPLE -> context.getString(R.string.popular_people)
             else -> ""
         }
     }
 }
+
+class LoadingItem
 
 data class HomeCategoryData(
     val id: Int,
     val position: Int,
     val type: String,
     val title: String,
-    var listItems: ArrayList<ItemModel>? = null
-) : ItemModel {
-    override fun layoutId(): Int {
-        return R.layout.item_movies_category
-    }
-
-}
+    var listItems: ArrayList<Any>? = null
+)
 
 object HomeCategoryType {
     const val MOVIE_TRENDING = "MovieTrending"
@@ -53,4 +49,5 @@ object HomeCategoryType {
     const val MOVIE_POPULAR = "MoviePopular"
     const val MOVIE_TOP_RATE = "MovieTopRate"
     const val MOVIE_GENRES = "MovieGenres"
+    const val POPULAR_PEOPLE = "PopularPeople"
 }

@@ -1,14 +1,10 @@
 package com.thuypham.ptithcm.baseapp.data.remote.response
 
 
-import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
-import com.thuypham.ptithcm.baseapp.R
-import com.thuypham.ptithcm.baseapp.data.remote.response.Movie
-import com.thuypham.ptithcm.baseapp.model.CategorySubItem
-import com.thuypham.ptithcm.baseapp.ui.adapter.ItemModel
+import com.google.gson.annotations.SerializedName
 import com.thuypham.ptithcm.baseapp.util.ApiHelper
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class MovieResponse(
@@ -63,10 +59,7 @@ class Movie(
     var voteAverage: Double?,
     @SerializedName("vote_count")
     var voteCount: Int?
-) : ItemModel, Parcelable {
-    override fun layoutId(): Int {
-        return R.layout.item_movie
-    }
+) : Parcelable {
 
     fun getImagePath() = ApiHelper.baseImageV3Url().format(posterPath)
 }

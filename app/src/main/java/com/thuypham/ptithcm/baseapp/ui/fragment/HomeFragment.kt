@@ -3,9 +3,7 @@ package com.thuypham.ptithcm.baseapp.ui.fragment
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentHomeBinding
-import com.thuypham.ptithcm.baseapp.ui.adapter.GenreItemViewHolderFactory
-import com.thuypham.ptithcm.baseapp.ui.adapter.MovieListItemsViewHolderFactory
-import com.thuypham.ptithcm.baseapp.ui.adapter.RecyclerViewMultiTypeAdapter
+import com.thuypham.ptithcm.baseapp.ui.adapter.HomeCategoryAdapter
 import com.thuypham.ptithcm.baseapp.viewmodel.HomeViewModel
 import com.thuypham.ptithcm.baselib.base.extension.logD
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -14,7 +12,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     private val homeAdapter by lazy {
-        RecyclerViewMultiTypeAdapter().registerViewHolderFactory(MovieListItemsViewHolderFactory())
+        HomeCategoryAdapter().initAdapter()
     }
 
     private val homeViewModel: HomeViewModel by viewModel()
@@ -28,8 +26,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     override fun setupView() {
         binding.apply {
             rvMainHome.adapter = homeAdapter
-            homeAdapter.setOnItemClick { view, itemModel ->
-            }
         }
     }
 
@@ -44,7 +40,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
 
-        homeViewModel.notifyItemChangePosition.observe(viewLifecycleOwner) { position->
+        homeViewModel.notifyItemChangePosition.observe(viewLifecycleOwner) { position ->
             logD("notifyItemChangePosition: $position")
             homeAdapter.notifyItemChanged(position)
         }
