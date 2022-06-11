@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "type": "MovieTrending"
+  },
+  {
+    "id": 2,
+    "type": "MovieNowPlaying"
+  },
+  {
+    "id": 3,
+    "type": "MovieUpComing"
+  },
+  {
+    "id": 4,
+    "type": "MoviePopular"
+  },
+  {
+    "id": 5,
+    "type": "MovieTopRate"
+  },
+  {
+    "id": 6,
+    "type": "MovieGenres"
+  }
+]

@@ -7,24 +7,23 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.net.Uri
-import android.net.wifi.WifiManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.viewpager.widget.ViewPager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.thuypham.ptithcm.baselib.BuildConfig
-import java.io.File
-import java.io.FileInputStream
-import java.net.InetAddress
-import java.net.URLConnection
-import java.nio.ByteBuffer
-import java.nio.ByteOrder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.InputStream
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 fun <T> getViewBinding(inflater: LayoutInflater, clazz: Class<T>) =
     clazz.getMethod("inflate", LayoutInflater::class.java)
@@ -118,32 +117,25 @@ fun View.isHide(boolean: Boolean) {
     }
 }
 
-fun File.getMimeType() =
-    URLConnection.guessContentTypeFromName(name.split(".").last().let { ".$it" })
 
-fun String.getMimeType() =
-    try {
-        if (split(".").last() == "mp3") {
-            "audio/mp3"
-        } else {
-            URLConnection.guessContentTypeFromName(this)
+suspend inline fun <reified T: Any> getDataFromJsonRawResource(context: Context, rawFileResID: Int): T? {
+    return withContext(Dispatchers.IO) {
+        var inputStream: InputStream? = null
+        try {
+            inputStream = context.resources.openRawResource(rawFileResID)
+            val objectAsString = inputStream.bufferedReader().use {
+                it.readText()
+            }
+            logD("objectAsString: $objectAsString")
+            Gson().fromJson<T>(objectAsString, object : TypeToken<T>() {}.type)
+        } catch (ex: java.lang.Exception) {
+            logE("read json file ($rawFileResID) error: ${ex.message}", ex)
+            null
+        } finally {
+            inputStream?.bufferedReader()?.close()
         }
-    } catch (e: Exception) {
-        "image"
     }
-
-fun File.toFileInputStream() = FileInputStream(this)
-
-fun Context.getIpAddress(): String {
-    return (applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager?)?.let {
-        val ipInt = it.connectionInfo.ipAddress
-        InetAddress.getByAddress(
-            ByteBuffer.allocate(4).order(ByteOrder.LITTLE_ENDIAN).putInt(ipInt).array()
-        )
-            .hostAddress
-    }.orEmpty()
 }
-
 
 fun Context.getPackageInfo(): PackageInfo? {
     return try {

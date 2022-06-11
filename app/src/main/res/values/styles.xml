@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="TextTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+
+    <style name="Text16">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/textColor</item>
+    </style>
+
+    <style name="Text14">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextGenre" parent="Text14">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:background">@drawable/bg_round_corner</item>
+        <item name="android:backgroundTint">@color/bg_genres</item>
+    </style>
+
+    <style name="TextRating" parent="Text14">
+        <item name="android:textColor">@color/textColor1</item>
+        <item name="android:paddingHorizontal" tools:ignore="NewApi">8dp</item>
+        <item name="android:paddingVertical" tools:targetApi="o">4dp</item>
+    </style>
+    <style name="TextMovieTitle" parent="Text14">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>

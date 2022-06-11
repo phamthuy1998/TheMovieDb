@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tvGenreTitle"
+        style="@style/TextGenre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:maxLines="1"
+        android:paddingHorizontal="@dimen/default_padding"
+        android:paddingVertical="8dp"
+        tools:text="Genre tile" />
+</layout>

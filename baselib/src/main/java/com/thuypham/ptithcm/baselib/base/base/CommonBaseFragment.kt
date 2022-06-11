@@ -20,6 +20,10 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
         return binding.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        getData()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +37,7 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
     }
 
     open fun setupLogic() {}
+    open fun getData() {}
     abstract fun setupView()
     open fun setupDataObserver() {}
 

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 
 fun Any.logV(message: String) {
     Log.v(this::class.java.simpleName, message)
@@ -18,11 +19,19 @@ fun Any.logW(message: String) {
 }
 
 fun Any.logD(message: String) {
-    Log.d(this::class.java.simpleName,  message)
+    Log.d(this::class.java.simpleName, message)
+}
+
+fun ViewModel.logD(message: String) {
+    Log.d(this::class.java.simpleName, message)
+}
+
+fun Fragment.logD(message: String) {
+    Log.d(this::class.java.simpleName, message)
 }
 
 fun Activity.logD(message: String) {
-    Log.d(this::class.java.simpleName,  message)
+    Log.d(this::class.java.simpleName, message)
 }
 
 fun Any.logE(message: String, e: Throwable) {

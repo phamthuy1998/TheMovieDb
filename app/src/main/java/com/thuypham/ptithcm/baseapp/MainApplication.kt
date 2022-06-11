@@ -5,7 +5,7 @@ import android.content.Context
 import android.support.multidex.MultiDex
 import com.thuypham.ptithcm.data.di.databaseModule
 import com.thuypham.ptithcm.baseapp.di.viewModelModule
-import com.thuypham.ptithcm.domain.di.networkModule
+import com.thuypham.ptithcm.baseapp.di.networkModule
 import com.thuypham.ptithcm.domain.di.repositoryModule
 import com.thuypham.ptithcm.domain.di.useCaseModule
 import org.koin.android.ext.koin.androidContext
