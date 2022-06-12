@@ -3,9 +3,18 @@
     <dimen name="home_recycler_height">150dp</dimen>
     <dimen name="default_margin">12dp</dimen>
     <dimen name="default_padding">12dp</dimen>
+
     <dimen name="item_home_movie_width">120dp</dimen>
     <dimen name="item_home_movie_height">180dp</dimen>
     <dimen name="item_title_movie_height">40dp</dimen>
     <dimen name="item_rc_movie_height">220dp</dimen>
     <dimen name="item_genre_height">40dp</dimen>
+
+    <dimen name="iv_person_avt_height">80dp</dimen>
+    <dimen name="iv_person_avt_radius">40dp</dimen>
+    <dimen name="item_title_avt_height">40dp</dimen>
+    <dimen name="item_rc_popular_height">120dp</dimen>
+
+    <dimen name="grid_item_decoration">12dp</dimen>
+    <dimen name="grid_item_loading_height">100dp</dimen>
 </resources>

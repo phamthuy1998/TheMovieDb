@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int) : AppCompatActivity() {
 
-    protected lateinit var binding: T
+    protected var binding: T? = null
     private lateinit var dialog: Dialog
     protected var isAutoHideKeyboard = true
     private val isHandleNetworkState = false
@@ -31,7 +31,7 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, layoutId)
-        binding.lifecycleOwner = this
+        binding!!.lifecycleOwner = this
         connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         getData()
         setupLogic()
@@ -49,8 +49,9 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
 
     }
 
-    open fun getData(){}
+    open fun getData() {}
     open fun setupLogic() {}
+    open fun clearData() {}
     abstract fun setupView()
     open fun setupDataObserver() {}
 
@@ -136,4 +137,10 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
     }
 
     open fun onNetworkAvailable() {}
+
+    override fun onDestroy() {
+        clearData()
+        super.onDestroy()
+        binding = null
+    }
 }

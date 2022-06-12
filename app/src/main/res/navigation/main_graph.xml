@@ -25,5 +25,10 @@
         android:name="com.thuypham.ptithcm.baseapp.ui.fragment.WatchListFragment"
         android:label="@string/bot_nav_watch_list"
         tools:layout="@layout/fragment_watchlist" />
+    <fragment
+        android:id="@+id/movieCategoryFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.MovieCategoryFragment"
+        android:label="MovieCategoryFragment"
+        tools:layout="@layout/fragment_movie_category" />
 
 </navigation>

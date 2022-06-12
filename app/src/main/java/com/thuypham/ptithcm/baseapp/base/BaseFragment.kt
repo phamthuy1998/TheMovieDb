@@ -6,5 +6,5 @@ import com.thuypham.ptithcm.baselib.base.base.CommonBaseFragment
 
 abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : CommonBaseFragment<T>(layoutId) {
 
-    protected val toolbarHelper by lazy { ToolbarHelper(binding.root) }
+    protected val toolbarHelper by lazy { binding?.root?.let { ToolbarHelper(it) } }
 }

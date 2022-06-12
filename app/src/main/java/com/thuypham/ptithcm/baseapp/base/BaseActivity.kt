@@ -6,5 +6,5 @@ import com.thuypham.ptithcm.baselib.base.base.CommonBaseActivity
 
 abstract class BaseActivity<T : ViewDataBinding>(private val layoutId: Int) : CommonBaseActivity<T>(layoutId) {
 
-    protected val toolbarHelper by lazy { ToolbarHelper(binding.root) }
+    protected val toolbarHelper by lazy { binding?.root?.let { ToolbarHelper(it) } }
 }

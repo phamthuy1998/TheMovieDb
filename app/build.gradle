@@ -63,6 +63,8 @@ android {
 
 dependencies {
     implementation project(':baselib')
+    implementation project(':data')
+    implementation project(':domain')
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     def nav_version = "2.4.2"
@@ -72,4 +74,9 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.13.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
+
+    /* RecyclerView */
+    implementation "androidx.recyclerview:recyclerview:1.2.1"
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 }

@@ -10,36 +10,40 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.thuypham.ptithcm.baselib.base.extension.logD
 
 abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fragment() {
 
-    lateinit var binding: T
+    protected var binding: T? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        return binding.root
+        return binding!!.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupFirst()
         getData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.apply {
+        binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             executePendingBindings()
         }
-        setupLogic()
         setupView()
+        setupToolbar()
         setupDataObserver()
     }
 
-    open fun setupLogic() {}
+    open fun setupFirst() {}
     open fun getData() {}
     abstract fun setupView()
+    open fun setupToolbar() {}
     open fun setupDataObserver() {}
+    open fun clearData() {}
 
     fun showLoading() {
         (requireActivity() as CommonBaseActivity<*>).showLoading()
@@ -95,8 +99,30 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        clearData()
         hideKeyboard()
+        clearViewBinding()
+        super.onDestroyView()
     }
 
+    /**
+     * Reference:  {@link https://stackoverflow.com/questions/65295104/android-view-binding-clear-binding-in-fragment-lifecycle}
+     *  once the fragment then invokes its onDestroyView() callback all references to the fragment's view should be removed,
+     *  allowing the fragment's view to be garbage collected.
+     *
+     * The next time the fragment needs to be displayed,
+     * a new view will be created. So we set _binding = null to allow for a new View to be created and referenced.
+     * */
+    private fun clearViewBinding(){
+        binding?.apply {
+            logD("clearViewBinding")
+
+            (root.parent as? ViewGroup)?.run {
+                logD("clearViewBinding")
+                this.removeAllViews()
+            }
+            this.unbind()
+        }
+        binding = null
+    }
 }

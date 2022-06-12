@@ -5,26 +5,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.thuypham.ptithcm.baseapp.MainApplication
 import com.thuypham.ptithcm.baseapp.R
-import com.thuypham.ptithcm.baseapp.data.local.IStorage
-import com.thuypham.ptithcm.baseapp.data.local.SharedPreferencesStorage
-import com.thuypham.ptithcm.baseapp.data.remote.response.MovieResponse
-import com.thuypham.ptithcm.baseapp.domain.usecase.movie.*
+import com.thuypham.ptithcm.baseapp.model.HomeCategory
+import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
+import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
 import com.thuypham.ptithcm.baselib.base.base.BaseViewModel
 import com.thuypham.ptithcm.baselib.base.extension.getDataFromJsonRawResource
 import com.thuypham.ptithcm.baselib.base.extension.logD
 import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
-import com.thuypham.ptithcm.baseapp.model.HomeCategory
-import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
-import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
+import com.thuypham.ptithcm.data.local.IStorage
+import com.thuypham.ptithcm.data.local.SharedPreferencesStorage
+import com.thuypham.ptithcm.data.remote.response.MovieGenre
+import com.thuypham.ptithcm.data.remote.response.MovieResponse
+import com.thuypham.ptithcm.data.remote.response.Person
+import com.thuypham.ptithcm.domain.repository.MovieRepository
+import com.thuypham.ptithcm.domain.repository.PeopleRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val getMovieGenresUseCase: GetMovieGenresUseCase,
-    private val getMovieTrendingUseCase: GetMovieTrendingUseCase,
-    private val getMovieNowPlayingUseCase: GetMovieNowPlayingUseCase,
-    private val getMovieUpComingUseCase: GetMovieUpComingUseCase,
-    private val getMoviePopularUseCase: GetMoviePopularUseCase,
-    private val getMovieTopRateUseCase: GetMovieTopRateUseCase,
+    private val movieRepository: MovieRepository,
+    private val peopleRepository: PeopleRepository,
     private val sharedPrf: IStorage
 ) : BaseViewModel() {
 
@@ -35,7 +37,7 @@ class HomeViewModel(
     private val _notifyItemChangePosition = MutableLiveData<Int>()
     val notifyItemChangePosition: LiveData<Int> get() = _notifyItemChangePosition
 
-    fun getAllDataHome() = viewModelScope.launch {
+    fun getAllDataHome() = viewModelScope.launch(Dispatchers.IO) {
         val context = MainApplication.applicationContext()
 
         val isFirstTimeOpenApp = sharedPrf.getBoolean(SharedPreferencesStorage.IS_FIRST_TIME_OPEN_APP, true)
@@ -49,117 +51,140 @@ class HomeViewModel(
                 val homeCategoryData = homeCategory.toHomeCategoryData(index, context)
                 homeCategoryItems.add(homeCategoryData)
             }
-            _homeCategories.value = homeCategoryItems
+            _homeCategories.postValue(homeCategoryItems)
             getAllItemCategory()
 
             // Todo: Update IS_FIRST_TIME_OPEN_APP to false
         } else {
             // Todo: Load data from database
-            _homeCategories.value = homeCategoryItems
+            _homeCategories.postValue(homeCategoryItems)
         }
     }
 
-    private fun getAllItemCategory() {
+    private suspend fun getAllItemCategory() {
         logD("getAllItemCategory")
-        homeCategoryItems.forEach { categoryData ->
-            getItemCategory(categoryData)
+        viewModelScope.launch(Dispatchers.IO) {
+            homeCategoryItems.map { categoryData ->
+                async(Dispatchers.IO) {
+                    categoryData.listItems = getItemCategory(categoryData)
+                }
+            }.awaitAll()
+            _homeCategories.postValue(homeCategoryItems)
         }
     }
 
-    private fun getItemCategory(categoryData: HomeCategoryData) {
-        when (categoryData.type) {
+    private suspend fun getItemCategory(categoryData: HomeCategoryData): ArrayList<Any>? {
+        return when (categoryData.type) {
             HomeCategoryType.MOVIE_TRENDING -> {
-                getMovieTrending(categoryData)
+                getMovieTrending()
             }
             HomeCategoryType.MOVIE_NOW_PLAYING -> {
-                getMovieNowPlaying(categoryData)
+                getMovieNowPlaying()
             }
             HomeCategoryType.MOVIE_UPCOMING -> {
-                getMovieUpComing(categoryData)
+                getMovieUpComing()
             }
             HomeCategoryType.MOVIE_POPULAR -> {
-                getMoviePopular(categoryData)
+                getMoviePopular()
             }
             HomeCategoryType.MOVIE_TOP_RATE -> {
-                getMovieTopRate(categoryData)
+                getMovieTopRate()
             }
             HomeCategoryType.MOVIE_GENRES -> {
-                getMovieGenres(categoryData)
+                getMovieGenres()
+            }
+            HomeCategoryType.POPULAR_PEOPLE -> {
+                getPopularPeople()
+            }
+            else -> {
+                null
             }
         }
     }
 
+
     private var currentTrendingPage = 1
-    private fun getMovieTrending(categoryData: HomeCategoryData) = viewModelScope.launch {
-        val result = getMovieTrendingUseCase.invoke(currentTrendingPage)
+    private suspend fun getMovieTrending(): ArrayList<Any>? {
+        val result = movieRepository.getMovieTrending(currentTrendingPage)
         logD("getMovieTrending: $result")
-        handleMovieListResponse(result, categoryData)
         currentTrendingPage++
+        return handleMovieListResponse(result)
     }
 
     private var currentNowPlayingPage = 1
-    private fun getMovieNowPlaying(categoryData: HomeCategoryData) = viewModelScope.launch {
-        val result = getMovieNowPlayingUseCase.invoke(currentNowPlayingPage)
+    private suspend fun getMovieNowPlaying(): ArrayList<Any>? {
+        val result = movieRepository.getMovieNowPlaying(currentNowPlayingPage)
         logD("getMovieNowPlaying: $result")
-        handleMovieListResponse(result, categoryData)
         currentNowPlayingPage++
+        return handleMovieListResponse(result)
     }
 
     private var currentMovieUpComingPage = 1
-    private fun getMovieUpComing(categoryData: HomeCategoryData) = viewModelScope.launch {
-        val result = getMovieUpComingUseCase.invoke(currentMovieUpComingPage)
+    private suspend fun getMovieUpComing(): ArrayList<Any>? {
+        val result = movieRepository.getMovieUpComing(currentMovieUpComingPage)
         logD("getMovieUpComing: $result")
-        handleMovieListResponse(result, categoryData)
         currentMovieUpComingPage++
+        return handleMovieListResponse(result)
     }
 
     private var currentMoviePopularPage = 1
-    private fun getMoviePopular(categoryData: HomeCategoryData) = viewModelScope.launch {
-        val result = getMoviePopularUseCase.invoke(currentMoviePopularPage)
+    private suspend fun getMoviePopular(): ArrayList<Any>? {
+        val result = movieRepository.getMoviePopular(currentMoviePopularPage)
         logD("getMoviePopular: $result")
-        handleMovieListResponse(result, categoryData)
         currentMoviePopularPage++
+        return handleMovieListResponse(result)
     }
 
     private var currentMovieTopRatePage = 1
-    private fun getMovieTopRate(categoryData: HomeCategoryData) = viewModelScope.launch {
-        val result = getMovieTopRateUseCase.invoke(currentMovieTopRatePage)
+    private suspend fun getMovieTopRate(): ArrayList<Any>? {
+        val result = movieRepository.getMovieTopRate(currentMovieTopRatePage)
         logD("getMovieTopRate: $result")
-        handleMovieListResponse(result, categoryData)
         currentMovieTopRatePage++
+        return handleMovieListResponse(result)
     }
 
-    private fun getMovieGenres(categoryData: HomeCategoryData) = viewModelScope.launch {
-        when (val result = getMovieGenresUseCase.invoke()) {
+    private suspend fun getMovieGenres(): ArrayList<Any>? {
+        return when (val result = movieRepository.getMovieGenres()) {
             is ResponseHandler.Success -> {
-                logD("getMovieGenres: $result")
-                categoryData.listItems = result.data.genres as ArrayList<Any>
-                _notifyItemChangePosition.value = categoryData.position
+                (result.data.genres) as  ArrayList<Any>?
             }
             is ResponseHandler.Failure -> {
-                categoryData.listItems = null
-                _notifyItemChangePosition.value = categoryData.position
+                null
             }
             else -> {
-
+                null
             }
         }
+    }
 
+    private var currentPopularPeoplePage = 1
+    private suspend fun getPopularPeople(): ArrayList<Any>? {
+        val result = peopleRepository.getPopularPeople(currentPopularPeoplePage)
+        currentPopularPeoplePage++
+        return when (result) {
+            is ResponseHandler.Success -> {
+                result.data.people as  ArrayList<Any>?
+            }
+            is ResponseHandler.Failure -> {
+                null
+            }
+            else -> {
+                null
+            }
+        }
     }
 
 
-    private fun handleMovieListResponse(result: ResponseHandler<MovieResponse>, categoryData: HomeCategoryData) {
-        when (result) {
+    private fun handleMovieListResponse(result: ResponseHandler<MovieResponse>): ArrayList<Any>? {
+        return when (result) {
             is ResponseHandler.Success -> {
-                categoryData.listItems = result.data.results as ArrayList<Any>
-                _notifyItemChangePosition.value = categoryData.position
+                result.data.results as ArrayList<Any>?
             }
             is ResponseHandler.Failure -> {
-                categoryData.listItems = null
-                _notifyItemChangePosition.value = categoryData.position
+                null
             }
             else -> {
-
+                null
             }
         }
     }

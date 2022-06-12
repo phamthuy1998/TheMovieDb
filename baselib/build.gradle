@@ -80,4 +80,7 @@ dependencies {
 
     /* multidex */
     api("com.android.support:multidex:1.0.3")
+
+    /* Paging 3 */
+    api "androidx.paging:paging-runtime-ktx:3.1.1"
 }

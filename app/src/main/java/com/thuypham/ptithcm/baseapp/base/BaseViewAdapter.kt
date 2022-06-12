@@ -6,25 +6,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class BaseViewAdapter<Model : Any>(
+class BaseViewAdapter<T : Any>(
     private val onCreateViewHolderFunc: (viewGroup: ViewGroup, viewType: Int) -> ViewDataBinding,
-    private val getItemViewTypeFunc: ((item: Model) -> Int?)? = null,
-    private val bindFunc: ((binding: ViewDataBinding, item: Any, position: Int) -> Unit)? = null,
-    private val getItemCountFunc: (() -> Int)? = null
-) : ListAdapter<Model, RecyclerView.ViewHolder>(DiffCallback<Model>()) {
+    private val getItemViewTypeFunc: ((item: T) -> Int?)? = null,
+    private val bindViewFunc: ((binding: ViewDataBinding, item: Any, position: Int) -> Unit)? = null,
+    private val addEventListener: ((viewHolder: ItemViewHolder, listItems: List<T>) -> Unit)? = null
+) : ListAdapter<T, RecyclerView.ViewHolder>(DiffCallback<T>()) {
 
     override fun getItemViewType(position: Int): Int {
         return getItemViewTypeFunc?.invoke(getItem(position)) ?: super.getItemViewType(position)
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ItemViewHolder(onCreateViewHolderFunc.invoke(viewGroup, viewType), bindFunc)
+        return ItemViewHolder(onCreateViewHolderFunc(viewGroup, viewType), bindViewFunc).apply {
+            addEventListener?.invoke(this, currentList)
+        }
     }
 
-    override fun getItemCount() = currentList.size
-
     class ItemViewHolder(
-        private val mBinding: ViewDataBinding,
+        val mBinding: ViewDataBinding,
         private val bindFunc: ((binding: ViewDataBinding, item: Any, position: Int) -> Unit)? = null,
     ) : RecyclerView.ViewHolder(mBinding.root) {
         fun bindView(item: Any, position: Int) {
