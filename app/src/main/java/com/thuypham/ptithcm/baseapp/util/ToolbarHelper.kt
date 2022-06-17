@@ -42,6 +42,12 @@ class ToolbarHelper constructor(private val view: View) {
         }
     }
 
+    fun updateRightBtnIconResource(iconResID: Int){
+        view.findViewById<AppCompatImageView>(R.id.ivRight)?.apply {
+            setImageResource(iconResID)
+        }
+    }
+
     fun setSubRightBtn(iconResID: Int, onClick: ((View) -> Unit?)? = null) {
         view.findViewById<AppCompatImageView>(R.id.ivSubRight)?.apply {
             show()

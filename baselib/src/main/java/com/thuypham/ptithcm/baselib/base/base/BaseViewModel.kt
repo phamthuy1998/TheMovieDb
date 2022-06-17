@@ -6,6 +6,6 @@ import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
 
 abstract class BaseViewModel : ViewModel() {
 
-    val errorLiveData = MutableLiveData<ResponseHandler.Failure>()
+    val errorLiveData = MutableLiveData<ResponseHandler.Error>()
     val isLoading = MutableLiveData<Boolean>()
 }

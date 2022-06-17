@@ -2,42 +2,50 @@ package com.thuypham.ptithcm.baselib.base.base
 
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class BaseViewAdapter<T, K>(private val onCreateViewHolderFunc: (viewGroup: ViewGroup, viewType: Int) -> ViewDataBinding,
-                            private var data: K?,
-                            private val bindFunc: ((binding: T, item: K?, position: Int) -> Unit)? = null,
-                            private val getItemIdFunc: ((position: Int) -> Long)? = null,
-                            private val getItemCountFunc: (() -> Int)? = null) : RecyclerView.Adapter<BaseViewAdapter<T, K>.ViewHolder>() {
+class BaseViewAdapter<T : Any>(
+    private val onCreateViewHolderFunc: (viewGroup: ViewGroup, viewType: Int) -> ViewDataBinding,
+    private val diffUtilCallback: () -> BaseItemDiffUtilCallback<T>,
+    private val getItemViewTypeFunc: ((item: T) -> Int?)? = null,
+    private val bindViewFunc: ((binding: ViewDataBinding, item: Any, position: Int) -> Unit)? = null,
+    private val addEventListener: ((viewHolder: ItemViewHolder, listItems: List<T>) -> Unit)? = null
+) : ListAdapter<T, RecyclerView.ViewHolder>(diffCallback(diffUtilCallback.invoke())) {
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(onCreateViewHolderFunc.invoke(viewGroup, viewType))
+    override fun getItemViewType(position: Int): Int {
+        return getItemViewTypeFunc?.invoke(getItem(position)) ?: super.getItemViewType(position)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data, position)
-    }
-
-    override fun getItemCount(): Int {
-        return getItemCountFunc?.invoke()
-                ?: when (data) {
-                    is Collection<*>? -> (data as? Collection<*>)?.size ?: 0
-                    else -> 0
-                }
-    }
-
-    override fun getItemId(position: Int): Long {
-        return getItemIdFunc?.invoke(position) ?: position.toLong()
-    }
-
-    fun updateData(newData: K?) {
-        data = newData
-        this.notifyDataSetChanged()
-    }
-
-    inner class ViewHolder(private val mBinding: ViewDataBinding) : RecyclerView.ViewHolder(mBinding.root) {
-        fun bind(item: K?, position: Int) {
-            bindFunc?.invoke(mBinding as T, item, position)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return ItemViewHolder(onCreateViewHolderFunc(viewGroup, viewType), bindViewFunc).apply {
+            addEventListener?.invoke(this, currentList)
         }
     }
+
+    class ItemViewHolder(
+        val mBinding: ViewDataBinding,
+        private val bindFunc: ((binding: ViewDataBinding, item: Any, position: Int) -> Unit)? = null,
+    ) : RecyclerView.ViewHolder(mBinding.root) {
+        fun bindView(item: Any, position: Int) {
+            bindFunc?.invoke(mBinding, item, position)
+        }
+    }
+
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as ItemViewHolder).bindView(getItem(position), position)
+    }
+/*
+
+    class DiffCallback<T> : DiffUtil.ItemCallback<T>() {
+        override fun areItemsTheSame(oldItem: T, newItem: T) =
+            oldItem.toString() == newItem.toString()
+
+        override fun areContentsTheSame(oldItem: T, newItem: T) =
+            oldItem.toString() == newItem.toString()
+    }
+*/
+
 }

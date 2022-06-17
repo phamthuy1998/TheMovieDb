@@ -11,6 +11,7 @@ import com.thuypham.ptithcm.baselib.base.extension.logD
 import com.thuypham.ptithcm.baselib.base.extension.navigateTo
 import com.thuypham.ptithcm.data.remote.response.Movie
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.ref.WeakReference
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
@@ -22,11 +23,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     override fun getData() {
-        homeViewModel.getAllDataHome()
+        homeViewModel.getAllDataHome(WeakReference(requireContext()))
     }
 
     override fun setupView() {
-        binding?.run {
+        binding.run {
             rvMainHome.adapter = homeAdapter
         }
     }
@@ -65,9 +66,5 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             }
         }
 
-        homeViewModel.notifyItemChangePosition.observe(viewLifecycleOwner) { position ->
-            logD("notifyItemChangePosition: $position")
-            homeAdapter.notifyItemChanged(position)
-        }
     }
 }

@@ -2,12 +2,13 @@ package com.thuypham.ptithcm.baseapp.model
 
 import android.content.Context
 import com.thuypham.ptithcm.baseapp.R
+import java.lang.ref.WeakReference
 
 data class HomeCategory(
     val id: Int,
     val type: String,
 ) {
-    fun toHomeCategoryData(index: Int, context: Context): HomeCategoryData {
+    fun toHomeCategoryData(index: Int, context: WeakReference<Context>): HomeCategoryData {
         val homeCategory: HomeCategory = this
         return HomeCategoryData(
             id = homeCategory.id,
@@ -18,17 +19,21 @@ data class HomeCategory(
         )
     }
 
-    private fun getTitleByCategoryType(categoryType: String, context: Context): String {
-        return when (categoryType) {
-            HomeCategoryType.MOVIE_TRENDING -> context.getString(R.string.movie_trending)
-            HomeCategoryType.MOVIE_NOW_PLAYING -> context.getString(R.string.movie_now_playing)
-            HomeCategoryType.MOVIE_UPCOMING -> context.getString(R.string.movie_up_coming)
-            HomeCategoryType.MOVIE_POPULAR -> context.getString(R.string.movie_popular)
-            HomeCategoryType.MOVIE_TOP_RATE -> context.getString(R.string.movie_top_rate)
-            HomeCategoryType.MOVIE_GENRES -> context.getString(R.string.movie_genres)
-            HomeCategoryType.POPULAR_PEOPLE -> context.getString(R.string.popular_people)
-            else -> ""
+    private fun getTitleByCategoryType(categoryType: String, context: WeakReference<Context>): String {
+        context.get()?.run {
+            return when (categoryType) {
+                HomeCategoryType.MOVIE_TRENDING -> getString(R.string.movie_trending)
+                HomeCategoryType.MOVIE_NOW_PLAYING -> getString(R.string.movie_now_playing)
+                HomeCategoryType.MOVIE_UPCOMING -> getString(R.string.movie_up_coming)
+                HomeCategoryType.MOVIE_POPULAR -> getString(R.string.movie_popular)
+                HomeCategoryType.MOVIE_TOP_RATE -> getString(R.string.movie_top_rate)
+                HomeCategoryType.MOVIE_GENRES -> getString(R.string.movie_genres)
+                HomeCategoryType.POPULAR_PEOPLE -> getString(R.string.popular_people)
+                else -> ""
+            }
+
         }
+        return ""
     }
 }
 
@@ -40,7 +45,11 @@ data class HomeCategoryData(
     val type: String,
     val title: String,
     var listItems: ArrayList<Any>? = null
-)
+) {
+    override fun toString(): String {
+        return "id: $id, position: $position, type: $type, title: $title, listItems:$listItems-size:${listItems?.size}"
+    }
+}
 
 object HomeCategoryType {
     const val MOVIE_TRENDING = "MovieTrending"

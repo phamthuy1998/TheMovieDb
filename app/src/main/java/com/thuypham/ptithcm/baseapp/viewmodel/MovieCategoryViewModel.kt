@@ -1,15 +1,13 @@
 package com.thuypham.ptithcm.baseapp.viewmodel
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
-import com.thuypham.ptithcm.baseapp.model.LoadingItem
 import com.thuypham.ptithcm.baselib.base.base.BaseViewModel
 import com.thuypham.ptithcm.baselib.base.extension.logD
-import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
 import com.thuypham.ptithcm.data.remote.response.Movie
-import com.thuypham.ptithcm.data.remote.response.MovieResponse
 import com.thuypham.ptithcm.domain.repository.MovieRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,17 +16,10 @@ class MovieCategoryViewModel(
     private val movieRepository: MovieRepository,
 ) : BaseViewModel() {
 
-    private val _movieList = MutableLiveData<List<Movie>?>()
-    val movieList: LiveData<List<Movie>?> get() = _movieList
-    private val movieListItems: ArrayList<Any> = arrayListOf()
-
-    private var currentPage = 1
-    var isLoadMoreAble = true
-
+    var movieListPaging: LiveData<PagingData<Movie>>? = null
 
     fun getMovieItems(movieType: String) = viewModelScope.launch(Dispatchers.IO) {
         logD("getMovieItems")
-        movieListItems.add(LoadingItem())
         when (movieType) {
             HomeCategoryType.MOVIE_TRENDING -> {
                 getMovieTrending()
@@ -46,61 +37,30 @@ class MovieCategoryViewModel(
                 getMovieTopRate()
             }
             else -> {
-                _movieList.postValue(null)
+
             }
         }
     }
 
 
     private suspend fun getMovieTrending() {
-        val result = movieRepository.getMovieTrending(currentPage)
-        logD("getMovieTrending: $result")
-        handleMovieListResponse(result)
+        movieListPaging = movieRepository.getMovieTrendingPaging().cachedIn(viewModelScope)
     }
 
     private suspend fun getMovieNowPlaying() {
-        val result = movieRepository.getMovieNowPlaying(currentPage)
-        logD("getMovieNowPlaying: $result")
-        handleMovieListResponse(result)
+        movieListPaging = movieRepository.getMovieNowPlayingPaging().cachedIn(viewModelScope)
     }
 
     private suspend fun getMovieUpComing() {
-        val result = movieRepository.getMovieUpComing(currentPage)
-        logD("getMovieUpComing: $result")
-        handleMovieListResponse(result)
+        movieListPaging = movieRepository.getMovieUpComingPaging().cachedIn(viewModelScope)
     }
 
     private suspend fun getMoviePopular() {
-        val result = movieRepository.getMoviePopular(currentPage)
-        logD("getMoviePopular: $result")
-        handleMovieListResponse(result)
+        movieListPaging = movieRepository.getMoviePopularPaging().cachedIn(viewModelScope)
     }
 
     private suspend fun getMovieTopRate() {
-        val result = movieRepository.getMovieTopRate(currentPage)
-        logD("getMovieTopRate: $result")
-        handleMovieListResponse(result)
+        movieListPaging = movieRepository.getMovieTopRatePaging().cachedIn(viewModelScope)
     }
 
-    private fun handleMovieListResponse(result: ResponseHandler<MovieResponse>) {
-        when (result) {
-            is ResponseHandler.Success -> {
-                if (result.data.totalPages == currentPage) {
-                    logD("Stop Load More")
-                    isLoadMoreAble = false
-                }
-
-                // Remove Loading Item
-                movieListItems.removeLast()
-
-                movieListItems.addAll(result.data.results ?: return)
-                _movieList.postValue(movieListItems as List<Movie>)
-            }
-            is ResponseHandler.Failure -> {
-                errorLiveData.postValue(result)
-            }
-            else -> {}
-        }
-        currentPage++
-    }
 }

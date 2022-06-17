@@ -1,10 +1,7 @@
 package com.thuypham.ptithcm.data.remote.api
 
-import com.thuypham.ptithcm.data.remote.response.LoginResponse
-import com.thuypham.ptithcm.data.remote.response.MovieGenres
-import com.thuypham.ptithcm.data.remote.response.MovieResponse
-import com.thuypham.ptithcm.data.remote.response.PopularPeople
 import com.thuypham.ptithcm.data.param.LoginParam
+import com.thuypham.ptithcm.data.remote.response.*
 import com.thuypham.ptithcm.data.util.ApiHelper
 import retrofit2.Response
 import retrofit2.http.Body
@@ -24,7 +21,7 @@ interface MovieV3Api {
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
-    ): Response<MovieResponse>
+    ): Response<ListResponse<Movie>>
 
 
     @GET("movie/now_playing")
@@ -32,7 +29,7 @@ interface MovieV3Api {
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
-    ): Response<MovieResponse>
+    ): Response<ListResponse<Movie>>
 
 
     @GET("movie/upcoming")
@@ -40,7 +37,7 @@ interface MovieV3Api {
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
-    ): Response<MovieResponse>
+    ): Response<ListResponse<Movie>>
 
 
     @GET("movie/popular")
@@ -48,7 +45,7 @@ interface MovieV3Api {
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
-    ): Response<MovieResponse>
+    ): Response<ListResponse<Movie>>
 
 
     @GET("movie/top_rated")
@@ -56,14 +53,14 @@ interface MovieV3Api {
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
-    ): Response<MovieResponse>
+    ): Response<ListResponse<Movie>>
 
     @GET("person/popular")
     suspend fun getPopularPeople(
         @Query("page") page: Int = 1,
         @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
-    ): Response<PopularPeople>
+    ): Response<ListResponse<Person>>
 
 
     @GET("authentication/token/new")

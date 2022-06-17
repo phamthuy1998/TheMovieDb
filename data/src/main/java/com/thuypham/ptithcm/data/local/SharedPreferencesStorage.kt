@@ -72,6 +72,7 @@ class SharedPreferencesStorage constructor(context: Context, private val gson: G
     companion object {
         const val APP_PREF = "TheMovieDB"
         const val IS_FIRST_TIME_OPEN_APP = "IS_FIRST_TIME_OPEN_APP"
+        const val IS_RECYCLERVIEW_LAYOUT_GRID_VIEW = "IS_RECYCLERVIEW_LAYOUT_GRID_VIEW"
     }
 }
 

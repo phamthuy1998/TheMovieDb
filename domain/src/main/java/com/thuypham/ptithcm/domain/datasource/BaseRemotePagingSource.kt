@@ -1,0 +1,49 @@
+package com.thuypham.ptithcm.domain.datasource
+
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
+import com.thuypham.ptithcm.data.remote.api.wrapApiCall
+import com.thuypham.ptithcm.data.remote.response.ListResponse
+import retrofit2.HttpException
+import retrofit2.Response
+import java.io.IOException
+
+abstract class BaseRemotePagingSource<O : Any> : PagingSource<Int, O>() {
+
+    companion object {
+        const val DEFAULT_PAGE_INDEX = 1
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, O>): Int? {
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
+    }
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, O> {
+        val page = params.key ?: DEFAULT_PAGE_INDEX
+        return try {
+            when (val response = wrapApiCall { createApiCall(page) }) {
+                is ResponseHandler.Success -> {
+                    LoadResult.Page(
+                        response.data.results ?: arrayListOf(),
+                        prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
+                        nextKey = if (response.data.results?.isNullOrEmpty() == true) null else page + 1
+                    )
+                }
+                else -> {
+                    response as ResponseHandler.Error
+                    LoadResult.Error(response.error)
+                }
+            }
+        } catch (exception: IOException) {
+            return LoadResult.Error(exception)
+        } catch (exception: HttpException) {
+            return LoadResult.Error(exception)
+        }
+    }
+
+    protected abstract suspend fun createApiCall(page: Int): Response<ListResponse<O>>
+}

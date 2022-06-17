@@ -25,12 +25,25 @@
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:orientation="vertical"
+            android:paddingVertical="@dimen/default_margin"
             android:paddingStart="@dimen/grid_item_decoration"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:spanCount="3"
-            tools:listitem="@layout/item_movie_gridview"
-            tools:ignore="RtlSymmetry" />
+            tools:ignore="RtlSymmetry"
+            tools:listitem="@layout/item_movie_gridview" />
+
+        <ViewStub
+            android:id="@+id/viewStubEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:inflatedId="@+id/viewStubEmpty"
+            android:layout="@layout/layout_empty_data"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintTop_toTopOf="@id/rvItem" />
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

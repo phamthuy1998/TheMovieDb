@@ -5,7 +5,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
-import com.thuypham.ptithcm.baseapp.base.BaseViewAdapter
 import com.thuypham.ptithcm.baseapp.databinding.ItemGenreBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemMoviesCategoryBinding
@@ -13,6 +12,8 @@ import com.thuypham.ptithcm.baseapp.databinding.ItemPopularPersonBinding
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
 import com.thuypham.ptithcm.baseapp.model.LoadingItem
+import com.thuypham.ptithcm.baselib.base.base.BaseItemDiffUtilCallback
+import com.thuypham.ptithcm.baselib.base.base.BaseViewAdapter
 import com.thuypham.ptithcm.baselib.base.extension.gone
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.baselib.base.extension.show
@@ -73,6 +74,13 @@ class HomeCategoryAdapter {
                     }
                     itemAdapter.submitList(item.listItems)
                 }
+            },
+            diffUtilCallback = {
+                BaseItemDiffUtilCallback(
+                    areItemsTheSameFunc = { oldItem, newItem -> oldItem?.toString()  == newItem?.toString()  },
+                    areContentsTheSameFunc = { oldItem, newItem -> oldItem?.toString() == newItem?.toString() }
+                )
+
             }
         )
     }
@@ -128,6 +136,13 @@ class HomeCategoryAdapter {
 
                     }
                 }
+            },
+            diffUtilCallback = {
+                BaseItemDiffUtilCallback(
+                    areItemsTheSameFunc = { oldItem, newItem -> oldItem?.toString()  == newItem?.toString()  },
+                    areContentsTheSameFunc = { oldItem, newItem -> oldItem?.toString() == newItem?.toString() }
+                )
+
             }
         )
     }

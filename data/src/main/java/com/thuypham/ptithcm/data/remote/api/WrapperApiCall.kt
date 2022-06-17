@@ -25,7 +25,7 @@ suspend inline fun <reified T> wrapApiCall(
                 if (response.body() != null) {
                     ResponseHandler.Success(response.body()!!)
                 } else {
-                    ResponseHandler.Failure(AppException.NullPoint)
+                    ResponseHandler.Error(AppException.NullPoint)
                 }
             }
             else -> {
@@ -34,26 +34,26 @@ suspend inline fun <reified T> wrapApiCall(
 //                val type = object : TypeToken<ErrorResponse>() {}.type
 //                val errorResponse: ErrorResponse? = gson.fromJson(response.errorBody()?.charStream(), type)
 
-                ResponseHandler.Failure(AppException.Unknown)
+                ResponseHandler.Error(AppException.Unknown)
             }
         }
     } catch (exp: Exception) {
         Log.e("wrapApiCall", "Error: ${exp.printStackTrace()}")
         return when (exp) {
             is HttpException -> {
-                ResponseHandler.Failure(AppException.NoNetwork)
+                ResponseHandler.Error(AppException.NoNetwork)
             }
             is UnknownHostException -> {
-                ResponseHandler.Failure(AppException.UnsolvedHost)
+                ResponseHandler.Error(AppException.UnsolvedHost)
             }
             is ConnectException -> {
-                ResponseHandler.Failure(AppException.ConnectException)
+                ResponseHandler.Error(AppException.ConnectException)
             }
             is SocketTimeoutException -> {
-                ResponseHandler.Failure(AppException.TimeOut)
+                ResponseHandler.Error(AppException.TimeOut)
             }
             else -> {
-                ResponseHandler.Failure(exp)
+                ResponseHandler.Error(exp)
             }
         }
     }

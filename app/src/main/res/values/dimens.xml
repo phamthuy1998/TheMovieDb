@@ -17,4 +17,5 @@
 
     <dimen name="grid_item_decoration">12dp</dimen>
     <dimen name="grid_item_loading_height">100dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
 </resources>

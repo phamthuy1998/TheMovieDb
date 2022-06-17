@@ -14,11 +14,11 @@ import com.thuypham.ptithcm.baselib.base.extension.logD
 
 abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fragment() {
 
-    protected var binding: T? = null
+    protected lateinit var binding: T
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +29,7 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.apply {
+        binding.apply {
             lifecycleOwner = viewLifecycleOwner
             executePendingBindings()
         }
@@ -114,7 +114,7 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
      * a new view will be created. So we set _binding = null to allow for a new View to be created and referenced.
      * */
     private fun clearViewBinding(){
-        binding?.apply {
+        binding.apply {
             logD("clearViewBinding")
 
             (root.parent as? ViewGroup)?.run {
@@ -123,6 +123,5 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
             }
             this.unbind()
         }
-        binding = null
     }
 }

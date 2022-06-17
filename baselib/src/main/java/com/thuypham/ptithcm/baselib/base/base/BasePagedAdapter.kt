@@ -1,25 +1,27 @@
-package com.thuypham.ptithcm.baseapp.base
+package com.thuypham.ptithcm.baselib.base.base
 
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class BaseViewAdapter<T : Any>(
+class BasePagedAdapter<T : Any>(
     private val onCreateViewHolderFunc: (viewGroup: ViewGroup, viewType: Int) -> ViewDataBinding,
+    private val diffUtilCallback: () -> BaseItemDiffUtilCallback<T>,
     private val getItemViewTypeFunc: ((item: T) -> Int?)? = null,
     private val bindViewFunc: ((binding: ViewDataBinding, item: Any, position: Int) -> Unit)? = null,
     private val addEventListener: ((viewHolder: ItemViewHolder, listItems: List<T>) -> Unit)? = null
-) : ListAdapter<T, RecyclerView.ViewHolder>(DiffCallback<T>()) {
+) : PagingDataAdapter<T, RecyclerView.ViewHolder>(diffCallback(diffUtilCallback.invoke())) {
 
     override fun getItemViewType(position: Int): Int {
-        return getItemViewTypeFunc?.invoke(getItem(position)) ?: super.getItemViewType(position)
+        return getItem(position)?.let { getItemViewTypeFunc?.invoke(it) } ?: super.getItemViewType(position)
     }
+
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ItemViewHolder(onCreateViewHolderFunc(viewGroup, viewType), bindViewFunc).apply {
-            addEventListener?.invoke(this, currentList)
+            addEventListener?.invoke(this, snapshot().items)
         }
     }
 
@@ -34,15 +36,23 @@ class BaseViewAdapter<T : Any>(
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as ItemViewHolder).bindView(getItem(position), position)
-    }
-
-    class DiffCallback<T> : DiffUtil.ItemCallback<T>() {
-        override fun areItemsTheSame(oldItem: T, newItem: T) =
-            oldItem.hashCode() == newItem.hashCode()
-
-        override fun areContentsTheSame(oldItem: T, newItem: T) =
-            oldItem.toString() == newItem.toString()
+        getItem(position)?.let { (holder as ItemViewHolder).bindView(it, position) }
     }
 
 }
+
+fun <T> diffCallback(baseDiffUtilCallback: BaseItemDiffUtilCallback<T>): DiffUtil.ItemCallback<T> {
+    return object : DiffUtil.ItemCallback<T>() {
+
+        override fun areItemsTheSame(oldItem: T, newItem: T): Boolean =
+            baseDiffUtilCallback.areItemsTheSameFunc.invoke(oldItem as? T, newItem as? T)
+
+        override fun areContentsTheSame(oldItem: T, newItem: T): Boolean =
+            baseDiffUtilCallback.areContentsTheSameFunc.invoke(oldItem as? T, newItem as? T)
+    }
+}
+
+data class BaseItemDiffUtilCallback<T>(
+    var areItemsTheSameFunc: ((T?, T?) -> Boolean),
+    var areContentsTheSameFunc: ((T?, T?) -> Boolean)
+)

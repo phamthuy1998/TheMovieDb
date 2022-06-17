@@ -21,6 +21,7 @@
     <color name="bg_splash_screen">#141A3C</color>
     <color name="textColor">#FF000000</color>
     <color name="icon_color">#FF000000</color>
+    <color name="text_description">#4E4E4E</color>
     <color name="textColor1">#FFFFFF</color>
     <color name="color_icon">#FF000000</color>
     <color name="bg_genres">#4D777777</color>

@@ -1,9 +1,9 @@
 package com.thuypham.ptithcm.baseapp.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.thuypham.ptithcm.baseapp.MainApplication
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.model.HomeCategory
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
@@ -14,15 +14,15 @@ import com.thuypham.ptithcm.baselib.base.extension.logD
 import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
 import com.thuypham.ptithcm.data.local.IStorage
 import com.thuypham.ptithcm.data.local.SharedPreferencesStorage
-import com.thuypham.ptithcm.data.remote.response.MovieGenre
-import com.thuypham.ptithcm.data.remote.response.MovieResponse
-import com.thuypham.ptithcm.data.remote.response.Person
+import com.thuypham.ptithcm.data.remote.response.ListResponse
+import com.thuypham.ptithcm.data.remote.response.Movie
 import com.thuypham.ptithcm.domain.repository.MovieRepository
 import com.thuypham.ptithcm.domain.repository.PeopleRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
+import java.lang.ref.WeakReference
 
 class HomeViewModel(
     private val movieRepository: MovieRepository,
@@ -34,11 +34,7 @@ class HomeViewModel(
     private val _homeCategories = MutableLiveData<ArrayList<HomeCategoryData>>()
     val homeCategories: LiveData<ArrayList<HomeCategoryData>> = _homeCategories
 
-    private val _notifyItemChangePosition = MutableLiveData<Int>()
-    val notifyItemChangePosition: LiveData<Int> get() = _notifyItemChangePosition
-
-    fun getAllDataHome() = viewModelScope.launch(Dispatchers.IO) {
-        val context = MainApplication.applicationContext()
+    fun getAllDataHome(context: WeakReference<Context>) = viewModelScope.launch(Dispatchers.IO) {
 
         val isFirstTimeOpenApp = sharedPrf.getBoolean(SharedPreferencesStorage.IS_FIRST_TIME_OPEN_APP, true)
 
@@ -146,9 +142,9 @@ class HomeViewModel(
     private suspend fun getMovieGenres(): ArrayList<Any>? {
         return when (val result = movieRepository.getMovieGenres()) {
             is ResponseHandler.Success -> {
-                (result.data.genres) as  ArrayList<Any>?
+                (result.data.genres) as ArrayList<Any>?
             }
-            is ResponseHandler.Failure -> {
+            is ResponseHandler.Error -> {
                 null
             }
             else -> {
@@ -163,9 +159,9 @@ class HomeViewModel(
         currentPopularPeoplePage++
         return when (result) {
             is ResponseHandler.Success -> {
-                result.data.people as  ArrayList<Any>?
+                result.data.results as ArrayList<Any>?
             }
-            is ResponseHandler.Failure -> {
+            is ResponseHandler.Error -> {
                 null
             }
             else -> {
@@ -175,12 +171,12 @@ class HomeViewModel(
     }
 
 
-    private fun handleMovieListResponse(result: ResponseHandler<MovieResponse>): ArrayList<Any>? {
+    private fun handleMovieListResponse(result: ResponseHandler<ListResponse<Movie>>): ArrayList<Any>? {
         return when (result) {
             is ResponseHandler.Success -> {
                 result.data.results as ArrayList<Any>?
             }
-            is ResponseHandler.Failure -> {
+            is ResponseHandler.Error -> {
                 null
             }
             else -> {

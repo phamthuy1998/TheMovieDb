@@ -19,6 +19,7 @@ import com.thuypham.ptithcm.baselib.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.InputStream
+import java.lang.ref.WeakReference
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.text.SimpleDateFormat
@@ -118,16 +119,18 @@ fun View.isHide(boolean: Boolean) {
 }
 
 
-suspend inline fun <reified T: Any> getDataFromJsonRawResource(context: Context, rawFileResID: Int): T? {
+suspend inline fun <reified T : Any> getDataFromJsonRawResource(context: WeakReference<Context>, rawFileResID: Int): T? {
     return withContext(Dispatchers.IO) {
         var inputStream: InputStream? = null
         try {
-            inputStream = context.resources.openRawResource(rawFileResID)
-            val objectAsString = inputStream.bufferedReader().use {
-                it.readText()
+            context.get()?.run {
+                inputStream = this.resources.openRawResource(rawFileResID)
+                val objectAsString = inputStream?.bufferedReader().use {
+                    it?.readText()
+                }
+                logD("objectAsString: $objectAsString")
+                Gson().fromJson<T>(objectAsString, object : TypeToken<T>() {}.type)
             }
-            logD("objectAsString: $objectAsString")
-            Gson().fromJson<T>(objectAsString, object : TypeToken<T>() {}.type)
         } catch (ex: java.lang.Exception) {
             logE("read json file ($rawFileResID) error: ${ex.message}", ex)
             null
