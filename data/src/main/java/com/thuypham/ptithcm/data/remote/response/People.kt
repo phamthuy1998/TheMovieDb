@@ -6,28 +6,28 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class PopularPeople(
-    @SerializedName("page")
-    var page: Int?,
-    @SerializedName("results")
-    var people: List<Person>?,
-    @SerializedName("total_pages")
-    var totalPages: Int?,
-    @SerializedName("total_results")
-    var totalResults: Int?
-) : Parcelable
-
-@Parcelize
 data class Person(
+    @SerializedName("adult")
+    var adult: Boolean?,
+    @SerializedName("gender")
+    var gender: Int?,
     @SerializedName("id")
     var id: Int?,
+    @SerializedName("known_for")
+    var knownFor: List<KnownFor>?,
+    @SerializedName("known_for_department")
+    var knownForDepartment: String?,
     @SerializedName("name")
     var name: String?,
+    @SerializedName("popularity")
+    var popularity: Double?,
     @SerializedName("profile_path")
     var profilePath: String?
-) : Parcelable{
+) : Parcelable {
 
 }
+
+
 
 @Parcelize
 data class KnownFor(
@@ -68,3 +68,5 @@ data class KnownFor(
     @SerializedName("vote_count")
     var voteCount: Int?
 ) : Parcelable
+
+

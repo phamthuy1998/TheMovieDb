@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.thuypham.ptithcm.baselib.base.extension.shareImageToOtherApp
 
 
 fun Fragment.navigateTo(destination: Int, bundle: Bundle? = null, option: NavOptions? = null) {
@@ -54,4 +53,9 @@ fun Fragment.getScreenHeight(): Int {
 
 fun Fragment.shareImageToOtherApp(imagePath: String) {
     requireActivity().shareImageToOtherApp(imagePath)
+}
+
+
+fun Fragment.isNetworkConnected(): Boolean {
+    return requireActivity().isNetworkConnected()
 }

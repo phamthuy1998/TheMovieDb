@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/person_graph"
+    app:startDestination="@id/personDatailFragment">
+    <fragment
+        android:id="@+id/personDatailFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PersonDetailFragment"
+        android:label="PersonDetailFragment"
+        tools:layout="@layout/fragment_person_detail" />
+    <fragment
+        android:id="@+id/personAboutFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PersonAboutFragment"
+        android:label="PersonAboutFragment"
+        tools:layout="@layout/fragment_person_about" />
+    <fragment
+        android:id="@+id/personFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PersonBaseFragment"
+        android:label="PersonMoviesFragment"
+        tools:layout="@layout/fragment_person_movie" />
+</navigation>

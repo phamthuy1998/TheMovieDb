@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/grid_item_decoration"
+        android:paddingEnd="@dimen/grid_item_decoration">
+
+        <View
+            android:id="@+id/ivMovie"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/color_shimmer_item"
+            app:layout_constraintDimensionRatio="1:1.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:riv_corner_radius="8dp" />
+
+        <View
+            android:id="@+id/tvMovieName"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_marginTop="@dimen/x_mall_padding"
+            android:background="@color/color_shimmer_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivMovie" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_marginTop="@dimen/x_mall_padding"
+            android:layout_marginEnd="40dp"
+            android:background="@color/color_shimmer_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvMovieName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

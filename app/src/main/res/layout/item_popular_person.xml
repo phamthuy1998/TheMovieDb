@@ -8,12 +8,11 @@
         android:layout_marginEnd="@dimen/default_margin"
         android:orientation="vertical">
 
-        <com.makeramen.roundedimageview.RoundedImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivAvt"
             android:scaleType="centerCrop"
             android:layout_width="@dimen/iv_person_avt_height"
             android:layout_height="@dimen/iv_person_avt_height"
-            app:riv_corner_radius="@dimen/iv_person_avt_radius"
             tools:src="@tools:sample/avatars" />
 
         <TextView

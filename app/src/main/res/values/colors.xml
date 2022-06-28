@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="status_bar">#80FFFFFF</color>
+
     <color name="color_primary">#141A3C</color>
     <color name="color_primary_variant">#141A3C</color>
 
@@ -20,12 +22,29 @@
 
     <color name="bg_splash_screen">#141A3C</color>
     <color name="textColor">#FF000000</color>
+    <color name="textColor2">#424242</color>
     <color name="icon_color">#FF000000</color>
+    <color name="icon_color2">#424242</color>
     <color name="text_description">#4E4E4E</color>
     <color name="textColor1">#FFFFFF</color>
+    <color name="textColor1Shadow">#000000</color>
     <color name="color_icon">#FF000000</color>
     <color name="bg_genres">#4D777777</color>
+    <color name="bg_know_as">#33777777</color>
     <color name="bg_item_movie">#80000000</color>
 
     <color name="bg_toolbar">#FFFFFF</color>
+    <color name="red">#CD1212</color>
+
+    <color name="color_shimmer_item">#DCDCDC</color>
+    <color name="transparent">#00DCDCDC</color>
+
+
+    <color name="start_blur_bg_color">#1AFFFFFF</color>
+    <color name="center_blur_bg_color">#4DFFFFFF</color>
+    <color name="end_blur_bg_color">#FFFFFFFF</color>
+
+
+    <color name="text_tab_layout_color">#000000</color>
+    <color name="text_selected_tab_layout_color">#BA360C</color>
 </resources>

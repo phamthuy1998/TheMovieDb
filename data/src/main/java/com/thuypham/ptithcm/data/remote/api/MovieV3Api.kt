@@ -4,10 +4,7 @@ import com.thuypham.ptithcm.data.param.LoginParam
 import com.thuypham.ptithcm.data.remote.response.*
 import com.thuypham.ptithcm.data.util.ApiHelper
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface MovieV3Api {
     @GET("genre/movie/list")
@@ -55,6 +52,15 @@ interface MovieV3Api {
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
     ): Response<ListResponse<Movie>>
 
+
+    @GET("discover/movie")
+    suspend fun getMovieByGenreID(
+        @Query("with_genres") genreId: Int,
+        @Query("page") page: Int = 1,
+        @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
+        @Query("language") language: String = ApiHelper.getCurrentLanguage(),
+    ): Response<ListResponse<Movie>>
+
     @GET("person/popular")
     suspend fun getPopularPeople(
         @Query("page") page: Int = 1,
@@ -62,6 +68,36 @@ interface MovieV3Api {
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
     ): Response<ListResponse<Person>>
 
+
+    @GET("person/{person_id}")
+    suspend fun getPersonDetail(
+        @Path("person_id") personId: Int = 0,
+        @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
+        @Query("language") language: String = ApiHelper.getCurrentLanguage(),
+    ): Response<PersonDetail>
+
+
+    @GET("person/{person_id}/images")
+    suspend fun getPersonImage(
+        @Path("person_id") personId: Int = 0,
+        @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
+        @Query("language") language: String = ApiHelper.getCurrentLanguage(),
+    ): Response<PersonImage>
+
+    @GET("person/{person_id}/movie_credits")
+    suspend fun getPersonMovie(
+        @Path("person_id") personId: Int = 0,
+        @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
+        @Query("language") language: String = ApiHelper.getCurrentLanguage(),
+    ): Response<PersonMovie>
+
+
+    @GET("person/{person_id}/tv_credits")
+    suspend fun getPersonTVShows(
+        @Path("person_id") personId: Int = 0,
+        @Query("api_key") apiKey: String = ApiHelper.movieApiKey(),
+        @Query("language") language: String = ApiHelper.getCurrentLanguage(),
+    ): Response<PersonMovie>
 
     @GET("authentication/token/new")
     suspend fun getNewToken(

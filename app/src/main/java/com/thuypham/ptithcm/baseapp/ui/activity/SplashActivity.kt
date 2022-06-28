@@ -12,7 +12,6 @@ import com.thuypham.ptithcm.baselib.base.extension.logD
 class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_splash) {
 
     override fun setupView() {
-        logD("apiaaaa: ${ApiHelper.movieApiKey()} ")
         val intent = Intent(this@SplashActivity, MainActivity::class.java)
         startActivity(intent)
         finish()

@@ -30,5 +30,23 @@
         android:name="com.thuypham.ptithcm.baseapp.ui.fragment.MovieCategoryFragment"
         android:label="MovieCategoryFragment"
         tools:layout="@layout/fragment_movie_category" />
+    <fragment
+        android:id="@+id/genresFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.GenresFragment"
+        android:label="GenresFragment"
+        tools:layout="@layout/fragment_genres" />
+    <fragment
+        android:id="@+id/peopleFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PeopleFragment"
+        android:label="PeopleFragment"
+        tools:layout="@layout/fragment_people" />
+
+    <fragment
+        android:id="@+id/movieDatailFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.MovieDetailFragment"
+        android:label="MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail" />
+
+    <include app:graph="@navigation/person_graph" />
 
 </navigation>

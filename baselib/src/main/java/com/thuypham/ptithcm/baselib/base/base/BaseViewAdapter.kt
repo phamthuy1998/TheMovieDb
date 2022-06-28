@@ -33,6 +33,9 @@ class BaseViewAdapter<T : Any>(
         }
     }
 
+    fun getItemAtPos(position: Int): T {
+        return currentList.get(position)
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as ItemViewHolder).bindView(getItem(position), position)

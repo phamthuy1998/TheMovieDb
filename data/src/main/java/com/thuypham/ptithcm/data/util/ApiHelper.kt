@@ -2,7 +2,7 @@ package com.thuypham.ptithcm.data.util
 
 class ApiHelper {
     companion object {
-        const val CONNECTION_TIME_OUT_SECOND = 5L
+        const val CONNECTION_TIME_OUT_SECOND = 50L
         const val MAIN_API = "MAIN_API"
         init {
             System.loadLibrary("native-lib")

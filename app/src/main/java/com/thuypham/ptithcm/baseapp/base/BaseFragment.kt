@@ -1,10 +1,23 @@
 package com.thuypham.ptithcm.baseapp.base
 
+import android.os.Bundle
+import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.thuypham.ptithcm.baseapp.util.ToolbarHelper
 import com.thuypham.ptithcm.baselib.base.base.CommonBaseFragment
 
-abstract class BaseFragment<T : ViewDataBinding>(private val layoutId: Int) : CommonBaseFragment<T>(layoutId) {
+abstract class BaseFragment<T : ViewDataBinding>(layoutId: Int) : CommonBaseFragment<T>(layoutId) {
 
-    protected val toolbarHelper by lazy { binding?.root?.let { ToolbarHelper(it) } }
+    protected lateinit var toolbarHelper: ToolbarHelper
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        toolbarHelper = ToolbarHelper(binding.root)
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        toolbarHelper.clear()
+        binding.unbind()
+    }
 }

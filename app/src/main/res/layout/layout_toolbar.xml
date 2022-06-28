@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="?actionBarSize"
     android:background="@color/bg_toolbar"
+    android:fitsSystemWindows="true"
     app:layout_scrollFlags="scroll|enterAlways">
 
     <androidx.appcompat.widget.AppCompatImageView

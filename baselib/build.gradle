@@ -88,4 +88,7 @@ dependencies {
     /* RecyclerView */
     api "androidx.recyclerview:recyclerview:1.2.1"
 
+    /* Joda time */
+    api "joda-time:joda-time:2.10.14"
+
 }

@@ -4,4 +4,26 @@
     <string name="bot_nav_search">Search</string>
     <string name="bot_nav_watch_list">Watch list</string>
     <string name="bot_nav_profile">Profile</string>
+    <string name="retry">Retry</string>
+    <string name="you_are_offline">You are offline</string>
+    <string name="no_internet_description">Please connect to the internet and try again</string>
+
+
+    <string name="person_tab_layout_about">About</string>
+    <string name="person_tab_layout_movies">Movies</string>
+    <string name="person_tab_layout_tv_shows">TV Shows</string>
+    <string name="mainFragment">MainFragment</string>
+    <string name="person_info">
+        <![CDATA[
+            <b>Age: </b> %1d <br />
+            <b>Birthday: </b> %2s <br />
+            <b>From: </b> %3s <br />
+            <b>Popularity: </b> %4s<br />
+            <b>Biography </b>
+        ]]>
+    </string>
+    <string name="show_more">Show more</string>
+    <string name="show_less">Show less</string>
+    <string name="also_know_as">Also know as</string>
+    <string name="images">Images</string>
 </resources>

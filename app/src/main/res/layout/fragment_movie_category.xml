@@ -33,17 +33,22 @@
             tools:ignore="RtlSymmetry"
             tools:listitem="@layout/item_movie_gridview" />
 
-        <ViewStub
-            android:id="@+id/viewStubEmpty"
+        <include
+            android:id="@+id/layoutEmpty"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:inflatedId="@+id/viewStubEmpty"
-            android:layout="@layout/layout_empty_data"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintTop_toTopOf="@id/rvItem" />
+            android:visibility="gone"
+            layout="@layout/layout_empty_data"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <include
+            android:id="@+id/layoutShimmer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:gravity="center"
+            layout="@layout/layout_gridview_shimmer"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

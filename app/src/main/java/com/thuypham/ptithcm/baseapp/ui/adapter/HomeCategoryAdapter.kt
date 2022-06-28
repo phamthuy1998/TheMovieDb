@@ -67,7 +67,7 @@ class HomeCategoryAdapter {
                         HomeCategoryType.POPULAR_PEOPLE -> root.context.resources.getDimensionPixelOffset(R.dimen.item_rc_popular_height)
                         else -> root.context.resources.getDimensionPixelOffset(R.dimen.item_rc_movie_height)
                     }
-                    val itemAdapter = initItemAdapter(onChildItemClick)
+                    val itemAdapter = initListItemAdapter(onChildItemClick)
                     rvItem.apply {
                         adapter = itemAdapter
                         layoutParams.height = rvHeight
@@ -85,7 +85,7 @@ class HomeCategoryAdapter {
         )
     }
 
-    private fun initItemAdapter(onChildItemClick: ((item: Any) -> Unit)): BaseViewAdapter<Any> {
+    private fun initListItemAdapter(onChildItemClick: ((item: Any) -> Unit)): BaseViewAdapter<Any> {
         return BaseViewAdapter(
             getItemViewTypeFunc = { item ->
                 when (item) {
@@ -95,9 +95,9 @@ class HomeCategoryAdapter {
                     else -> R.layout.item_loading
                 }
             },
-            addEventListener = { viewHolder, listItems ->
+            addEventListener = { viewHolder, item ->
                 viewHolder.mBinding.apply {
-                    root.setOnSingleClickListener { onChildItemClick.invoke(listItems[viewHolder.absoluteAdapterPosition]) }
+                    root.setOnSingleClickListener { onChildItemClick.invoke(item[viewHolder.absoluteAdapterPosition]) }
                 }
             },
             onCreateViewHolderFunc = { viewGroup, viewType ->

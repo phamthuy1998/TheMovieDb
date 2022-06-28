@@ -19,14 +19,16 @@ import com.thuypham.ptithcm.baselib.base.ui.activity.NoNetworkActivity
 import com.thuypham.ptithcm.baselib.base.ui.dialog.ProgressDialog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int) : AppCompatActivity() {
 
     protected var binding: T? = null
-    private lateinit var dialog: Dialog
+    private val dialog: Dialog by lazy { ProgressDialog.progressDialog(this) }
     protected var isAutoHideKeyboard = true
     private val isHandleNetworkState = false
     private lateinit var connectivityManager: ConnectivityManager
+    private var timerTask: TimerTask? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +39,6 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
         setupLogic()
         setupView()
         setupDataObserver()
-
-        dialog = ProgressDialog.progressDialog(this)
 
         if (isHandleNetworkState) {
             if (!isNetworkConnected()) {
@@ -62,13 +62,15 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
 
 
     fun hideLoading() {
-        if (dialog.isShowing) {
-            dialog.dismiss()
+        runOnUiThread {
+            if (dialog.isShowing) {
+                dialog.dismiss()
+            }
         }
     }
 
     fun showLoading() {
-        dialog.show()
+        runOnUiThread { dialog.show() }
     }
 
     override fun dispatchTouchEvent(event: MotionEvent?): Boolean {
@@ -141,6 +143,7 @@ abstract class CommonBaseActivity<T : ViewDataBinding>(private val layoutId: Int
     override fun onDestroy() {
         clearData()
         super.onDestroy()
+        binding?.unbind()
         binding = null
     }
 }

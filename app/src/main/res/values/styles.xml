@@ -7,6 +7,25 @@
         <item name="android:textColor">@color/textColor</item>
     </style>
 
+    <style name="Shadow">
+        <item name="android:shadowDx">10</item>
+        <item name="android:shadowDy">10</item>
+        <item name="android:shadowRadius">50</item>
+        <item name="android:shadowColor">@color/textColor1Shadow</item>
+    </style>
+
+    <style name="TextTitle.Shadow" parent="Shadow">
+        <item name="android:textColor">@color/textColor1</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text14.Shadow" parent="Shadow">
+        <item name="android:textColor">@color/textColor1</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
 
     <style name="Text16">
         <item name="android:textSize">16sp</item>
@@ -15,6 +34,11 @@
 
     <style name="Text14">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextPersonInfo" parent="Text14">
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:lineSpacingExtra">12dp</item>
     </style>
 
     <style name="TextGenre" parent="Text14">
@@ -31,6 +55,21 @@
 
     <style name="TextItemTitle" parent="Text14">
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="Progressbar">
+        <item name="android:indeterminateTint">@color/black</item>
+    </style>
+
+    <style name="TabLayout">
+        <item name="tabSelectedTextColor">@color/text_selected_tab_layout_color</item>
+        <item name="tabTextColor">@color/text_tab_layout_color</item>
+        <item name="tabIndicatorColor">@color/text_selected_tab_layout_color</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabGravity">center</item>
+        <item name="tabBackground">?attr/selectableItemBackgroundBorderless</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
     </style>
 
 </resources>

@@ -1,15 +1,20 @@
 package com.thuypham.ptithcm.baseapp.ui.fragment
 
-import androidx.core.os.bundleOf
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentHomeBinding
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
+import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
 import com.thuypham.ptithcm.baseapp.ui.adapter.HomeCategoryAdapter
+import com.thuypham.ptithcm.baseapp.util.navigateToMovieDetail
+import com.thuypham.ptithcm.baseapp.util.navigateToMovieList
+import com.thuypham.ptithcm.baseapp.util.navigateToPeople
+import com.thuypham.ptithcm.baseapp.util.navigateToPersonDetail
 import com.thuypham.ptithcm.baseapp.viewmodel.HomeViewModel
-import com.thuypham.ptithcm.baselib.base.extension.logD
-import com.thuypham.ptithcm.baselib.base.extension.navigateTo
+import com.thuypham.ptithcm.baselib.base.extension.*
 import com.thuypham.ptithcm.data.remote.response.Movie
+import com.thuypham.ptithcm.data.remote.response.MovieGenre
+import com.thuypham.ptithcm.data.remote.response.Person
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
@@ -23,7 +28,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     }
 
     override fun getData() {
-        homeViewModel.getAllDataHome(WeakReference(requireContext()))
+        if (isNetworkConnected()) {
+            showNoNetWorkLayout(false)
+            if (homeViewModel.homeCategories.value.isNullOrEmpty()) {
+                homeViewModel.getAllDataHome(WeakReference(requireContext()))
+            }
+        } else {
+            showNoNetWorkLayout(true)
+        }
+    }
+
+    private fun showNoNetWorkLayout(visible: Boolean) {
+        binding.viewStubNoNetWork.viewStub?.run {
+            if (visible) {
+                inflate()
+                show()
+            } else {
+                gone()
+            }
+        }
     }
 
     override fun setupView() {
@@ -36,22 +59,36 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         (item as? HomeCategoryData)?.apply {
             when (item.listItems?.first()) {
                 is Movie -> {
-                    navigateTo(
-                        R.id.movieCategoryFragment,
-                        bundleOf(MovieCategoryFragment.CATEGORY_TYPE to item.type, MovieCategoryFragment.TITLE to item.title)
-                    )
+                    navigateToMovieList(type, title)
                 }
-            }
-        }
-        when (item) {
-            is HomeCategoryData -> {
-
+                is MovieGenre -> {
+                    navigateTo(R.id.genresFragment)
+                }
+                is Person -> {
+                    navigateToPeople(title)
+                }
             }
         }
     }
 
     private fun onChildItemClick(item: Any) {
+        when (item) {
+            is Movie -> {
+                navigateToMovieDetail(item.id ?: return)
+            }
+            is MovieGenre -> {
+                navigateToMovieList(HomeCategoryType.MOVIE_GENRES, item.name, item.id)
+            }
+            is Person -> {
+                navigateToPersonDetail(person = item)
+            }
+        }
+    }
 
+    override fun setupToolbar() {
+        super.setupToolbar()
+        toolbarHelper.setToolbarTitle(getString(R.string.app_name))
+        toolbarHelper.setImgCenter(R.drawable.ic_logo)
     }
 
     override fun setupDataObserver() {

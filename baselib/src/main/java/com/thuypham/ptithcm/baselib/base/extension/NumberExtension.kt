@@ -1,14 +1,32 @@
 package com.thuypham.ptithcm.baselib.base.extension
 
+import org.joda.time.LocalDate
+import org.joda.time.Years
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 
 fun Long.milliSecondToDateFormat(): String {
-    val dateFormat = SimpleDateFormat("EEE, dd MMM", Locale.getDefault())
+    val dateFormat = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
     val date = Date(this)
     return dateFormat.format(date)
+}
+
+fun Long.getAge(): Int {
+    val date = Date(this)
+    return Years.yearsBetween(LocalDate(this), LocalDate()).years
+}
+
+fun String.toMillisecond(): Long? {
+    return try {
+        val dateString = this
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(dateString)
+        date?.time
+    } catch (ex: Exception) {
+        logD("convert date error: ${ex.message}")
+        null
+    }
 }
 
 fun Long.toTime(): String {
@@ -25,6 +43,7 @@ fun Long.toTime(): String {
 
     return durationFormat
 }
+
 fun Long.toSecond(): Int {
     return TimeUnit.MILLISECONDS.toSeconds(this).toInt()
 }

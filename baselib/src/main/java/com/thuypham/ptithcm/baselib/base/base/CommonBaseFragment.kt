@@ -1,5 +1,6 @@
 package com.thuypham.ptithcm.baselib.base.base
 
+import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +12,12 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 import com.thuypham.ptithcm.baselib.base.extension.logD
+import com.thuypham.ptithcm.baselib.base.ui.dialog.ProgressDialog
 
 abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int) : Fragment() {
 
     protected lateinit var binding: T
+    private val dialog: Dialog by lazy { ProgressDialog.progressDialog(requireContext()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
@@ -24,7 +27,6 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupFirst()
-        getData()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,9 +35,10 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
             lifecycleOwner = viewLifecycleOwner
             executePendingBindings()
         }
+        getData()
+        setupDataObserver()
         setupView()
         setupToolbar()
-        setupDataObserver()
     }
 
     open fun setupFirst() {}
@@ -46,15 +49,19 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
     open fun clearData() {}
 
     fun showLoading() {
-        (requireActivity() as CommonBaseActivity<*>).showLoading()
+        runOnUiThread { dialog.show() }
     }
 
     fun hideLoading() {
-        (requireActivity() as CommonBaseActivity<*>).hideLoading()
+        runOnUiThread {
+            if (dialog.isShowing) {
+                dialog.dismiss()
+            }
+        }
     }
 
 
-    private fun runOnUiThread(runnable: Runnable?) {
+    protected fun runOnUiThread(runnable: Runnable?) {
         if (activity == null || !isAdded) {
             return
         }
@@ -113,13 +120,14 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
      * The next time the fragment needs to be displayed,
      * a new view will be created. So we set _binding = null to allow for a new View to be created and referenced.
      * */
-    private fun clearViewBinding(){
+    private fun clearViewBinding() {
         binding.apply {
             logD("clearViewBinding")
 
             (root.parent as? ViewGroup)?.run {
                 logD("clearViewBinding")
                 this.removeAllViews()
+                this.removeAllViewsInLayout()
             }
             this.unbind()
         }

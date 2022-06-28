@@ -5,13 +5,14 @@ import androidx.databinding.ViewDataBinding
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 
 class BasePagedAdapter<T : Any>(
     private val onCreateViewHolderFunc: (viewGroup: ViewGroup, viewType: Int) -> ViewDataBinding,
     private val diffUtilCallback: () -> BaseItemDiffUtilCallback<T>,
     private val getItemViewTypeFunc: ((item: T) -> Int?)? = null,
     private val bindViewFunc: ((binding: ViewDataBinding, item: Any, position: Int) -> Unit)? = null,
-    private val addEventListener: ((viewHolder: ItemViewHolder, listItems: List<T>) -> Unit)? = null
+    private val addEventListener: ((viewHolder: ItemViewHolder) -> Unit)? = null
 ) : PagingDataAdapter<T, RecyclerView.ViewHolder>(diffCallback(diffUtilCallback.invoke())) {
 
     override fun getItemViewType(position: Int): Int {
@@ -21,7 +22,7 @@ class BasePagedAdapter<T : Any>(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ItemViewHolder(onCreateViewHolderFunc(viewGroup, viewType), bindViewFunc).apply {
-            addEventListener?.invoke(this, snapshot().items)
+            addEventListener?.invoke(this)
         }
     }
 
@@ -32,6 +33,11 @@ class BasePagedAdapter<T : Any>(
         fun bindView(item: Any, position: Int) {
             bindFunc?.invoke(mBinding, item, position)
         }
+
+    }
+
+    fun getItemAtPosition(position: Int): T? {
+        return getItem(position)
     }
 
 

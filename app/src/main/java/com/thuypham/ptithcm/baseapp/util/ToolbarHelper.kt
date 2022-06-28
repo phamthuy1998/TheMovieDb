@@ -7,10 +7,10 @@ import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.baselib.base.extension.show
 
-class ToolbarHelper constructor(private val view: View) {
+class ToolbarHelper constructor(private var view: View?) {
 
     fun setToolbarTitle(title: String, onClick: ((View) -> Unit?)? = null) {
-        view.findViewById<AppCompatTextView>(R.id.tvTitle)?.apply {
+        view?.findViewById<AppCompatTextView>(R.id.tvTitle)?.apply {
             show()
             text = title
             isSelected = true
@@ -19,15 +19,15 @@ class ToolbarHelper constructor(private val view: View) {
     }
 
     fun setToolbarTitle(titleRes: Int, onClick: ((View) -> Unit?)? = null) {
-        view.findViewById<AppCompatTextView>(R.id.tvTitle)?.apply {
+        view?.findViewById<AppCompatTextView>(R.id.tvTitle)?.apply {
             show()
-            text = view.context.getString(titleRes)
+            text = this.context.getString(titleRes)
             setOnSingleClickListener { onClick?.invoke(this) }
         }
     }
 
     fun setLeftBtn(iconResID: Int, onClick: ((View) -> Unit?)? = null) {
-        view.findViewById<AppCompatImageView>(R.id.ivLeft)?.apply {
+        view?.findViewById<AppCompatImageView>(R.id.ivLeft)?.apply {
             show()
             setImageResource(iconResID)
             setOnSingleClickListener { onClick?.invoke(this) }
@@ -35,21 +35,21 @@ class ToolbarHelper constructor(private val view: View) {
     }
 
     fun setRightBtn(iconResID: Int, onClick: ((View) -> Unit?)? = null) {
-        view.findViewById<AppCompatImageView>(R.id.ivRight)?.apply {
+        view?.findViewById<AppCompatImageView>(R.id.ivRight)?.apply {
             show()
             setImageResource(iconResID)
             setOnSingleClickListener { onClick?.invoke(this) }
         }
     }
 
-    fun updateRightBtnIconResource(iconResID: Int){
-        view.findViewById<AppCompatImageView>(R.id.ivRight)?.apply {
+    fun updateRightBtnIconResource(iconResID: Int) {
+        view?.findViewById<AppCompatImageView>(R.id.ivRight)?.apply {
             setImageResource(iconResID)
         }
     }
 
     fun setSubRightBtn(iconResID: Int, onClick: ((View) -> Unit?)? = null) {
-        view.findViewById<AppCompatImageView>(R.id.ivSubRight)?.apply {
+        view?.findViewById<AppCompatImageView>(R.id.ivSubRight)?.apply {
             show()
             setImageResource(iconResID)
             setOnSingleClickListener { onClick?.invoke(this) }
@@ -57,11 +57,31 @@ class ToolbarHelper constructor(private val view: View) {
     }
 
     fun setSubRight2Btn(iconResID: Int, onClick: ((View) -> Unit?)? = null) {
-        view.findViewById<AppCompatImageView>(R.id.ivSubRight2)?.apply {
+        view?.findViewById<AppCompatImageView>(R.id.ivSubRight2)?.apply {
             show()
             setImageResource(iconResID)
             setOnSingleClickListener { onClick?.invoke(this) }
         }
+    }
+
+    fun setImgCenter(iconResID: Int, onClick: ((View) -> Unit?)? = null) {
+        view?.findViewById<AppCompatImageView>(R.id.ivCenter)?.apply {
+            show()
+            setImageResource(iconResID)
+            setOnSingleClickListener { onClick?.invoke(this) }
+        }
+    }
+
+    fun setImgAvt(iconResID: Int, onClick: ((View) -> Unit?)? = null) {
+        view?.findViewById<AppCompatImageView>(R.id.ivLeft)?.apply {
+            show()
+            setImageResource(iconResID)
+            setOnSingleClickListener { onClick?.invoke(this) }
+        }
+    }
+
+    fun clear(){
+        view = null
     }
 
 }
