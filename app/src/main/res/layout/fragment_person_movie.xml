@@ -34,6 +34,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <include
+            android:id="@+id/layoutVerticalShimmer"
+            layout="@layout/layout_vertical_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:visibility="gone"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 

@@ -35,19 +35,27 @@
 
         <include
             android:id="@+id/layoutEmpty"
+            layout="@layout/layout_empty_data"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
-            layout="@layout/layout_empty_data"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <include
             android:id="@+id/layoutShimmer"
+            layout="@layout/layout_gridview_shimmer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             android:gravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+        <include
+            android:id="@+id/layoutVerticalShimmer"
             layout="@layout/layout_gridview_shimmer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -32,6 +32,8 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
         navigateToMovieDetail(movie?.id ?: return)
     }
 
+    private var currentList: List<Movie>? = null
+
     private var isRecyclerviewGridLayout = true
     private var firstVisibleItemPosition = 0
 
@@ -41,6 +43,7 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
     }
 
     override fun setupView() {
+        updateShimmer(true)
         setupRecyclerViewByType()
     }
 
@@ -70,21 +73,23 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
         }
         logD("setupRecyclerViewByType: firstVisibleItemPosition: $firstVisibleItemPosition")
 
-//
-//        // submit data for recycler view
-//        movieViewModel.movieListPaging.value?.let {
-//            logD("setupRecyclerViewByType - movieListPaging")
-//            updateShimmer(false)
-//            submitRecyclerViewData(it)
-//            // Scroll to position
-//            binding.rvMovies.post {
-//                binding.rvMovies.layoutManager?.scrollToPosition(firstVisibleItemPosition)
-//            }
-//        }
+
+        // submit data for recycler view
+        currentList?.let {
+            logD("setupRecyclerViewByType - movieListPaging")
+            updateShimmer(false)
+            submitRecyclerViewData(it)
+            // Scroll to position
+            binding.rvMovies.post {
+                binding.rvMovies.layoutManager?.scrollToPosition(firstVisibleItemPosition)
+            }
+        }
 
     }
 
     protected fun submitRecyclerViewData(movieList: List<Movie>?) {
+        currentList = movieList
+        updateShimmer(false)
         if (movieList.isNullOrEmpty()) {
             showEmptyData(true)
             return
@@ -98,11 +103,11 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
         }
     }
 
-    protected fun showEmptyData(visible: Boolean) {
+    private fun showEmptyData(visible: Boolean) {
         binding.layoutEmpty.root.isVisible = visible
     }
 
-    protected fun updateShimmer(isShow: Boolean) {
+    private fun updateShimmer(isShow: Boolean) {
         logD("updateShimmer - isShow: $isShow")
         runOnUiThread {
             binding.layoutShimmer.root.isVisible = isShow

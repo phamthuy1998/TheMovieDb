@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/default_margin">
+
+        <View
+            android:id="@+id/ivMovie"
+            android:layout_width="@dimen/item_home_movie_width"
+            android:layout_height="@dimen/item_home_movie_height"
+            android:background="@color/color_shimmer_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/tvMovieName"
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:background="@color/color_shimmer_item"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivMovie"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="50dp"
+            android:background="@color/color_shimmer_item"
+            android:ellipsize="end"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivMovie"
+            app:layout_constraintTop_toBottomOf="@id/tvMovieName" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@color/bg_genres"
+            app:layout_constraintTop_toBottomOf="@id/ivMovie" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
