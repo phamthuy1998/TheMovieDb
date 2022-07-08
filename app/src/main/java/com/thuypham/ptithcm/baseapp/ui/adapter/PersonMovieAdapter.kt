@@ -34,10 +34,16 @@ class PersonMovieAdapter {
                         binding.run {
                             tvMovieName.text = item.title
                             tvRate.text = item.voteAverage.toString()
-                            Glide.with(binding.root.context)
-                                .load(ApiHelper.getImagePath(item.posterPath ?: ""))
-                                .placeholder(R.drawable.ic_image_placeholder)
-                                .into(ivMovie)
+                            if (item.posterPath.isNullOrEmpty()) {
+                                Glide.with(binding.root.context)
+                                    .load(R.drawable.ic_image_placeholder)
+                                    .into(ivMovie)
+                            } else {
+                                Glide.with(binding.root.context)
+                                    .load(ApiHelper.getImagePath(item.posterPath!!))
+                                    .placeholder(R.drawable.ic_image_placeholder)
+                                    .into(ivMovie)
+                            }
                         }
                     }
                 }
@@ -60,7 +66,7 @@ class PersonMovieAdapter {
             onCreateViewHolderFunc = { viewGroup, viewType ->
                 DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), viewType, viewGroup, false)
             },
-            addEventListener = {viewHolder, listItems ->
+            addEventListener = { viewHolder, listItems ->
                 viewHolder.mBinding.root.setOnSingleClickListener {
                     onItemMovieClick(viewHolder.absoluteAdapterPosition)
                 }
@@ -73,10 +79,16 @@ class PersonMovieAdapter {
                             tvMovieName.text = item.title
                             tvDescription.text = item.overview
                             tvRate.text = item.voteAverage.toString()
-                            Glide.with(binding.root.context)
-                                .load(ApiHelper.getImagePath(item.posterPath ?: ""))
-                                .placeholder(R.drawable.ic_image_placeholder)
-                                .into(ivMovie)
+                            if (item.posterPath.isNullOrEmpty()) {
+                                Glide.with(binding.root.context)
+                                    .load(R.drawable.ic_image_placeholder)
+                                    .into(ivMovie)
+                            } else {
+                                Glide.with(binding.root.context)
+                                    .load(ApiHelper.getImagePath(item.posterPath!!))
+                                    .placeholder(R.drawable.ic_image_placeholder)
+                                    .into(ivMovie)
+                            }
                         }
                     }
                 }

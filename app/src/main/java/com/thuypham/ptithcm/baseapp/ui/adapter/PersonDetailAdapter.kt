@@ -44,10 +44,16 @@ class PersonDetailAdapter {
             bindViewFunc = { binding, item, position ->
                 item as Profile
                 binding as ItemPersonImageBinding
-                Glide.with(binding.root.context)
-                    .load(ApiHelper.getImagePath(item.filePath ?: ""))
-                    .placeholder(R.drawable.ic_image_placeholder)
-                    .into(binding.ivPerson)
+                if (item.filePath.isNullOrEmpty()) {
+                    Glide.with(binding.root.context)
+                        .load(R.drawable.ic_image_placeholder)
+                        .into(binding.ivPerson)
+                } else {
+                    Glide.with(binding.root.context)
+                        .load(ApiHelper.getImagePath(item.filePath!!))
+                        .placeholder(R.drawable.ic_image_placeholder)
+                        .into(binding.ivPerson)
+                }
             },
             diffUtilCallback = {
                 BaseItemDiffUtilCallback(

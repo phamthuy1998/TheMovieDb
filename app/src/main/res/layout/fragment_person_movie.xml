@@ -26,15 +26,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
+            app:isPersonEmptyData="@{true}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <include
-            android:id="@+id/layoutShimmer"
+            android:id="@+id/layoutGridViewShimmer"
             layout="@layout/layout_gridview_shimmer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            android:visibility="gone"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:visibility="visible" />
 
         <include
             android:id="@+id/layoutVerticalShimmer"

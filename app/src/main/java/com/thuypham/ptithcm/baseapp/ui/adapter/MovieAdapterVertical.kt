@@ -33,10 +33,16 @@ class MovieAdapterVertical {
                             tvMovieName.text = item.title
                             tvDescription.text = item.overview
                             tvRate.text = item.voteAverage.toString()
-                            Glide.with(binding.root.context)
-                                .load(ApiHelper.getImagePath(item.posterPath ?: ""))
-                                .placeholder(R.drawable.ic_image_placeholder)
-                                .into(ivMovie)
+                            if (item.posterPath.isNullOrEmpty()) {
+                                Glide.with(binding.root.context)
+                                    .load(R.drawable.ic_image_placeholder)
+                                    .into(ivMovie)
+                            } else {
+                                Glide.with(binding.root.context)
+                                    .load(ApiHelper.getImagePath(item.posterPath!!))
+                                    .placeholder(R.drawable.ic_image_placeholder)
+                                    .into(ivMovie)
+                            }
                         }
                     }
                 }

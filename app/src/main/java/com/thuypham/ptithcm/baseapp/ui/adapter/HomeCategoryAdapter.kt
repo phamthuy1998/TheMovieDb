@@ -77,7 +77,7 @@ class HomeCategoryAdapter {
             },
             diffUtilCallback = {
                 BaseItemDiffUtilCallback(
-                    areItemsTheSameFunc = { oldItem, newItem -> oldItem?.toString()  == newItem?.toString()  },
+                    areItemsTheSameFunc = { oldItem, newItem -> oldItem?.toString() == newItem?.toString() },
                     areContentsTheSameFunc = { oldItem, newItem -> oldItem?.toString() == newItem?.toString() }
                 )
 
@@ -110,10 +110,16 @@ class HomeCategoryAdapter {
                         binding.run {
                             tvMovieName.text = item.title
                             tvRate.text = item.voteAverage.toString()
-                            Glide.with(binding.root.context)
-                                .load(ApiHelper.getImagePath(item.posterPath ?: ""))
-                                .placeholder(R.drawable.ic_image_placeholder)
-                                .into(ivMovie)
+                            if (item.posterPath.isNullOrEmpty()) {
+                                Glide.with(binding.root.context)
+                                    .load(R.drawable.ic_image_placeholder)
+                                    .into(ivMovie)
+                            } else {
+                                Glide.with(binding.root.context)
+                                    .load(ApiHelper.getImagePath(item.posterPath!!))
+                                    .placeholder(R.drawable.ic_image_placeholder)
+                                    .into(ivMovie)
+                            }
 
                         }
                     }
@@ -128,10 +134,16 @@ class HomeCategoryAdapter {
                         item as Person
                         binding.run {
                             tvPersonName.text = item.name
-                            Glide.with(binding.root.context)
-                                .load(ApiHelper.getImagePath(item.profilePath ?: ""))
-                                .placeholder(R.drawable.ic_image_placeholder)
-                                .into(ivAvt)
+                            if (item.profilePath.isNullOrEmpty()) {
+                                Glide.with(binding.root.context)
+                                    .load(R.drawable.ic_image_placeholder)
+                                    .into(ivAvt)
+                            } else {
+                                Glide.with(binding.root.context)
+                                    .load(ApiHelper.getImagePath(item.profilePath!!))
+                                    .placeholder(R.drawable.ic_image_placeholder)
+                                    .into(ivAvt)
+                            }
                         }
 
                     }
@@ -139,7 +151,7 @@ class HomeCategoryAdapter {
             },
             diffUtilCallback = {
                 BaseItemDiffUtilCallback(
-                    areItemsTheSameFunc = { oldItem, newItem -> oldItem?.toString()  == newItem?.toString()  },
+                    areItemsTheSameFunc = { oldItem, newItem -> oldItem?.toString() == newItem?.toString() },
                     areContentsTheSameFunc = { oldItem, newItem -> oldItem?.toString() == newItem?.toString() }
                 )
 

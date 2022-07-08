@@ -28,10 +28,16 @@ class PeopleAdapter {
                 item as Person
                 binding as ItemPeopleBinding
                 binding.run {
-                    Glide.with(binding.root.context)
-                        .load(ApiHelper.getImagePath(item.profilePath ?: ""))
-                        .placeholder(R.drawable.ic_image_placeholder)
-                        .into(ivAvatar)
+                    if (item.profilePath.isNullOrEmpty()) {
+                        Glide.with(binding.root.context)
+                            .load(R.drawable.ic_image_placeholder)
+                            .into(ivAvatar)
+                    } else {
+                        Glide.with(binding.root.context)
+                            .load(ApiHelper.getImagePath(item.profilePath!!))
+                            .placeholder(R.drawable.ic_image_placeholder)
+                            .into(ivAvatar)
+                    }
                     tvPersonName.text = item.name
                 }
             },

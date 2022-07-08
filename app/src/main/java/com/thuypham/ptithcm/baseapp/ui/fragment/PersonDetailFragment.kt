@@ -114,10 +114,16 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             tvPersonName.text = person.name
             tvTitleToolbar.text = person.name
             tvKnowFor.text = person.knownForDepartment
-            Glide.with(requireContext())
-                .load(ApiHelper.getImagePath(ApiHelper.getImagePath(person.profilePath ?: "")))
-                .placeholder(R.drawable.ic_image_placeholder)
-                .into(binding.ivAvatar)
+            if (person.profilePath.isNullOrEmpty()) {
+                Glide.with(binding.root.context)
+                    .load(R.drawable.ic_image_placeholder)
+                    .into(ivAvatar)
+            } else {
+                Glide.with(requireContext())
+                    .load(ApiHelper.getImagePath(ApiHelper.getImagePath(person.profilePath!!)))
+                    .placeholder(R.drawable.ic_image_placeholder)
+                    .into(binding.ivAvatar)
+            }
             val backDropPath = person.knownFor?.first()?.backdropPath
             if (!backDropPath.isNullOrBlank()) {
                 Glide.with(requireContext())

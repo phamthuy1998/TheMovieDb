@@ -26,4 +26,5 @@
     <string name="show_less">Show less</string>
     <string name="also_know_as">Also know as</string>
     <string name="images">Images</string>
+    <string name="empty_data">Empty</string>
 </resources>

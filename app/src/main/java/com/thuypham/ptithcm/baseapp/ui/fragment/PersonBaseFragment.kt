@@ -9,6 +9,7 @@ import com.thuypham.ptithcm.baseapp.databinding.FragmentPersonMovieBinding
 import com.thuypham.ptithcm.baseapp.ui.adapter.PersonMovieAdapter
 import com.thuypham.ptithcm.baseapp.util.navigateToMovieDetail
 import com.thuypham.ptithcm.baselib.base.base.BaseViewAdapter
+import com.thuypham.ptithcm.baselib.base.extension.gone
 import com.thuypham.ptithcm.baselib.base.extension.logD
 import com.thuypham.ptithcm.data.local.IStorage
 import com.thuypham.ptithcm.data.local.SharedPreferencesStorage
@@ -110,7 +111,13 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
     private fun updateShimmer(isShow: Boolean) {
         logD("updateShimmer - isShow: $isShow")
         runOnUiThread {
-            binding.layoutShimmer.root.isVisible = isShow
+            if (isRecyclerviewGridLayout) {
+                binding.layoutGridViewShimmer.root.isVisible = isShow
+                binding.layoutVerticalShimmer.root.gone()
+            } else {
+                binding.layoutGridViewShimmer.root.gone()
+                binding.layoutVerticalShimmer.root.isVisible = isShow
+            }
         }
     }
 

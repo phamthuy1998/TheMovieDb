@@ -203,16 +203,16 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
     }
 
     private fun updateShimmer(isShow: Boolean) {
-        logD("updateShimmer - isShow: $isShow")
+        logD("updateShimmer - isShow: $isShow isRecyclerviewGridLayout: $isRecyclerviewGridLayout")
         if (isRecyclerviewGridLayout) {
             runOnUiThread {
-                binding.layoutShimmer.root.isVisible = isShow
+                binding.layoutGridViewShimmer.root.isVisible = isShow
                 binding.layoutVerticalShimmer.root.gone()
             }
         } else {
             runOnUiThread {
+                binding.layoutGridViewShimmer.root.gone()
                 binding.layoutVerticalShimmer.root.isVisible = isShow
-                binding.layoutShimmer.root.gone()
             }
         }
     }
