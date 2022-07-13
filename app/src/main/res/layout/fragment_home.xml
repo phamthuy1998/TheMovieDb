@@ -23,12 +23,12 @@
             android:id="@+id/rvMainHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:clipToPadding="false"
+            android:orientation="vertical"
             android:paddingBottom="32dp"
-            tools:listitem="@layout/item_movies_category"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_movies_category" />
 
         <ViewStub
             android:id="@+id/viewStubNoNetWork"

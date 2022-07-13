@@ -3,12 +3,12 @@ package com.thuypham.ptithcm.baseapp.ui.adapter
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemGenreBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemMoviesCategoryBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemPopularPersonBinding
+import com.thuypham.ptithcm.baseapp.extension.loadImage
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
 import com.thuypham.ptithcm.baseapp.model.LoadingItem
@@ -62,11 +62,19 @@ class HomeCategoryAdapter {
                             viewStubEmpty.viewStub?.gone()
                         }
                     }
+
+                    // Calculate item height
+                    val resource = root.context.resources
                     val rvHeight = when (item.type) {
-                        HomeCategoryType.MOVIE_GENRES -> root.context.resources.getDimensionPixelOffset(R.dimen.item_genre_height)
+                        HomeCategoryType.MOVIE_GENRES -> resource.getDimensionPixelOffset(R.dimen.item_genre_height)
                         HomeCategoryType.POPULAR_PEOPLE -> root.context.resources.getDimensionPixelOffset(R.dimen.item_rc_popular_height)
                         else -> root.context.resources.getDimensionPixelOffset(R.dimen.item_rc_movie_height)
                     }
+
+                    val itemHeight = rvHeight + resource.getDimensionPixelSize(R.dimen.item_title_category_height)
+                    rootLayoutCategoryItem.layoutParams.height = itemHeight
+
+                    // setup recyclerview
                     val itemAdapter = initListItemAdapter(onChildItemClick)
                     rvItem.apply {
                         adapter = itemAdapter
@@ -95,9 +103,9 @@ class HomeCategoryAdapter {
                     else -> R.layout.item_loading
                 }
             },
-            addEventListener = { viewHolder, item ->
+            addEventListener = { viewHolder, items ->
                 viewHolder.mBinding.apply {
-                    root.setOnSingleClickListener { onChildItemClick.invoke(item[viewHolder.absoluteAdapterPosition]) }
+                    root.setOnSingleClickListener { onChildItemClick.invoke(items[viewHolder.absoluteAdapterPosition]) }
                 }
             },
             onCreateViewHolderFunc = { viewGroup, viewType ->
@@ -110,17 +118,7 @@ class HomeCategoryAdapter {
                         binding.run {
                             tvMovieName.text = item.title
                             tvRate.text = item.voteAverage.toString()
-                            if (item.posterPath.isNullOrEmpty()) {
-                                Glide.with(binding.root.context)
-                                    .load(R.drawable.ic_image_placeholder)
-                                    .into(ivMovie)
-                            } else {
-                                Glide.with(binding.root.context)
-                                    .load(ApiHelper.getImagePath(item.posterPath!!))
-                                    .placeholder(R.drawable.ic_image_placeholder)
-                                    .into(ivMovie)
-                            }
-
+                            ivMovie.loadImage(item.posterPath)
                         }
                     }
                     is ItemGenreBinding -> {
@@ -134,16 +132,7 @@ class HomeCategoryAdapter {
                         item as Person
                         binding.run {
                             tvPersonName.text = item.name
-                            if (item.profilePath.isNullOrEmpty()) {
-                                Glide.with(binding.root.context)
-                                    .load(R.drawable.ic_image_placeholder)
-                                    .into(ivAvt)
-                            } else {
-                                Glide.with(binding.root.context)
-                                    .load(ApiHelper.getImagePath(item.profilePath!!))
-                                    .placeholder(R.drawable.ic_image_placeholder)
-                                    .into(ivAvt)
-                            }
+                            ivAvt.loadImage(item.profilePath)
                         }
 
                     }

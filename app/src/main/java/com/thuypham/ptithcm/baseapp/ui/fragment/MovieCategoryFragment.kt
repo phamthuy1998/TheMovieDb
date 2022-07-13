@@ -27,6 +27,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layout.fragment_movie_category) {
     companion object {
         const val CATEGORY_TYPE = "CATEGORY_TYPE"
+        const val MOVIE_LIST = "MOVIE_LIST"
         const val TITLE = "TITLE"
         const val GENRE_ID = "GENRE_ID"
     }

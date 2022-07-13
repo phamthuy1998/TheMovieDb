@@ -19,4 +19,11 @@
         android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PersonBaseFragment"
         android:label="PersonMoviesFragment"
         tools:layout="@layout/fragment_person_movie" />
+
+    <fragment
+        android:id="@+id/imagesFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.ImagesFragment"
+        android:label="ImagesFragment"
+        tools:layout="@layout/fragment_images" />
+
 </navigation>

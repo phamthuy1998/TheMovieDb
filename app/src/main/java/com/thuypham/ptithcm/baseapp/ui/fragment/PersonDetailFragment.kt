@@ -3,13 +3,15 @@ package com.thuypham.ptithcm.baseapp.ui.fragment
 import android.util.TypedValue
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentPersonDetailBinding
+import com.thuypham.ptithcm.baseapp.extension.loadImage
 import com.thuypham.ptithcm.baseapp.ui.adapter.PersonPagerAdapter
+import com.thuypham.ptithcm.baseapp.util.NavConstant
+import com.thuypham.ptithcm.baseapp.util.showImageDetailDialog
 import com.thuypham.ptithcm.baseapp.viewmodel.PersonViewModel
 import com.thuypham.ptithcm.baselib.base.extension.goBack
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
@@ -20,7 +22,6 @@ import kotlin.math.abs
 
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.fragment_person_detail) {
     companion object {
-        const val PERSON_INFO = "PERSON_INFO"
         const val SWITCH_BOUND = 0.8f
         const val TO_EXPANDED = 0
         const val TO_COLLAPSED = 1
@@ -54,7 +55,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
 
     override fun setupFirst() {
         arguments?.let {
-            personInfo = it.getParcelable(PERSON_INFO)
+            personInfo = it.getParcelable(NavConstant.PERSON_INFO)
             personViewModel.setPersonInfo(personInfo)
         }
     }
@@ -114,23 +115,15 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             tvPersonName.text = person.name
             tvTitleToolbar.text = person.name
             tvKnowFor.text = person.knownForDepartment
-            if (person.profilePath.isNullOrEmpty()) {
-                Glide.with(binding.root.context)
-                    .load(R.drawable.ic_image_placeholder)
-                    .into(ivAvatar)
-            } else {
-                Glide.with(requireContext())
-                    .load(ApiHelper.getImagePath(ApiHelper.getImagePath(person.profilePath!!)))
-                    .placeholder(R.drawable.ic_image_placeholder)
-                    .into(binding.ivAvatar)
-            }
-            val backDropPath = person.knownFor?.first()?.backdropPath
-            if (!backDropPath.isNullOrBlank()) {
-                Glide.with(requireContext())
-                    .load(ApiHelper.getImagePath(ApiHelper.getImagePath(backDropPath)))
-                    .into(binding.ivCover)
+            ivAvatar.apply {
+                loadImage(person.profilePath)
+                setOnSingleClickListener {
+                    person.profilePath?.let { it1 -> showImageDetailDialog(it1) }
+                }
             }
 
+            val backDropPath = person.knownFor?.first()?.backdropPath
+            ivCover.loadImage(backDropPath, false)
         }
     }
 

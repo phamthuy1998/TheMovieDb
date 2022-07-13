@@ -1,14 +1,14 @@
 package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import android.view.LayoutInflater
-import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemKnowAsBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemPersonImageBinding
+import com.thuypham.ptithcm.baseapp.extension.loadImage
 import com.thuypham.ptithcm.baselib.base.base.BaseItemDiffUtilCallback
 import com.thuypham.ptithcm.baselib.base.base.BaseViewAdapter
+import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.data.remote.response.Profile
-import com.thuypham.ptithcm.data.util.ApiHelper
 
 class PersonDetailAdapter {
     fun setupKnowAsAdapter(): BaseViewAdapter<String> {
@@ -33,7 +33,7 @@ class PersonDetailAdapter {
         )
     }
 
-    fun setupPersonImageAdapter(): BaseViewAdapter<Profile> {
+    fun setupPersonImageAdapter(onItemClick: (imgPath: String) -> Unit): BaseViewAdapter<Profile> {
         return BaseViewAdapter(
             getItemViewTypeFunc = {
                 R.layout.item_person_image
@@ -41,19 +41,15 @@ class PersonDetailAdapter {
             onCreateViewHolderFunc = { viewGroup, viewType ->
                 ItemPersonImageBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
             },
+            addEventListener = { viewHolder, items ->
+                viewHolder.mBinding.root.setOnSingleClickListener {
+                    items[viewHolder.absoluteAdapterPosition].filePath?.let { it1 -> onItemClick(it1) }
+                }
+            },
             bindViewFunc = { binding, item, position ->
                 item as Profile
                 binding as ItemPersonImageBinding
-                if (item.filePath.isNullOrEmpty()) {
-                    Glide.with(binding.root.context)
-                        .load(R.drawable.ic_image_placeholder)
-                        .into(binding.ivPerson)
-                } else {
-                    Glide.with(binding.root.context)
-                        .load(ApiHelper.getImagePath(item.filePath!!))
-                        .placeholder(R.drawable.ic_image_placeholder)
-                        .into(binding.ivPerson)
-                }
+                binding.ivPerson.loadImage(item.filePath)
             },
             diffUtilCallback = {
                 BaseItemDiffUtilCallback(

@@ -1,5 +1,6 @@
 package com.thuypham.ptithcm.baselib.base.extension
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
@@ -51,8 +52,12 @@ fun Fragment.getScreenHeight(): Int {
     return displayMetrics.heightPixels
 }
 
-fun Fragment.shareImageToOtherApp(imagePath: String) {
-    requireActivity().shareImageToOtherApp(imagePath)
+fun Fragment.shareImageFromUrlToOtherApp(imagePath: String) {
+    requireActivity().shareImageLocalToOtherApp(imagePath)
+}
+
+fun Fragment.shareImageFromUrlToOtherApp(bitmap: Bitmap, fileName: String) {
+    requireActivity().shareImageFromUrlToOtherApp(bitmap, fileName)
 }
 
 

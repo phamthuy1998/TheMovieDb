@@ -1,9 +1,9 @@
 package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import android.view.LayoutInflater
-import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemPeopleBinding
+import com.thuypham.ptithcm.baseapp.extension.loadImage
 import com.thuypham.ptithcm.baselib.base.base.BaseItemDiffUtilCallback
 import com.thuypham.ptithcm.baselib.base.base.BasePagedAdapter
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
@@ -28,16 +28,7 @@ class PeopleAdapter {
                 item as Person
                 binding as ItemPeopleBinding
                 binding.run {
-                    if (item.profilePath.isNullOrEmpty()) {
-                        Glide.with(binding.root.context)
-                            .load(R.drawable.ic_image_placeholder)
-                            .into(ivAvatar)
-                    } else {
-                        Glide.with(binding.root.context)
-                            .load(ApiHelper.getImagePath(item.profilePath!!))
-                            .placeholder(R.drawable.ic_image_placeholder)
-                            .into(ivAvatar)
-                    }
+                    ivAvatar.loadImage(item.profilePath)
                     tvPersonName.text = item.name
                 }
             },

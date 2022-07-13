@@ -4,15 +4,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/item_category_height"
+        android:id="@+id/rootLayoutCategoryItem"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextTitle"
+            android:gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/default_margin"
+            android:layout_height="@dimen/item_title_category_height"
+            android:layout_marginHorizontal="@dimen/default_margin"
+            android:maxLines="1"
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

@@ -2,16 +2,14 @@ package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
-import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieGridviewBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieVerticalBinding
+import com.thuypham.ptithcm.baseapp.extension.loadImage
 import com.thuypham.ptithcm.baselib.base.base.BaseItemDiffUtilCallback
-import com.thuypham.ptithcm.baselib.base.base.BasePagedAdapter
 import com.thuypham.ptithcm.baselib.base.base.BaseViewAdapter
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.data.remote.response.Movie
-import com.thuypham.ptithcm.data.util.ApiHelper
 
 class PersonMovieAdapter {
     fun initGridMovieAdapter(onItemMovieClick: (position: Int) -> Unit): BaseViewAdapter<Movie> {
@@ -22,7 +20,7 @@ class PersonMovieAdapter {
             onCreateViewHolderFunc = { viewGroup, viewType ->
                 DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), viewType, viewGroup, false)
             },
-            addEventListener = { viewHolder, listItems ->
+            addEventListener = { viewHolder, items ->
                 viewHolder.mBinding.root.setOnSingleClickListener {
                     onItemMovieClick(viewHolder.absoluteAdapterPosition)
                 }
@@ -34,16 +32,7 @@ class PersonMovieAdapter {
                         binding.run {
                             tvMovieName.text = item.title
                             tvRate.text = item.voteAverage.toString()
-                            if (item.posterPath.isNullOrEmpty()) {
-                                Glide.with(binding.root.context)
-                                    .load(R.drawable.ic_image_placeholder)
-                                    .into(ivMovie)
-                            } else {
-                                Glide.with(binding.root.context)
-                                    .load(ApiHelper.getImagePath(item.posterPath!!))
-                                    .placeholder(R.drawable.ic_image_placeholder)
-                                    .into(ivMovie)
-                            }
+                            ivMovie.loadImage(item.posterPath)
                         }
                     }
                 }
@@ -66,7 +55,7 @@ class PersonMovieAdapter {
             onCreateViewHolderFunc = { viewGroup, viewType ->
                 DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), viewType, viewGroup, false)
             },
-            addEventListener = { viewHolder, listItems ->
+            addEventListener = { viewHolder, items ->
                 viewHolder.mBinding.root.setOnSingleClickListener {
                     onItemMovieClick(viewHolder.absoluteAdapterPosition)
                 }
@@ -79,16 +68,7 @@ class PersonMovieAdapter {
                             tvMovieName.text = item.title
                             tvDescription.text = item.overview
                             tvRate.text = item.voteAverage.toString()
-                            if (item.posterPath.isNullOrEmpty()) {
-                                Glide.with(binding.root.context)
-                                    .load(R.drawable.ic_image_placeholder)
-                                    .into(ivMovie)
-                            } else {
-                                Glide.with(binding.root.context)
-                                    .load(ApiHelper.getImagePath(item.posterPath!!))
-                                    .placeholder(R.drawable.ic_image_placeholder)
-                                    .into(ivMovie)
-                            }
+                            ivMovie.loadImage(item.posterPath)
                         }
                     }
                 }

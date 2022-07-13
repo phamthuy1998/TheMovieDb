@@ -16,7 +16,7 @@ class PersonViewModel(private val peopleRepository: PeopleRepository) : BaseView
 
     private val _personImages = MutableLiveData<PersonImage?>()
     val personImages: LiveData<PersonImage?> get() = _personImages
-
+    private var personImagesPath: List<String> = listOf()
 
     private val _personDetail = MutableLiveData<PersonDetail?>()
     val personDetail: LiveData<PersonDetail?> get() = _personDetail
@@ -79,10 +79,20 @@ class PersonViewModel(private val peopleRepository: PeopleRepository) : BaseView
         when (val result = peopleRepository.getPersonImage(personId)) {
             is ResponseHandler.Success -> {
                 _personImages.value = result.data
+                result.data.profiles?.map { it.filePath ?: "" }?.let {
+                    personImagesPath = it
+                }
             }
             is ResponseHandler.Error -> {
                 errorLiveData.value = result
             }
+            else -> {
+
+            }
         }
+    }
+
+    fun getPersonImagePath(): List<String> {
+        return personImagesPath
     }
 }

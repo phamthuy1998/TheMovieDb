@@ -6,16 +6,14 @@ import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentPeopleBinding
 import com.thuypham.ptithcm.baseapp.ui.adapter.PeopleAdapter
+import com.thuypham.ptithcm.baseapp.util.NavConstant
 import com.thuypham.ptithcm.baseapp.util.navigateToPersonDetail
 import com.thuypham.ptithcm.baseapp.viewmodel.PeopleViewModel
 import com.thuypham.ptithcm.baselib.base.extension.goBack
+import com.thuypham.ptithcm.data.remote.response.Person
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_people) {
-
-    companion object {
-        const val TITLE = "TITLE"
-    }
 
     private val peopleViewModel: PeopleViewModel by viewModel()
     private val peopleAdapter by lazy { PeopleAdapter().initPeopleAdapter(::onPersonItemClick) }
@@ -30,7 +28,7 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_peo
     override fun setupFirst() {
         super.setupFirst()
         arguments?.let {
-            title = it.getString(TITLE, "")
+            title = it.getString(NavConstant.TITLE, "")
         }
     }
 
@@ -56,6 +54,7 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_peo
         binding.run {
             rvPeople.adapter = peopleAdapter
             rvPeople.addItemDecoration(DividerItemDecoration(requireContext(), LinearLayout.VERTICAL))
+            rvPeople.setHasFixedSize(true)
         }
     }
 

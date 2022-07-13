@@ -1,9 +1,6 @@
 package com.thuypham.ptithcm.baseapp.di
 
-import com.thuypham.ptithcm.baseapp.viewmodel.HomeViewModel
-import com.thuypham.ptithcm.baseapp.viewmodel.MovieCategoryViewModel
-import com.thuypham.ptithcm.baseapp.viewmodel.PeopleViewModel
-import com.thuypham.ptithcm.baseapp.viewmodel.PersonViewModel
+import com.thuypham.ptithcm.baseapp.viewmodel.*
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,4 +9,5 @@ val viewModelModule = module {
     viewModel { MovieCategoryViewModel(get()) }
     viewModel { PeopleViewModel(get()) }
     viewModel { PersonViewModel(get()) }
+    viewModel { GenreViewModel(get()) }
 }

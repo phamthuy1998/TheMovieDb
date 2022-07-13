@@ -1,17 +1,22 @@
 package com.thuypham.ptithcm.baseapp.ui.fragment
 
+import android.view.MotionEvent
+import android.view.View
 import androidx.core.text.HtmlCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentPersonAboutBinding
+import com.thuypham.ptithcm.baseapp.ui.adapter.MovieHorizontalAdapter
 import com.thuypham.ptithcm.baseapp.ui.adapter.PersonDetailAdapter
+import com.thuypham.ptithcm.baseapp.util.navigateToImageList
+import com.thuypham.ptithcm.baseapp.util.navigateToMovieDetail
+import com.thuypham.ptithcm.baseapp.util.navigateToMovieList
+import com.thuypham.ptithcm.baseapp.util.showImageDetailDialog
 import com.thuypham.ptithcm.baseapp.viewmodel.PersonViewModel
 import com.thuypham.ptithcm.baselib.base.base.BaseViewAdapter
 import com.thuypham.ptithcm.baselib.base.extension.*
-import com.thuypham.ptithcm.data.remote.response.Person
-import com.thuypham.ptithcm.data.remote.response.PersonDetail
-import com.thuypham.ptithcm.data.remote.response.PersonImage
-import com.thuypham.ptithcm.data.remote.response.Profile
+import com.thuypham.ptithcm.data.remote.response.*
 import org.koin.androidx.navigation.koinNavGraphViewModel
 
 class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fragment_person_about) {
@@ -20,39 +25,76 @@ class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fr
 
     private val personAdapter by lazy { PersonDetailAdapter() }
     private val knowAsAdapter: BaseViewAdapter<String> by lazy { personAdapter.setupKnowAsAdapter() }
-    private val imageAdapter: BaseViewAdapter<Profile> by lazy { personAdapter.setupPersonImageAdapter() }
+    private val imageAdapter: BaseViewAdapter<Profile> by lazy { personAdapter.setupPersonImageAdapter(::onImageItemClick) }
+    private val movieKnowForAdapter: BaseViewAdapter<Movie> by lazy { MovieHorizontalAdapter().setupKnowForAdapter(::onMovieClick) }
 
     private var isCollapse = true
+    private lateinit var knowForMovie: List<Movie>
 
     override fun setupView() {
         setupEventClick()
         setupRecyclerView()
     }
 
+    private fun onImageItemClick(imagePath: String) {
+        showImageDetailDialog(imagePath)
+    }
+    private fun onMovieClick(movie: Movie) {
+        navigateToMovieDetail(movie)
+    }
+
+
     private fun setupRecyclerView() {
         binding.run {
             rvKnowAs.adapter = knowAsAdapter
-
-            rvImages.adapter = imageAdapter
-            rvImages.setHasFixedSize(true)
+            rvImages.apply {
+                adapter = imageAdapter
+                setHasFixedSize(true)
+//                addOnItemTouchListener(recyclerviewScrollListener)
+            }
+            rvMoviesKnowFor.apply {
+                adapter = movieKnowForAdapter
+                setHasFixedSize(true)
+//                addOnItemTouchListener(recyclerviewScrollListener)
+            }
         }
     }
+
+    private val recyclerviewScrollListener = object : RecyclerView.OnItemTouchListener {
+        override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+            val action = e.action
+            return if (binding.rvImages.canScrollHorizontally(RecyclerView.FOCUS_LEFT)
+                || binding.rvImages.canScrollHorizontally(RecyclerView.FOCUS_RIGHT)
+            ) {
+                when (action) {
+                    MotionEvent.ACTION_MOVE -> rv.parent.requestDisallowInterceptTouchEvent(true)
+                }
+                false
+            } else {
+                when (action) {
+                    MotionEvent.ACTION_MOVE -> rv.parent.requestDisallowInterceptTouchEvent(false)
+                }
+//                binding.rvImages.removeOnItemTouchListener(this)
+                false
+            }
+        }
+
+        override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+        override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
+    }
+
 
     private fun setupEventClick() {
         binding.run {
-            tvBtnShowMore.setOnSingleClickListener {
-                collapseOrExpandBiography()
-            }
-            tvBiography.setOnSingleClickListener {
-                collapseOrExpandBiography()
-            }
+            tvBtnShowMore.setOnClickListener(biographyClickListener)
+            tvBiography.setOnClickListener(biographyClickListener)
             layoutImages.setOnSingleClickListener {
-                // open Image list
+                navigateToImageList(personViewModel.getPersonImagePath())
             }
         }
     }
 
-    private fun collapseOrExpandBiography() {
+    private val biographyClickListener = View.OnClickListener {
         isCollapse = !isCollapse
         binding.run {
             if (isCollapse) {
@@ -104,7 +146,15 @@ class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fr
 
     private fun setPersonInfo(personInfo: Person) {
         binding.run {
-
+            if (personInfo.knownFor.isNullOrEmpty()) {
+                tvKnowFor.gone()
+                rvMoviesKnowFor.gone()
+            } else {
+                knowForMovie = personInfo.knownFor!!
+                tvKnowFor.show()
+                rvMoviesKnowFor.show()
+                movieKnowForAdapter.submitList(personInfo.knownFor)
+            }
         }
     }
 

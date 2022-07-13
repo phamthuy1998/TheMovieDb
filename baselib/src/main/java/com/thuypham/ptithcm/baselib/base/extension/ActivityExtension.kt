@@ -3,12 +3,15 @@ package com.thuypham.ptithcm.baselib.base.extension
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import java.io.File
+import java.io.FileOutputStream
 
 
 fun AppCompatActivity.shareDataToOtherApp(content: String) {
@@ -22,17 +25,51 @@ fun AppCompatActivity.shareDataToOtherApp(content: String) {
 }
 
 
-fun Activity.shareImageToOtherApp(imagePath: String) {
-    val sendIntent: Intent = Intent().apply {
-        action = Intent.ACTION_SEND
-        val file = File(imagePath)
-        val uri =
-            FileProvider.getUriForFile(this@shareImageToOtherApp, application.packageName, file);
-        putExtra(Intent.EXTRA_STREAM, uri)
-        type = "image/jpeg"
+fun Activity.shareImageLocalToOtherApp(imagePath: String) {
+    try {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            val file = File(imagePath)
+            val uri = FileProvider.getUriForFile(this@shareImageLocalToOtherApp, application.packageName, file)
+            putExtra(Intent.EXTRA_STREAM, uri)
+            type = "image/jpeg"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    } catch (ex: Exception) {
+        logE("shareImageToOtherApp error: ${ex.message}", ex)
     }
-    val shareIntent = Intent.createChooser(sendIntent, null)
-    startActivity(shareIntent)
+}
+
+
+fun Activity.shareImageFromUrlToOtherApp(bitmap: Bitmap, fileName: String) {
+    val context = this
+    try {
+        val sendIntent: Intent = Intent().apply {
+//            val bitmapPath = MediaStore.Images.Media.insertImage(contentResolver, bitmap, "shared_images", null)
+
+            val cachePath = File(externalCacheDir, "shared_images/")
+            cachePath.mkdirs()
+
+
+            val file = File(cachePath, fileName.removePrefix("/"))
+            val fOut = FileOutputStream(file)
+            bitmap.compress(CompressFormat.PNG, 100, fOut)
+            fOut.flush()
+            fOut.close()
+            val myImageFileUri = FileProvider.getUriForFile(context, applicationContext.packageName, file)
+
+            action = Intent.ACTION_SEND
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            putExtra(Intent.EXTRA_STREAM, myImageFileUri)
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            type = "image/jpeg"
+        }
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
+    } catch (ex: Exception) {
+        logE("shareImageToOtherApp error: ${ex.message}", ex)
+    }
 }
 
 
