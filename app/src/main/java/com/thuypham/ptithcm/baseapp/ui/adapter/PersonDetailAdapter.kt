@@ -1,6 +1,7 @@
 package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import android.view.LayoutInflater
+import com.bumptech.glide.RequestManager
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemKnowAsBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemPersonImageBinding
@@ -33,7 +34,7 @@ class PersonDetailAdapter {
         )
     }
 
-    fun setupPersonImageAdapter(onItemClick: (imgPath: String) -> Unit): BaseViewAdapter<Profile> {
+    fun setupPersonImageAdapter(glide: RequestManager, onItemClick: (imgPath: String) -> Unit): BaseViewAdapter<Profile> {
         return BaseViewAdapter(
             getItemViewTypeFunc = {
                 R.layout.item_person_image
@@ -49,7 +50,7 @@ class PersonDetailAdapter {
             bindViewFunc = { binding, item, position ->
                 item as Profile
                 binding as ItemPersonImageBinding
-                binding.ivPerson.loadImage(item.filePath)
+                binding.ivPerson.loadImage(glide, item.filePath)
             },
             diffUtilCallback = {
                 BaseItemDiffUtilCallback(

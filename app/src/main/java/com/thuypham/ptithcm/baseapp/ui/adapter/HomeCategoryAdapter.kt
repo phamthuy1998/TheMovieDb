@@ -3,6 +3,8 @@ package com.thuypham.ptithcm.baseapp.ui.adapter
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemGenreBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieBinding
@@ -20,12 +22,12 @@ import com.thuypham.ptithcm.baselib.base.extension.show
 import com.thuypham.ptithcm.data.remote.response.Movie
 import com.thuypham.ptithcm.data.remote.response.MovieGenre
 import com.thuypham.ptithcm.data.remote.response.Person
-import com.thuypham.ptithcm.data.util.ApiHelper
 
 class HomeCategoryAdapter {
     fun initHomeCategoryAdapter(
-        onCategoryItemClick: ((item: Any) -> Unit),
-        onChildItemClick: ((item: Any) -> Unit)
+        onCategoryItemClick: (item: Any) -> Unit,
+        onChildItemClick: (item: Any) -> Unit,
+        glide: RequestManager
     ): BaseViewAdapter<Any> {
         return BaseViewAdapter(
             getItemViewTypeFunc = { item ->
@@ -75,7 +77,7 @@ class HomeCategoryAdapter {
                     rootLayoutCategoryItem.layoutParams.height = itemHeight
 
                     // setup recyclerview
-                    val itemAdapter = initListItemAdapter(onChildItemClick)
+                    val itemAdapter = initListItemAdapter(glide, onChildItemClick)
                     rvItem.apply {
                         adapter = itemAdapter
                         layoutParams.height = rvHeight
@@ -93,7 +95,7 @@ class HomeCategoryAdapter {
         )
     }
 
-    private fun initListItemAdapter(onChildItemClick: ((item: Any) -> Unit)): BaseViewAdapter<Any> {
+    private fun initListItemAdapter(glide: RequestManager, onChildItemClick: ((item: Any) -> Unit)): BaseViewAdapter<Any> {
         return BaseViewAdapter(
             getItemViewTypeFunc = { item ->
                 when (item) {
@@ -118,7 +120,7 @@ class HomeCategoryAdapter {
                         binding.run {
                             tvMovieName.text = item.title
                             tvRate.text = item.voteAverage.toString()
-                            ivMovie.loadImage(item.posterPath)
+                            ivMovie.loadImage(glide, item.posterPath)
                         }
                     }
                     is ItemGenreBinding -> {
@@ -132,7 +134,7 @@ class HomeCategoryAdapter {
                         item as Person
                         binding.run {
                             tvPersonName.text = item.name
-                            ivAvt.loadImage(item.profilePath)
+                            ivAvt.loadImage(glide, item.profilePath)
                         }
 
                     }

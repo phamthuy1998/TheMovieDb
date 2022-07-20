@@ -4,6 +4,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentPersonAboutBinding
@@ -11,7 +12,6 @@ import com.thuypham.ptithcm.baseapp.ui.adapter.MovieHorizontalAdapter
 import com.thuypham.ptithcm.baseapp.ui.adapter.PersonDetailAdapter
 import com.thuypham.ptithcm.baseapp.util.navigateToImageList
 import com.thuypham.ptithcm.baseapp.util.navigateToMovieDetail
-import com.thuypham.ptithcm.baseapp.util.navigateToMovieList
 import com.thuypham.ptithcm.baseapp.util.showImageDetailDialog
 import com.thuypham.ptithcm.baseapp.viewmodel.PersonViewModel
 import com.thuypham.ptithcm.baselib.base.base.BaseViewAdapter
@@ -25,8 +25,8 @@ class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fr
 
     private val personAdapter by lazy { PersonDetailAdapter() }
     private val knowAsAdapter: BaseViewAdapter<String> by lazy { personAdapter.setupKnowAsAdapter() }
-    private val imageAdapter: BaseViewAdapter<Profile> by lazy { personAdapter.setupPersonImageAdapter(::onImageItemClick) }
-    private val movieKnowForAdapter: BaseViewAdapter<Movie> by lazy { MovieHorizontalAdapter().setupKnowForAdapter(::onMovieClick) }
+    private val imageAdapter: BaseViewAdapter<Profile> by lazy { personAdapter.setupPersonImageAdapter(Glide.with(this), ::onImageItemClick) }
+    private val movieKnowForAdapter: BaseViewAdapter<Movie> by lazy { MovieHorizontalAdapter().setupKnowForAdapter(Glide.with(this), ::onMovieClick) }
 
     private var isCollapse = true
     private lateinit var knowForMovie: List<Movie>
@@ -39,6 +39,7 @@ class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fr
     private fun onImageItemClick(imagePath: String) {
         showImageDetailDialog(imagePath)
     }
+
     private fun onMovieClick(movie: Movie) {
         navigateToMovieDetail(movie)
     }
@@ -156,6 +157,14 @@ class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fr
                 movieKnowForAdapter.submitList(personInfo.knownFor)
             }
         }
+    }
+
+
+    override fun clearData() {
+        super.clearData()
+        binding.rvMoviesKnowFor.adapter = null
+        binding.rvImages.adapter = null
+        binding.rvKnowAs.adapter = null
     }
 
 

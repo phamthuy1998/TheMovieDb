@@ -53,7 +53,7 @@ class ImageDetailDialogFragment(
     override fun setupView() {
         imagePath = arguments?.getString(NavConstant.IMAGE_PATH, "") ?: ""
         binding.apply {
-            ivZoomImage.loadImageHighResolution(imagePath)
+            loadImageHighResolution(ivZoomImage, imagePath)
             ivZoomImage.setImageListener(this@ImageDetailDialogFragment)
             ivClose.setOnSingleClickListener {
                 dismiss()

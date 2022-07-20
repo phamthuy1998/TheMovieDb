@@ -2,6 +2,7 @@ package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.RequestManager
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieGridviewBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieVerticalBinding
@@ -12,7 +13,7 @@ import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.data.remote.response.Movie
 
 class PersonMovieAdapter {
-    fun initGridMovieAdapter(onItemMovieClick: (position: Int) -> Unit): BaseViewAdapter<Movie> {
+    fun initGridMovieAdapter(glide: RequestManager, onItemMovieClick: (position: Int) -> Unit): BaseViewAdapter<Movie> {
         return BaseViewAdapter(
             getItemViewTypeFunc = {
                 R.layout.item_movie_gridview
@@ -32,7 +33,7 @@ class PersonMovieAdapter {
                         binding.run {
                             tvMovieName.text = item.title
                             tvRate.text = item.voteAverage.toString()
-                            ivMovie.loadImage(item.posterPath)
+                            ivMovie.loadImage(glide, item.posterPath)
                         }
                     }
                 }
@@ -47,7 +48,7 @@ class PersonMovieAdapter {
         )
     }
 
-    fun initVerticalMovieAdapter(onItemMovieClick: (position: Int) -> Unit): BaseViewAdapter<Movie> {
+    fun initVerticalMovieAdapter(glide: RequestManager, onItemMovieClick: (position: Int) -> Unit): BaseViewAdapter<Movie> {
         return BaseViewAdapter(
             getItemViewTypeFunc = {
                 R.layout.item_movie_vertical
@@ -68,7 +69,7 @@ class PersonMovieAdapter {
                             tvMovieName.text = item.title
                             tvDescription.text = item.overview
                             tvRate.text = item.voteAverage.toString()
-                            ivMovie.loadImage(item.posterPath)
+                            ivMovie.loadImage(glide, item.posterPath)
                         }
                     }
                 }

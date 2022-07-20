@@ -1,6 +1,7 @@
 package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import android.view.LayoutInflater
+import com.bumptech.glide.RequestManager
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemPeopleBinding
 import com.thuypham.ptithcm.baseapp.extension.loadImage
@@ -11,7 +12,7 @@ import com.thuypham.ptithcm.data.remote.response.Person
 import com.thuypham.ptithcm.data.util.ApiHelper
 
 class PeopleAdapter {
-    fun initPeopleAdapter(onPersonItemClick: (position: Int) -> Unit): BasePagedAdapter<Person> {
+    fun initPeopleAdapter(glide: RequestManager, onPersonItemClick: (position: Int) -> Unit): BasePagedAdapter<Person> {
         return BasePagedAdapter(
             getItemViewTypeFunc = {
                 R.layout.item_people
@@ -28,7 +29,7 @@ class PeopleAdapter {
                 item as Person
                 binding as ItemPeopleBinding
                 binding.run {
-                    ivAvatar.loadImage(item.profilePath)
+                    ivAvatar.loadImage(glide, item.profilePath)
                     tvPersonName.text = item.name
                 }
             },

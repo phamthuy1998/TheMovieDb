@@ -16,7 +16,6 @@ import com.thuypham.ptithcm.baseapp.viewmodel.PersonViewModel
 import com.thuypham.ptithcm.baselib.base.extension.goBack
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.data.remote.response.Person
-import com.thuypham.ptithcm.data.util.ApiHelper
 import org.koin.androidx.navigation.koinNavGraphViewModel
 import kotlin.math.abs
 
@@ -80,7 +79,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
 
     private fun setupViewPagerWithTabLayout() {
         binding.run {
-            pagerAdapter = PersonPagerAdapter(requireParentFragment())
+            pagerAdapter = PersonPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle)
             viewPager.adapter = pagerAdapter
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
                 tab.text = tabTitles[position]
@@ -115,15 +114,13 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
             tvPersonName.text = person.name
             tvTitleToolbar.text = person.name
             tvKnowFor.text = person.knownForDepartment
-            ivAvatar.apply {
-                loadImage(person.profilePath)
-                setOnSingleClickListener {
-                    person.profilePath?.let { it1 -> showImageDetailDialog(it1) }
-                }
+            loadImage(ivAvatar, person.profilePath)
+            ivAvatar.setOnSingleClickListener {
+                person.profilePath?.let { it1 -> showImageDetailDialog(it1) }
             }
 
             val backDropPath = person.knownFor?.first()?.backdropPath
-            ivCover.loadImage(backDropPath, false)
+            loadImage(ivCover, backDropPath, false)
         }
     }
 

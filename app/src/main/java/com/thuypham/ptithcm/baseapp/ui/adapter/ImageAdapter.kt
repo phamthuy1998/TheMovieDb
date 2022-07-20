@@ -30,7 +30,6 @@ class ImageAdapter {
 
                 binding.ivZoomImage.apply {
                     layoutParams.height = (layoutParams.width * 1.5).toInt()
-                    loadImageHighResolution(imagePath)
                 }
             },
             diffUtilCallback = {

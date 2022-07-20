@@ -57,4 +57,10 @@ class ImagesFragment : BaseFragment<FragmentImagesBinding>(R.layout.fragment_ima
         }, 3000)
     }
 
+    override fun clearData() {
+        super.clearData()
+        binding.rvImages.adapter = null
+    }
+
+
 }

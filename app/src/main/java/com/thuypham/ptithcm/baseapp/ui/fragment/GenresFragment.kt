@@ -47,4 +47,9 @@ class GenresFragment : BaseFragment<FragmentGenresBinding>(R.layout.fragment_gen
             genreAdapter.submitList(it)
         }
     }
+
+    override fun clearData() {
+        super.clearData()
+        binding.rvGenres.adapter = null
+    }
 }

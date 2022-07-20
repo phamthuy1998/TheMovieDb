@@ -58,7 +58,7 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
 
     override suspend fun getMovieTrendingPaging(): LiveData<PagingData<Movie>> {
         logD("getMovieTrendingPaging")
-        return Pager<Int, Movie>(
+        return Pager(
             config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
             initialKey = 1,
             pagingSourceFactory = {
@@ -68,7 +68,7 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
     }
 
     override suspend fun getMovieNowPlayingPaging(): LiveData<PagingData<Movie>> {
-        return Pager<Int, Movie>(
+        return Pager(
             config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
             initialKey = 1,
             pagingSourceFactory = {
@@ -78,7 +78,7 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
     }
 
     override suspend fun getMovieUpComingPaging(): LiveData<PagingData<Movie>> {
-        return Pager<Int, Movie>(
+        return Pager(
             config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
             initialKey = 1,
             pagingSourceFactory = {
@@ -88,7 +88,7 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
     }
 
     override suspend fun getMoviePopularPaging(): LiveData<PagingData<Movie>> {
-        return Pager<Int, Movie>(
+        return Pager(
             config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
             initialKey = 1,
             pagingSourceFactory = {
@@ -98,7 +98,7 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
     }
 
     override suspend fun getMovieTopRatePaging(): LiveData<PagingData<Movie>> {
-        return Pager<Int, Movie>(
+        return Pager(
             config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
             initialKey = 1,
             pagingSourceFactory = {
@@ -108,7 +108,7 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
     }
 
     override suspend fun getMovieByGenreId(genreId: Int): LiveData<PagingData<Movie>> {
-        return Pager<Int, Movie>(
+        return Pager(
             config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE), initialKey = 1,
             pagingSourceFactory = {
                 GetMovieByGenreIdPagingSource(movieAPI, genreId)

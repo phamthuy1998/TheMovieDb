@@ -1,15 +1,16 @@
 package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.thuypham.ptithcm.baseapp.ui.fragment.PersonAboutFragment
 import com.thuypham.ptithcm.baseapp.ui.fragment.PersonMovieFragment
 import com.thuypham.ptithcm.baseapp.ui.fragment.PersonTVShowFragment
 
-class PersonPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class PersonPagerAdapter(fragment: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragment, lifecycle) {
     companion object {
         const val pageSize = 3
-        const val POSITION = "POSITION"
     }
 
     override fun getItemCount(): Int {

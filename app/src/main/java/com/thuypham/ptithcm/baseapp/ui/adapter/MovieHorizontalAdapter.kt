@@ -1,6 +1,7 @@
 package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import android.view.LayoutInflater
+import com.bumptech.glide.RequestManager
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemKnowAsBinding
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieBinding
@@ -11,7 +12,7 @@ import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.data.remote.response.Movie
 
 class MovieHorizontalAdapter {
-    fun setupKnowForAdapter(onItemClick: (item: Movie) -> Unit): BaseViewAdapter<Movie> {
+    fun setupKnowForAdapter(glide: RequestManager, onItemClick: (item: Movie) -> Unit): BaseViewAdapter<Movie> {
         return BaseViewAdapter(
             getItemViewTypeFunc = {
                 R.layout.item_movie
@@ -30,7 +31,7 @@ class MovieHorizontalAdapter {
                 binding.run {
                     tvMovieName.text = item.title?:item.name
                     tvRate.text = item.voteAverage.toString()
-                    ivMovie.loadImage(item.posterPath)
+                    ivMovie.loadImage(glide, item.posterPath)
                 }
             },
             diffUtilCallback = {

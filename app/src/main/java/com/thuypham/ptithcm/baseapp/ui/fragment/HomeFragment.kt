@@ -1,5 +1,6 @@
 package com.thuypham.ptithcm.baseapp.ui.fragment
 
+import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentHomeBinding
@@ -24,7 +25,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by viewModel()
 
     private val homeAdapter by lazy {
-        HomeCategoryAdapter().initHomeCategoryAdapter(::onCategoryClick, ::onChildItemClick)
+        HomeCategoryAdapter().initHomeCategoryAdapter(::onCategoryClick, ::onChildItemClick, Glide.with(this))
     }
 
     override fun getData() {
@@ -104,4 +105,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
         }
 
     }
+
+    override fun clearData() {
+        super.clearData()
+        binding.rvMainHome.adapter = null
+    }
+
 }

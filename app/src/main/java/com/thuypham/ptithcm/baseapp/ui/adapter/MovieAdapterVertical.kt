@@ -2,6 +2,7 @@ package com.thuypham.ptithcm.baseapp.ui.adapter
 
 import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
+import com.bumptech.glide.RequestManager
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemMovieVerticalBinding
 import com.thuypham.ptithcm.baseapp.extension.loadImage
@@ -11,7 +12,7 @@ import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.data.remote.response.Movie
 
 class MovieAdapterVertical {
-    fun initMovieAdapter(onItemMovieClick: (position: Int) -> Unit): BasePagedAdapter<Movie> {
+    fun initMovieAdapter(glide: RequestManager, onItemMovieClick: (position: Int) -> Unit): BasePagedAdapter<Movie> {
         return BasePagedAdapter(
             getItemViewTypeFunc = {
                 R.layout.item_movie_vertical
@@ -32,7 +33,7 @@ class MovieAdapterVertical {
                             tvMovieName.text = item.title
                             tvDescription.text = item.overview
                             tvRate.text = item.voteAverage.toString()
-                            ivMovie.loadImage(item.posterPath)
+                            ivMovie.loadImage(glide, item.posterPath)
                         }
                     }
                 }

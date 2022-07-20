@@ -2,6 +2,7 @@ package com.thuypham.ptithcm.baseapp.ui.fragment
 
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentPeopleBinding
@@ -16,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_people) {
 
     private val peopleViewModel: PeopleViewModel by viewModel()
-    private val peopleAdapter by lazy { PeopleAdapter().initPeopleAdapter(::onPersonItemClick) }
+    private val peopleAdapter by lazy { PeopleAdapter().initPeopleAdapter(Glide.with(this), ::onPersonItemClick) }
 
     private var title: String = ""
 
@@ -65,5 +66,9 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_peo
         }
     }
 
+    override fun clearData() {
+        super.clearData()
+        binding.rvPeople.adapter = null
+    }
 
 }

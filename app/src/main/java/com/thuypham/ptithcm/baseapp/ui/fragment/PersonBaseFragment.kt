@@ -3,6 +3,7 @@ package com.thuypham.ptithcm.baseapp.ui.fragment
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentPersonMovieBinding
@@ -22,11 +23,11 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
 
     private val personAdapter by lazy { PersonMovieAdapter() }
     private val movieAdapterGridView: BaseViewAdapter<Movie> by lazy {
-        personAdapter.initGridMovieAdapter { position -> onItemMovieClick(movieAdapterGridView.getItemAtPos(position)) }
+        personAdapter.initGridMovieAdapter(Glide.with(this)) { position -> onItemMovieClick(movieAdapterGridView.getItemAtPos(position)) }
     }
 
     private val movieAdapterLinear: BaseViewAdapter<Movie> by lazy {
-        personAdapter.initVerticalMovieAdapter { position -> onItemMovieClick(movieAdapterLinear.getItemAtPos(position)) }
+        personAdapter.initVerticalMovieAdapter(Glide.with(this)) { position -> onItemMovieClick(movieAdapterLinear.getItemAtPos(position)) }
     }
 
     private fun onItemMovieClick(movie: Movie?) {
@@ -123,6 +124,12 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
 
     private fun getIconResource(): Int {
         return if (isRecyclerviewGridLayout) R.drawable.ic_linearlayout_list else R.drawable.ic_gridview_list
+    }
+
+
+    override fun clearData() {
+        super.clearData()
+        binding.rvMovies.adapter = null
     }
 
 

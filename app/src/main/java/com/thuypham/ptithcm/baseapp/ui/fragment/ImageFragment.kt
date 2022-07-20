@@ -18,7 +18,7 @@ class ImageFragment : BaseFragment<FragmentImageBinding>(R.layout.fragment_image
 
     override fun setupView() {
         binding.run {
-            ivZoomImage.loadImage(imageUrl)
+            loadImage(ivZoomImage, imageUrl)
             ivZoomImage.setImageListener(this@ImageFragment)
         }
     }

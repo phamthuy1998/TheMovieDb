@@ -5,6 +5,7 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentMovieCategoryBinding
@@ -36,7 +37,7 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
     private val movieViewModel: MovieCategoryViewModel by viewModel()
 
     private val movieAdapterGridView: BasePagedAdapter<Movie> by lazy {
-        MovieAdapter().initMovieAdapter { position -> onItemMovieClick(movieAdapterGridView.getItemAtPosition(position)) }
+        MovieAdapter().initMovieAdapter(Glide.with(this)) { position -> onItemMovieClick(movieAdapterGridView.getItemAtPosition(position)) }
     }
 
     private fun onItemMovieClick(movie: Movie?) {
@@ -44,7 +45,7 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
     }
 
     private val movieAdapterLinear: BasePagedAdapter<Movie> by lazy {
-        MovieAdapterVertical().initMovieAdapter { position -> movieAdapterLinear.getItemAtPosition(position) }
+        MovieAdapterVertical().initMovieAdapter (Glide.with(this)){ position -> movieAdapterLinear.getItemAtPosition(position) }
     }
 
     private val sharedPrf: IStorage by inject()
@@ -217,4 +218,10 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
             }
         }
     }
+
+    override fun clearData() {
+        super.clearData()
+        binding.rvMovies.adapter = null
+    }
+
 }
