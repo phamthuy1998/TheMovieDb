@@ -8,6 +8,8 @@ import androidx.paging.cachedIn
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
 import com.thuypham.ptithcm.baselib.base.base.BaseViewModel
 import com.thuypham.ptithcm.baselib.base.extension.logD
+import com.thuypham.ptithcm.data.local.IStorage
+import com.thuypham.ptithcm.data.local.SharedPreferencesStorage
 import com.thuypham.ptithcm.data.remote.response.Movie
 import com.thuypham.ptithcm.domain.repository.MovieRepository
 import kotlinx.coroutines.Dispatchers
@@ -15,11 +17,12 @@ import kotlinx.coroutines.launch
 
 class MovieCategoryViewModel(
     private val movieRepository: MovieRepository,
+    private val sharedPrf: IStorage
 ) : BaseViewModel() {
 
     var movieListPaging: LiveData<PagingData<Movie>> = MutableLiveData()
 
-    fun getMovieItems(movieType: String, genreID: Int) = viewModelScope.launch(Dispatchers.IO) {
+    fun getMovieItems(movieType: String, genreID: Int) = viewModelScope.launch() {
         logD("getMovieItems - movieType: $movieType, genreID - $genreID")
         when (movieType) {
             HomeCategoryType.MOVIE_TRENDING -> {
@@ -76,6 +79,14 @@ class MovieCategoryViewModel(
     private suspend fun getMovieTopRate() {
         logD("getMovieTopRate")
         movieListPaging = movieRepository.getMovieTopRatePaging().cachedIn(viewModelScope)
+    }
+
+    fun isShowGridLayout(): Boolean {
+        return sharedPrf.getBoolean(SharedPreferencesStorage.IS_RECYCLERVIEW_LAYOUT_GRID_VIEW, true)
+    }
+
+    fun saveRecyclerViewMode(isRecyclerviewGridLayout: Boolean) {
+        sharedPrf.setBoolean(SharedPreferencesStorage.IS_RECYCLERVIEW_LAYOUT_GRID_VIEW, isRecyclerviewGridLayout)
     }
 
 }

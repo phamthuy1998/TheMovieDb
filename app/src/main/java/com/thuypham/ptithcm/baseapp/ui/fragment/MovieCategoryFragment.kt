@@ -18,17 +18,13 @@ import com.thuypham.ptithcm.baselib.base.base.BasePagedAdapter
 import com.thuypham.ptithcm.baselib.base.extension.goBack
 import com.thuypham.ptithcm.baselib.base.extension.gone
 import com.thuypham.ptithcm.baselib.base.extension.logD
-import com.thuypham.ptithcm.data.local.IStorage
-import com.thuypham.ptithcm.data.local.SharedPreferencesStorage
 import com.thuypham.ptithcm.data.remote.response.Movie
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layout.fragment_movie_category) {
     companion object {
         const val CATEGORY_TYPE = "CATEGORY_TYPE"
-        const val MOVIE_LIST = "MOVIE_LIST"
         const val TITLE = "TITLE"
         const val GENRE_ID = "GENRE_ID"
     }
@@ -37,7 +33,11 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
     private val movieViewModel: MovieCategoryViewModel by viewModel()
 
     private val movieAdapterGridView: BasePagedAdapter<Movie> by lazy {
-        MovieAdapter().initMovieAdapter(Glide.with(this)) { position -> onItemMovieClick(movieAdapterGridView.getItemAtPosition(position)) }
+        MovieAdapter().initMovieAdapter(Glide.with(this)) { position ->
+            onItemMovieClick(
+                movieAdapterGridView.getItemAtPosition(position)
+            )
+        }
     }
 
     private fun onItemMovieClick(movie: Movie?) {
@@ -45,10 +45,12 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
     }
 
     private val movieAdapterLinear: BasePagedAdapter<Movie> by lazy {
-        MovieAdapterVertical().initMovieAdapter (Glide.with(this)){ position -> movieAdapterLinear.getItemAtPosition(position) }
+        MovieAdapterVertical().initMovieAdapter(Glide.with(this)) { position ->
+            movieAdapterLinear.getItemAtPosition(
+                position
+            )
+        }
     }
-
-    private val sharedPrf: IStorage by inject()
 
     private var categoryType: String = ""
     private var genreID: Int = 0
@@ -63,7 +65,7 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
             genreID = it.getInt(GENRE_ID, 0)
             title = it.getString(TITLE, "") ?: ""
         }
-        isRecyclerviewGridLayout = sharedPrf.getBoolean(SharedPreferencesStorage.IS_RECYCLERVIEW_LAYOUT_GRID_VIEW, true)
+        isRecyclerviewGridLayout = movieViewModel.isShowGridLayout()
     }
 
     override fun getData() {
@@ -87,6 +89,7 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
                         updateShimmer(false)
                     }
                     LoadState.Loading -> {
+                        updateShimmer(true)
                     }
 
                     is LoadState.Error -> {
@@ -116,7 +119,7 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
 
                 setupRecyclerViewByType()
 
-                sharedPrf.setBoolean(SharedPreferencesStorage.IS_RECYCLERVIEW_LAYOUT_GRID_VIEW, isRecyclerviewGridLayout)
+                movieViewModel.saveRecyclerViewMode(isRecyclerviewGridLayout)
             }
         }
     }
@@ -134,11 +137,13 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
             binding.rvMovies.run {
                 setHasFixedSize(true)
                 layoutManager = GridLayoutManager(requireContext(), 3)
-                adapter = movieAdapterGridView.withLoadStateHeaderAndFooter(
-                    footer = PagingStateAdapter { movieAdapterGridView.retry() },
-                    header = PagingStateAdapter { movieAdapterGridView.retry() }
-                )
+                adapter = movieAdapterGridView
+                    .withLoadStateHeaderAndFooter(
+                        footer = PagingStateAdapter { movieAdapterGridView.retry() },
+                        header = PagingStateAdapter { movieAdapterGridView.retry() }
+                    )
             }
+
 
         } else {
             (binding.rvMovies.layoutManager as? GridLayoutManager)?.run {
@@ -148,10 +153,11 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
             binding.rvMovies.run {
                 setHasFixedSize(true)
                 layoutManager = LinearLayoutManager(requireContext())
-                adapter = movieAdapterLinear.withLoadStateHeaderAndFooter(
-                    footer = PagingStateAdapter { movieAdapterGridView.retry() },
-                    header = PagingStateAdapter { movieAdapterGridView.retry() }
-                )
+                adapter = movieAdapterLinear
+                    .withLoadStateHeaderAndFooter(
+                        footer = PagingStateAdapter { movieAdapterGridView.retry() },
+                        header = PagingStateAdapter { movieAdapterGridView.retry() }
+                    )
             }
 
         }

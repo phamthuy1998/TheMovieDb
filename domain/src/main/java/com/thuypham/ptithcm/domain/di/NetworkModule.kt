@@ -29,7 +29,6 @@ fun provideRetrofit(client: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .baseUrl(ApiHelper.baseMovieV3Url())
         .addConverterFactory(GsonConverterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .client(client)
         .build()

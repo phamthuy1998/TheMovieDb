@@ -5,12 +5,14 @@ import android.content.Context
 import android.support.multidex.MultiDex
 import com.thuypham.ptithcm.baseapp.di.dataModule
 import com.thuypham.ptithcm.baseapp.di.viewModelModule
+import com.thuypham.ptithcm.baseapp.util.Constant
 import com.thuypham.ptithcm.data.di.databaseModule
 import com.thuypham.ptithcm.domain.di.networkModule
 import com.thuypham.ptithcm.domain.di.repositoryModule
 import com.thuypham.ptithcm.domain.di.useCaseModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import java.util.*
 
 
 class MainApplication : Application() {
@@ -24,7 +26,6 @@ class MainApplication : Application() {
         instance = this
         initKoin()
         super.onCreate()
-
     }
 
     private fun initKoin() {
@@ -39,11 +40,13 @@ class MainApplication : Application() {
                 dataModule
             )
         }
-
     }
 
     override fun attachBaseContext(base: Context?) {
         super.attachBaseContext(base)
         MultiDex.install(this)
+
     }
+
+
 }

@@ -30,4 +30,5 @@
     <string name="know_for">Know for</string>
     <string name="save_image">Save image</string>
     <string name="share">Share</string>
+    <string name="default_notification_channel_id">com.thuypham.ptithcm.baseapp</string>
 </resources>
