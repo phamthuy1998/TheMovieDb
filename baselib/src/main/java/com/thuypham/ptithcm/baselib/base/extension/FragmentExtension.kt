@@ -1,9 +1,13 @@
 package com.thuypham.ptithcm.baselib.base.extension
 
+import android.app.Activity
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowMetrics
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -42,13 +46,19 @@ fun Fragment.canGoBack(): Boolean {
 
 fun Fragment.getScreenWidth(): Int {
     val displayMetrics = DisplayMetrics()
-    requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+    requireActivity().getDisplayMetrics()
     return displayMetrics.widthPixels
+}
+
+fun Activity.getDisplayMetrics(): DisplayMetrics {
+    val displayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics
 }
 
 fun Fragment.getScreenHeight(): Int {
     val displayMetrics = DisplayMetrics()
-    requireActivity().windowManager.defaultDisplay.getMetrics(displayMetrics)
+    requireActivity().getDisplayMetrics()
     return displayMetrics.heightPixels
 }
 

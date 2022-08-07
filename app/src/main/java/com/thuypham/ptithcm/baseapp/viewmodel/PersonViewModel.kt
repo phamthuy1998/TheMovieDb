@@ -49,6 +49,7 @@ class PersonViewModel(private val peopleRepository: PeopleRepository) : BaseView
             is ResponseHandler.Error -> {
                 errorLiveData.value = result
             }
+            else -> {}
         }
     }
 
@@ -60,6 +61,7 @@ class PersonViewModel(private val peopleRepository: PeopleRepository) : BaseView
             is ResponseHandler.Error -> {
                 errorLiveData.value = result
             }
+            else -> {}
         }
     }
 
@@ -71,6 +73,7 @@ class PersonViewModel(private val peopleRepository: PeopleRepository) : BaseView
             is ResponseHandler.Error -> {
                 errorLiveData.value = result
             }
+            else -> {}
         }
     }
 

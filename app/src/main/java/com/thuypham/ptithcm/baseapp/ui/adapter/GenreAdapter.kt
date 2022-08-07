@@ -15,7 +15,7 @@ class GenreAdapter {
             getItemViewTypeFunc = {
                 R.layout.item_genre_vertical
             },
-            onCreateViewHolderFunc = { viewGroup, viewType ->
+            onCreateViewHolderFunc = { viewGroup, _ ->
                 ItemGenreVerticalBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
             },
             addEventListener = { viewHolder, listItems ->
@@ -23,7 +23,7 @@ class GenreAdapter {
                     onItemClick(listItems[viewHolder.absoluteAdapterPosition])
                 }
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 binding as ItemGenreVerticalBinding
                 item as MovieGenre
 

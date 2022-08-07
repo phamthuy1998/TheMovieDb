@@ -214,7 +214,7 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     }
 
     override fun setupDataObserver() {
-        personViewModel.personDetail.observe(viewLifecycleOwner) { personDetail ->
+        personViewModel.personDetail.observe(viewLifecycleOwner) {
 
         }
     }

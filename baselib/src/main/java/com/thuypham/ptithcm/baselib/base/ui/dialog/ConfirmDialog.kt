@@ -29,7 +29,6 @@ class ConfirmDialog(
         dialog?.setCanceledOnTouchOutside(false)
         dialog?.setCancelable(false)
         binding.apply {
-            container.layoutParams.width = (getScreenWidth() * 0.8).roundToInt()
             btnCancel.setOnClickListener {
                 onCancelClick?.invoke()
                 dismiss()

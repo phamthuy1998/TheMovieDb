@@ -17,10 +17,10 @@ class PersonDetailAdapter {
             getItemViewTypeFunc = {
                 R.layout.item_know_as
             },
-            onCreateViewHolderFunc = { viewGroup, viewType ->
+            onCreateViewHolderFunc = { viewGroup, _ ->
                 ItemKnowAsBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 item as String
                 binding as ItemKnowAsBinding
                 binding.tvKnowAs.text = item
@@ -39,7 +39,7 @@ class PersonDetailAdapter {
             getItemViewTypeFunc = {
                 R.layout.item_person_image
             },
-            onCreateViewHolderFunc = { viewGroup, viewType ->
+            onCreateViewHolderFunc = { viewGroup, _ ->
                 ItemPersonImageBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
             },
             addEventListener = { viewHolder, items ->
@@ -47,7 +47,7 @@ class PersonDetailAdapter {
                     items[viewHolder.absoluteAdapterPosition].filePath?.let { it1 -> onItemClick(it1) }
                 }
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 item as Profile
                 binding as ItemPersonImageBinding
                 binding.ivPerson.loadImage(glide, item.filePath)

@@ -8,7 +8,7 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.thuypham.ptithcm.baseapp"
@@ -45,12 +45,7 @@ android {
     }
 
 
-    dataBinding {
-        enabled = true
-    }
-    viewBinding {
-        enabled = true
-    }
+    android.buildFeatures.dataBinding = true
 
     externalNativeBuild {
         cmake {
@@ -67,9 +62,8 @@ dependencies {
     implementation project(':domain')
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
-    def nav_version = "2.4.2"
-    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
-    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.1")
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     implementation 'com.github.bumptech.glide:glide:4.13.1'
@@ -78,4 +72,6 @@ dependencies {
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
     implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
 }

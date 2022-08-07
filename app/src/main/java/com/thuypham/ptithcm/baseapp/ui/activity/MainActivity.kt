@@ -18,7 +18,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding?.run {
             // Setup bottom navigation
             NavigationUI.setupWithNavController(bottomNav, navController)
-            navController.addOnDestinationChangedListener { navContrl, destination, _ ->
+            navController.addOnDestinationChangedListener { _, destination, _ ->
 
                 val currentFragmentId = destination.id
                 val shouldShowBottomNav = currentFragmentId == R.id.homeFragment || currentFragmentId == R.id.searchFragment ||

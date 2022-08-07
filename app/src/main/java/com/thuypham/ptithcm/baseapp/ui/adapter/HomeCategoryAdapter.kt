@@ -30,7 +30,7 @@ class HomeCategoryAdapter {
         glide: RequestManager
     ): BaseViewAdapter<Any> {
         return BaseViewAdapter(
-            getItemViewTypeFunc = { item ->
+            getItemViewTypeFunc = {
                 R.layout.item_movies_category
             },
             onCreateViewHolderFunc = { viewGroup, viewType ->
@@ -48,7 +48,7 @@ class HomeCategoryAdapter {
                     }
                 }
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 item as HomeCategoryData
                 binding as ItemMoviesCategoryBinding
                 binding.run {
@@ -113,7 +113,7 @@ class HomeCategoryAdapter {
             onCreateViewHolderFunc = { viewGroup, viewType ->
                 DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), viewType, viewGroup, false)
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 when (binding) {
                     is ItemMovieBinding -> {
                         item as Movie

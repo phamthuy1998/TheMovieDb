@@ -17,7 +17,7 @@ class MovieHorizontalAdapter {
             getItemViewTypeFunc = {
                 R.layout.item_movie
             },
-            onCreateViewHolderFunc = { viewGroup, viewType ->
+            onCreateViewHolderFunc = { viewGroup, _ ->
                 ItemMovieBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
             },
             addEventListener = { viewHolder, listItems ->
@@ -25,7 +25,7 @@ class MovieHorizontalAdapter {
                     onItemClick(listItems[viewHolder.absoluteAdapterPosition])
                 }
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 binding as ItemMovieBinding
                 item as Movie
                 binding.run {

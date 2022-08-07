@@ -169,7 +169,7 @@ class ZoomImageView @JvmOverloads constructor(
             }
         scaleDetector = ScaleGestureDetector(context, this@ZoomImageView)
         gestureDetector = GestureDetector(context, gestureListener)
-        ScaleGestureDetectorCompat.setQuickScaleEnabled(scaleDetector, false)
+        ScaleGestureDetectorCompat.setQuickScaleEnabled(scaleDetector!!, false)
         startScaleType = scaleType
         val values = context.obtainStyledAttributes(attrs, R.styleable.ZoomImageView)
         isZoomable = values.getBoolean(R.styleable.ZoomImageView_zoomImage_zoomable, true)

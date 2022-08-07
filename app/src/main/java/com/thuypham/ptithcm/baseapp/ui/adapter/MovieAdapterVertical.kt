@@ -25,7 +25,7 @@ class MovieAdapterVertical {
                     onItemMovieClick(viewHolder.absoluteAdapterPosition)
                 }
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 item as Movie
                 when (binding) {
                     is ItemMovieVerticalBinding -> {

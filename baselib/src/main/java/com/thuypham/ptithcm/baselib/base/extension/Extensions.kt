@@ -26,11 +26,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-fun <T> getViewBinding(inflater: LayoutInflater, clazz: Class<T>) =
-    clazz.getMethod("inflate", LayoutInflater::class.java)
-        .invoke(null, inflater)
-        .convert<T>()
-
 fun Context.getSharePref(): SharedPreferences {
     return getSharedPreferences(packageName, Context.MODE_PRIVATE)
 }

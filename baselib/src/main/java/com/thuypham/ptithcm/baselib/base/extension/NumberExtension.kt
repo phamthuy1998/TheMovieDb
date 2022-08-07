@@ -14,7 +14,6 @@ fun Long.milliSecondToDateFormat(): String {
 }
 
 fun Long.getAge(): Int {
-    val date = Date(this)
     return Years.yearsBetween(LocalDate(this), LocalDate()).years
 }
 

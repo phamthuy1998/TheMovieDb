@@ -21,12 +21,12 @@ class PersonMovieAdapter {
             onCreateViewHolderFunc = { viewGroup, viewType ->
                 DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), viewType, viewGroup, false)
             },
-            addEventListener = { viewHolder, items ->
+            addEventListener = { viewHolder, _ ->
                 viewHolder.mBinding.root.setOnSingleClickListener {
                     onItemMovieClick(viewHolder.absoluteAdapterPosition)
                 }
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 item as Movie
                 when (binding) {
                     is ItemMovieGridviewBinding -> {
@@ -56,12 +56,12 @@ class PersonMovieAdapter {
             onCreateViewHolderFunc = { viewGroup, viewType ->
                 DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context), viewType, viewGroup, false)
             },
-            addEventListener = { viewHolder, items ->
+            addEventListener = { viewHolder, _ ->
                 viewHolder.mBinding.root.setOnSingleClickListener {
                     onItemMovieClick(viewHolder.absoluteAdapterPosition)
                 }
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 item as Movie
                 when (binding) {
                     is ItemMovieVerticalBinding -> {

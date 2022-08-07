@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.customview.ZoomImageView
 import com.thuypham.ptithcm.baseapp.databinding.FragmentDetailImageBinding
@@ -21,9 +22,7 @@ import com.thuypham.ptithcm.baselib.base.base.BaseDialogFragment
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.baselib.base.extension.shareImageFromUrlToOtherApp
 
-class ImageDetailDialogFragment(
-
-) : BaseDialogFragment<FragmentDetailImageBinding>(R.layout.fragment_detail_image),
+class ImageDetailDialogFragment() : BaseDialogFragment<FragmentDetailImageBinding>(R.layout.fragment_detail_image),
     ZoomImageView.ZoomImageListener {
 
     companion object {

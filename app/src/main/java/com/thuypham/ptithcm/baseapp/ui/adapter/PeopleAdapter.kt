@@ -17,7 +17,7 @@ class PeopleAdapter {
             getItemViewTypeFunc = {
                 R.layout.item_people
             },
-            onCreateViewHolderFunc = { viewGroup, viewType ->
+            onCreateViewHolderFunc = { viewGroup, _ ->
                 ItemPeopleBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
             },
             addEventListener = { viewHolder ->
@@ -25,7 +25,7 @@ class PeopleAdapter {
                     onPersonItemClick(viewHolder.absoluteAdapterPosition)
                 }
             },
-            bindViewFunc = { binding, item, position ->
+            bindViewFunc = { binding, item, _ ->
                 item as Person
                 binding as ItemPeopleBinding
                 binding.run {

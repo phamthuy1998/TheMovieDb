@@ -36,6 +36,9 @@ class PagingStateAdapter(val retry: () -> Unit) :
                     progressBar.isVisible = false
                     retryButton.isVisible = true
                 }
+                else -> {
+
+                }
             }
         }
     }
