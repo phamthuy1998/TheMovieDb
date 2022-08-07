@@ -2,18 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:gravity="center_vertical"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivZoomImage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_gravity="center"
-            android:id="@+id/ivZoomImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_image_placeholder"
+        tools:src="@tools:sample/backgrounds/scenic" />
 
 </layout>

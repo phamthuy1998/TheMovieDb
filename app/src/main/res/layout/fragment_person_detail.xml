@@ -55,7 +55,6 @@
                             android:id="@+id/icBack"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="12dp"
                             android:padding="@dimen/x_mall_padding"
                             android:src="@drawable/ic_back"
                             app:layout_constraintBottom_toBottomOf="parent"

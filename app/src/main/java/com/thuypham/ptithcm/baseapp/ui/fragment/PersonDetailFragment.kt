@@ -21,7 +21,7 @@ import kotlin.math.abs
 
 class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.fragment_person_detail) {
     companion object {
-        const val SWITCH_BOUND = 0.8f
+        const val SWITCH_BOUND = 0.9f
         const val TO_EXPANDED = 0
         const val TO_COLLAPSED = 1
         const val WAIT_FOR_SWITCH = 0

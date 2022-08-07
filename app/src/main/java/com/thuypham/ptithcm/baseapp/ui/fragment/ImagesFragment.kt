@@ -5,6 +5,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
@@ -37,8 +38,9 @@ class ImagesFragment : BaseFragment<FragmentImagesBinding>(R.layout.fragment_ima
         toggleControllerVisibility()
 
         binding.run {
+            rvImages.layoutManager = LinearLayoutManager(requireContext() ,LinearLayoutManager.HORIZONTAL, false)
+            rvImages.setHasFixedSize(true)
             rvImages.adapter = imageAdapter
-//            rvImages.setHasFixedSize(true)
             val snapHelper = PagerSnapHelper()
             snapHelper.attachToRecyclerView(rvImages)
 

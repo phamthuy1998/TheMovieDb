@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.DecodeFormat
-import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
-import com.bumptech.glide.request.transition.Transition
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.data.util.ApiHelper
 
@@ -23,7 +21,7 @@ fun Fragment.loadImage(imageView: ImageView, imagePath: String?, shouldShowDefau
                 .into(imageView)
     } else {
         Glide.with(this)
-            .load(ApiHelper.getImagePath(ApiHelper.getImagePath(imagePath)))
+            .load(ApiHelper.getImagePath(imagePath))
             .centerInside()
             .placeholder(R.drawable.ic_image_placeholder)
             .format(DecodeFormat.PREFER_RGB_565)
@@ -41,7 +39,7 @@ fun ImageView.loadImage(glide: RequestManager, imagePath: String?, shouldShowDef
                 .dontAnimate()
                 .into(this)
     } else {
-        glide.load(ApiHelper.getImagePath(ApiHelper.getImagePath(imagePath)))
+        glide.load(ApiHelper.getImagePath(imagePath))
             .centerInside()
             .placeholder(R.drawable.ic_image_placeholder)
             .format(DecodeFormat.PREFER_RGB_565)
@@ -61,7 +59,7 @@ fun Fragment.loadImageHighResolution(imageView: ImageView, imagePath: String?, s
                 .into(imageView)
     } else {
         Glide.with(this)
-            .load(ApiHelper.getImagePath(ApiHelper.getImagePath(imagePath)))
+            .load(ApiHelper.getImagePath(imagePath))
             .placeholder(R.drawable.ic_image_placeholder)
             .override(SIZE_ORIGINAL, SIZE_ORIGINAL)
             .centerInside()
