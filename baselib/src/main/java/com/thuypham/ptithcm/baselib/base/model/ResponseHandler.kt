@@ -9,7 +9,6 @@ sealed class ResponseHandler<out T> {
 
     /** Function had already called before and the previous one is executing */
     object Loading : ResponseHandler<Nothing>()
-    object DoNothing : ResponseHandler<Nothing>()
 
     override fun toString(): String {
         return when (this) {

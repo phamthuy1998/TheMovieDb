@@ -1,4 +1,4 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment
+package com.thuypham.ptithcm.baseapp.ui.fragment.main
 
 import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
@@ -7,10 +7,7 @@ import com.thuypham.ptithcm.baseapp.databinding.FragmentHomeBinding
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
 import com.thuypham.ptithcm.baseapp.ui.adapter.HomeCategoryAdapter
-import com.thuypham.ptithcm.baseapp.util.navigateToMovieDetail
-import com.thuypham.ptithcm.baseapp.util.navigateToMovieList
-import com.thuypham.ptithcm.baseapp.util.navigateToPeople
-import com.thuypham.ptithcm.baseapp.util.navigateToPersonDetail
+import com.thuypham.ptithcm.baseapp.util.*
 import com.thuypham.ptithcm.baseapp.viewmodel.HomeViewModel
 import com.thuypham.ptithcm.baselib.base.extension.*
 import com.thuypham.ptithcm.data.remote.response.Movie
@@ -75,7 +72,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun onChildItemClick(item: Any) {
         when (item) {
             is Movie -> {
-                navigateToMovieDetail(item.id ?: return)
+                navigateToMovieDetail(item)
             }
             is MovieGenre -> {
                 navigateToMovieList(HomeCategoryType.MOVIE_GENRES, item.name, item.id)

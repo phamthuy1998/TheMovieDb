@@ -1,4 +1,4 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment
+package com.thuypham.ptithcm.baseapp.ui.fragment.movie
 
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
-import com.thuypham.ptithcm.baseapp.databinding.FragmentPersonMovieBinding
+import com.thuypham.ptithcm.baseapp.databinding.FragmentMovieListBinding
 import com.thuypham.ptithcm.baseapp.ui.adapter.PersonMovieAdapter
 import com.thuypham.ptithcm.baseapp.util.navigateToMovieDetail
 import com.thuypham.ptithcm.baselib.base.base.BaseViewAdapter
@@ -17,7 +17,7 @@ import com.thuypham.ptithcm.data.local.SharedPreferencesStorage
 import com.thuypham.ptithcm.data.remote.response.Movie
 import org.koin.android.ext.android.inject
 
-abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.layout.fragment_person_movie) {
+abstract class MovieListBaseFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragment_movie_list) {
 
     private val sharedPrf: IStorage by inject()
 
@@ -31,7 +31,7 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
     }
 
     private fun onItemMovieClick(movie: Movie?) {
-        navigateToMovieDetail(movie?.id ?: return)
+        navigateToMovieDetail(movie?: return)
     }
 
     private var currentList: List<Movie>? = null
@@ -90,6 +90,7 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
     }
 
     protected fun submitRecyclerViewData(movieList: List<Movie>?) {
+        logD("submitRecyclerViewData")
         currentList = movieList
         updateShimmer(false)
         if (movieList.isNullOrEmpty()) {
@@ -97,7 +98,6 @@ abstract class PersonBaseFragment : BaseFragment<FragmentPersonMovieBinding>(R.l
             return
         }
         showEmptyData(false)
-        logD("submitRecyclerViewData")
         if (isRecyclerviewGridLayout) {
             movieAdapterGridView.submitList(movieList)
         } else {

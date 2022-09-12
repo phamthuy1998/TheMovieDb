@@ -22,3 +22,9 @@ Java_com_thuypham_ptithcm_data_util_ApiHelper_movieApiKey(JNIEnv *env, jclass cl
     std::string apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed";
     return env->NewStringUTF(apiKey.c_str());
 }
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_thuypham_ptithcm_data_util_ApiHelper_youtubeKey(JNIEnv *env, jclass clazz) {
+    std::string youtubeKey = "AIzaSyBoB2HFOajmPpxiBMZg9bfR-tT3gdk_JrA";
+    return env->NewStringUTF(youtubeKey.c_str());
+}

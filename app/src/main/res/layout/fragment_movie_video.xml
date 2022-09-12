@@ -1,0 +1,69 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <com.thuypham.ptithcm.baseapp.customview.SingleViewTouchableMotionLayout
+        android:id="@+id/videoMotionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/player_scene">
+
+        <View
+            android:id="@+id/viewBackground"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/recyclerView"
+            app:layout_constraintEnd_toEndOf="@id/btnClose"
+            app:layout_constraintStart_toStartOf="@id/youtubePlayer"
+            app:layout_constraintTop_toTopOf="@id/youtubePlayer" />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtubePlayer"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_image_placeholder"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <!--        <fragment-->
+        <!--            android:id="@+id/youtubePlayer"-->
+        <!--            android:name="com.google.android.youtube.player.YouTubePlayerFragment"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="250dp"-->
+        <!--            android:scaleType="centerCrop"-->
+        <!--            android:src="@drawable/ic_image_placeholder"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnClose"
+            android:layout_width="@dimen/icon_48"
+            android:layout_height="@dimen/icon_48"
+            android:padding="4dp"
+            android:src="@drawable/ic_close_24"
+            app:layout_constraintBottom_toBottomOf="@+id/youtubePlayer"
+            app:layout_constraintStart_toEndOf="@+id/youtubePlayer"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@android:color/darker_gray" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:nestedScrollingEnabled="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/youtubePlayer" />
+
+
+    </com.thuypham.ptithcm.baseapp.customview.SingleViewTouchableMotionLayout>
+</layout>

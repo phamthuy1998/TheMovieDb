@@ -1,4 +1,4 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment
+package com.thuypham.ptithcm.baseapp.ui.fragment.people
 
 import android.util.TypedValue
 import android.view.View

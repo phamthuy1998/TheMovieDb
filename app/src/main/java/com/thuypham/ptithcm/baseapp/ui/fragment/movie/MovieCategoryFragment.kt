@@ -1,4 +1,4 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment
+package com.thuypham.ptithcm.baseapp.ui.fragment.movie
 
 import androidx.core.view.isVisible
 import androidx.paging.LoadState
@@ -41,7 +41,7 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
     }
 
     private fun onItemMovieClick(movie: Movie?) {
-        navigateToMovieDetail(movie?.id ?: return)
+        navigateToMovieDetail(movie ?: return)
     }
 
     private val movieAdapterLinear: BasePagedAdapter<Movie> by lazy {

@@ -41,12 +41,12 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
         setupToolbar()
     }
 
-    open fun setupFirst() {}
-    open fun getData() {}
-    abstract fun setupView()
-    open fun setupToolbar() {}
-    open fun setupDataObserver() {}
-    open fun clearData() {}
+    protected open fun setupFirst() {}
+    protected open fun getData() {}
+    protected abstract fun setupView()
+    protected open fun setupToolbar() {}
+    protected open fun setupDataObserver() {}
+    protected open fun clearData() {}
 
     fun showLoading() {
         runOnUiThread { dialog.show() }
@@ -81,13 +81,10 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
     }
 
     fun showSnackBar(message: String?) {
+        if(message.isNullOrEmpty()) return
         runOnUiThread(Runnable {
             if (view != null) {
-                val snackBar = Snackbar.make(
-                    view ?: return@Runnable, message
-                        ?: return@Runnable, Snackbar.LENGTH_SHORT
-                )
-                snackBar.show()
+                Snackbar.make(view ?: return@Runnable, message, Snackbar.LENGTH_SHORT).show()
             }
         })
     }

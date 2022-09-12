@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.thuypham.ptithcm.baseapp.ui.fragment.PersonAboutFragment
-import com.thuypham.ptithcm.baseapp.ui.fragment.PersonMovieFragment
-import com.thuypham.ptithcm.baseapp.ui.fragment.PersonTVShowFragment
+import com.thuypham.ptithcm.baseapp.ui.fragment.people.PersonAboutFragment
+import com.thuypham.ptithcm.baseapp.ui.fragment.people.PersonMovieFragment
+import com.thuypham.ptithcm.baseapp.ui.fragment.people.PersonTVShowFragment
 
 class PersonPagerAdapter(fragment: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragment, lifecycle) {
     companion object {

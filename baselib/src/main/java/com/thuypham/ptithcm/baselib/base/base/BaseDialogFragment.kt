@@ -28,6 +28,7 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(private val layoutId: Int
         if (isFullScreen) {
             setStyle(STYLE_NORMAL, android.R.style.Theme_Translucent_NoTitleBar)
         }
+        setupFirst()
     }
 
     @Suppress("DEPRECATION")
@@ -42,6 +43,7 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(private val layoutId: Int
         super.onViewCreated(view, savedInstanceState)
         try {
             setupLogic()
+            getData()
             setupView()
             setupDataObserver()
             onFinishLoading?.invoke()
@@ -53,9 +55,11 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(private val layoutId: Int
         }
     }
 
-    open fun setupLogic() {}
-    open fun setupView() {}
-    open fun setupDataObserver() {}
+    protected open fun setupFirst() {}
+    protected open fun setupLogic() {}
+    protected open fun getData() {}
+    protected open fun setupView() {}
+    protected open fun setupDataObserver() {}
 
     fun showLoading() {
         (requireActivity() as CommonBaseActivity<*>).showLoading()

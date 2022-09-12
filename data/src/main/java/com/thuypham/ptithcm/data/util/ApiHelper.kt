@@ -20,6 +20,9 @@ class ApiHelper {
         @JvmStatic
         external fun movieApiKey(): String
 
+        @JvmStatic
+        external fun youtubeKey(): String
+
         private var currentLanguage: String? = null
 
         private const val DEFAULT_LANGUAGE = "en-US"

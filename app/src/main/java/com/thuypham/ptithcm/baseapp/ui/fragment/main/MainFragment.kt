@@ -1,8 +1,7 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment
+package com.thuypham.ptithcm.baseapp.ui.fragment.main
 
 import android.view.MenuItem
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.google.android.material.navigation.NavigationBarView
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment

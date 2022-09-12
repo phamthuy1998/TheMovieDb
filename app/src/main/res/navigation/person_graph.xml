@@ -6,23 +6,23 @@
     app:startDestination="@id/personDatailFragment">
     <fragment
         android:id="@+id/personDatailFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PersonDetailFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.people.PersonDetailFragment"
         android:label="PersonDetailFragment"
         tools:layout="@layout/fragment_person_detail" />
     <fragment
         android:id="@+id/personAboutFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PersonAboutFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.people.PersonAboutFragment"
         android:label="PersonAboutFragment"
         tools:layout="@layout/fragment_person_about" />
     <fragment
         android:id="@+id/personFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PersonBaseFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.MovieListBaseFragment"
         android:label="PersonMoviesFragment"
-        tools:layout="@layout/fragment_person_movie" />
+        tools:layout="@layout/fragment_movie_list" />
 
     <fragment
         android:id="@+id/imagesFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.ImagesFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.image.ImagesFragment"
         android:label="ImagesFragment"
         tools:layout="@layout/fragment_images" />
 

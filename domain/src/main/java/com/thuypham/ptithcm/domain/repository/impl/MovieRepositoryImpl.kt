@@ -11,6 +11,7 @@ import com.thuypham.ptithcm.data.remote.api.MovieV3Api
 import com.thuypham.ptithcm.data.remote.api.wrapApiCall
 import com.thuypham.ptithcm.data.remote.response.ListResponse
 import com.thuypham.ptithcm.data.remote.response.Movie
+import com.thuypham.ptithcm.data.remote.response.MovieDetail
 import com.thuypham.ptithcm.data.remote.response.MovieGenres
 import com.thuypham.ptithcm.domain.datasource.movie.*
 import com.thuypham.ptithcm.domain.repository.MovieRepository
@@ -114,5 +115,25 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
                 GetMovieByGenreIdPagingSource(movieAPI, genreId)
             }
         ).liveData
+    }
+
+    override suspend fun getMovieDetail(movieID: Int): ResponseHandler<MovieDetail> {
+        return withContext(Dispatchers.IO) {
+            wrapApiCall { movieAPI.getMovieDetail(movieID) }
+        }
+    }
+
+    override suspend fun getMoviesRecommendation(movieID: Int): ResponseHandler<ListResponse<Movie>> {
+        return withContext(Dispatchers.IO) {
+            wrapApiCall {
+                movieAPI.getMoviesRecommendation(movieID)
+            }
+        }
+    }
+
+    override suspend fun getSimilarMovies(movieID: Int): ResponseHandler<ListResponse<Movie>> {
+        return withContext(Dispatchers.IO) {
+            wrapApiCall { movieAPI.getSimilarMovies(movieID) }
+        }
     }
 }

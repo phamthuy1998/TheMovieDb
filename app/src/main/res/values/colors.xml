@@ -47,4 +47,5 @@
 
     <color name="text_tab_layout_color">#000000</color>
     <color name="text_selected_tab_layout_color">#BA360C</color>
+    <color name="semiTransparentBlack">#6e232323</color>
 </resources>

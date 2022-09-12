@@ -1,0 +1,694 @@
+{
+	"info": {
+		"_postman_id": "a96ea1a2-bc4c-418a-a562-46f979a06d7e",
+		"name": "The Movie DB",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get new Session",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/authentication/guest_session/new?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"authentication",
+						"guest_session",
+						"new"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get New Token",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/authentication/token/new?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"authentication",
+						"token",
+						"new"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"phamthuy\",\r\n  \"password\": \"3jw#8uV!xDBf\",\r\n  \"request_token\": \"e2394a7afdee17034cc754c3c68ec91333273180\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"authentication",
+						"token",
+						"validate_with_login"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Genres",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api_key",
+						"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed",
+						"equals": true
+					}
+				],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/genre/movie/list?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"genre",
+						"movie",
+						"list"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trending",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/trending/all/day?page=2&api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"trending",
+						"all",
+						"day"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Up comming",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/upcoming?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"upcoming"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Now playing",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"now_playing"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Popular",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/popular?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"popular"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Top rate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/top_rated?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"top_rated"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TV Genres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/genre/tv/list?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"genre",
+						"tv",
+						"list"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/movie/10752/lists?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"movie",
+						"10752",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Popular people",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/person/popular?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"person",
+						"popular"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Movie By Genre ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/discover/movie?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&with_genres=12",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"discover",
+						"movie"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "with_genres",
+							"value": "12"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://image.tmdb.org/t/p/w500//3a9xnk4r07W2FTgZV3kv1vjkG6L.jpg",
+					"protocol": "https",
+					"host": [
+						"image",
+						"tmdb",
+						"org"
+					],
+					"path": [
+						"t",
+						"p",
+						"w500",
+						"",
+						"3a9xnk4r07W2FTgZV3kv1vjkG6L.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/person/86654?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"person",
+						"86654"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "language",
+							"value": "en-US"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reques Token",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.themoviedb.org/4/auth/request_token?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&access_token",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"4",
+						"auth",
+						"request_token"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						},
+						{
+							"key": "access_token",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person images",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/person/6161/images?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"person",
+						"6161",
+						"images"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get person Movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/person/86654/movie_credits?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"person",
+						"86654",
+						"movie_credits"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person Tagged images",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/person/6161/tagged_images?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"person",
+						"6161",
+						"tagged_images"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Person TV show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.themoviedb.org/3/person/86654/tv_credits?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed",
+					"protocol": "https",
+					"host": [
+						"api",
+						"themoviedb",
+						"org"
+					],
+					"path": [
+						"3",
+						"person",
+						"86654",
+						"tv_credits"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://image.tmdb.org/t/p/w500//xRWht48C2V8XNfzvPehyClOvDni.jpg",
+					"protocol": "https",
+					"host": [
+						"image",
+						"tmdb",
+						"org"
+					],
+					"path": [
+						"t",
+						"p",
+						"w500",
+						"",
+						"xRWht48C2V8XNfzvPehyClOvDni.jpg"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

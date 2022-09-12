@@ -7,45 +7,53 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.HomeFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.main.HomeFragment"
         android:label="@string/bot_nav_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.ProfileFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.main.ProfileFragment"
         android:label="@string/bot_nav_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.SearchFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.main.SearchFragment"
         android:label="@string/bot_nav_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/watchlistFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.WatchListFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.main.WatchListFragment"
         android:label="@string/bot_nav_watch_list"
         tools:layout="@layout/fragment_watchlist" />
     <fragment
         android:id="@+id/movieCategoryFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.MovieCategoryFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.MovieCategoryFragment"
         android:label="MovieCategoryFragment"
         tools:layout="@layout/fragment_movie_category" />
     <fragment
         android:id="@+id/genresFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.GenresFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.genre.GenresFragment"
         android:label="GenresFragment"
         tools:layout="@layout/fragment_genres" />
     <fragment
         android:id="@+id/peopleFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.PeopleFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.people.PeopleFragment"
         android:label="PeopleFragment"
         tools:layout="@layout/fragment_people" />
 
     <fragment
         android:id="@+id/movieDatailFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.MovieDetailFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieDetailFragment"
         android:label="MovieDetailFragment"
         tools:layout="@layout/fragment_movie_detail" />
+
+
+    <fragment
+        android:id="@+id/movieVideoDetailFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieVideoFragment"
+        android:label="TrailerFragment"
+        tools:layout="@layout/fragment_movie_video" />
+
 
     <include app:graph="@navigation/person_graph" />
 

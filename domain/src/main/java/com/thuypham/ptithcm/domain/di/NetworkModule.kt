@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.thuypham.ptithcm.data.remote.api.MovieV3Api
 import com.thuypham.ptithcm.data.util.ApiHelper
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -18,7 +19,6 @@ val networkModule = module {
     single { createService(get(), MovieV3Api::class.java) }
     single { provideRetrofit(get()) }
 }
-
 
 
 inline fun <reified T> createService(retrofit: Retrofit, apiService: Class<T>): T {
@@ -39,8 +39,21 @@ fun provideClient(): OkHttpClient {
         OkHttpClient.Builder()
             .callTimeout(ApiHelper.CONNECTION_TIME_OUT_SECOND, TimeUnit.SECONDS)
             .readTimeout(ApiHelper.CONNECTION_TIME_OUT_SECOND, TimeUnit.SECONDS)
+            .addInterceptor(Interceptor { chain ->
+                val request = chain.request()
 
-    if (BuildConfig.DEBUG) {
+                val url = request.url.newBuilder()
+                    .addQueryParameter("api_key", ApiHelper.movieApiKey())
+                    .addQueryParameter("language", ApiHelper.getCurrentLanguage())
+                    .build()
+
+                val requestBuilder = request.newBuilder().url(url)
+
+                chain.proceed(requestBuilder.build())
+            })
+
+    if (true)//BuildConfig.DEBUG)
+    {
         builder.also {
             val logger = HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY

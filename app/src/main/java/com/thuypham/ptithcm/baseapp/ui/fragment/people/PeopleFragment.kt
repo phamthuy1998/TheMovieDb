@@ -1,4 +1,4 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment
+package com.thuypham.ptithcm.baseapp.ui.fragment.people
 
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -11,7 +11,6 @@ import com.thuypham.ptithcm.baseapp.util.NavConstant
 import com.thuypham.ptithcm.baseapp.util.navigateToPersonDetail
 import com.thuypham.ptithcm.baseapp.viewmodel.PeopleViewModel
 import com.thuypham.ptithcm.baselib.base.extension.goBack
-import com.thuypham.ptithcm.data.remote.response.Person
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_people) {

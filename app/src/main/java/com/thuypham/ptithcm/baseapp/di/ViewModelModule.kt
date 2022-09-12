@@ -10,4 +10,5 @@ val viewModelModule = module {
     viewModel { PeopleViewModel(get()) }
     viewModel { PersonViewModel(get()) }
     viewModel { GenreViewModel(get()) }
+    viewModel { MovieViewModel(get()) }
 }

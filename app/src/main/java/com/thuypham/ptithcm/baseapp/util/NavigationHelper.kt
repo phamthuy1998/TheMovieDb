@@ -4,7 +4,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.ui.dialog.ImageDetailDialogFragment
-import com.thuypham.ptithcm.baseapp.ui.fragment.MovieCategoryFragment
+import com.thuypham.ptithcm.baseapp.ui.fragment.movie.MovieCategoryFragment
+import com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieDetailFragment
 import com.thuypham.ptithcm.baselib.base.extension.navigateTo
 import com.thuypham.ptithcm.data.remote.response.Movie
 import com.thuypham.ptithcm.data.remote.response.Person
@@ -19,11 +20,26 @@ object NavConstant {
 }
 
 fun Fragment.navigateToMovieDetail(movieId: Int) {
-    navigateTo(R.id.movieDatailFragment, bundle = bundleOf(NavConstant.MOVIE_ID to movieId))
+//    navigateTo(R.id.movieDatailFragment, bundle = bundleOf(NavConstant.MOVIE_ID to movieId))
+    requireActivity().supportFragmentManager.beginTransaction()
+        .replace(R.id.mainNavHostFragment, MovieDetailFragment().apply {
+            arguments = bundleOf(NavConstant.MOVIE_ID to movieId)
+        })
+        .commit()
 }
 
 fun Fragment.navigateToMovieDetail(movie: Movie) {
-    navigateTo(R.id.movieDatailFragment, bundle = bundleOf(NavConstant.MOVIE to movie))
+    // Todo: update this condition to start fragment
+    if (false) {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(R.id.mainNavHostFragment, MovieDetailFragment().apply {
+                arguments = bundleOf(NavConstant.MOVIE_ID to movie.id)
+            })
+            .commit()
+    } else {
+        navigateTo(R.id.movieDatailFragment, bundle = bundleOf(NavConstant.MOVIE_ID to movie, NavConstant.MOVIE_ID to movie.id))
+
+    }
 }
 
 fun Fragment.navigateToMovieList(categoryType: String? = null, title: String? = null) {

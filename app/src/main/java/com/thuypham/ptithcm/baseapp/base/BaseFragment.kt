@@ -10,6 +10,11 @@ abstract class BaseFragment<T : ViewDataBinding>(layoutId: Int) : CommonBaseFrag
 
     protected lateinit var toolbarHelper: ToolbarHelper
 
+
+    companion object {
+        val TAG = this::class.java.name
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         toolbarHelper = ToolbarHelper(binding.root)
         super.onViewCreated(view, savedInstanceState)

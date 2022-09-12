@@ -31,4 +31,11 @@
     <string name="save_image">Save image</string>
     <string name="share">Share</string>
     <string name="default_notification_channel_id">com.thuypham.ptithcm.baseapp</string>
+
+    <string name="movie_tab_layout_about">About</string>
+    <string name="movie_tab_layout_cast">Cast</string>
+    <string name="movie_tab_layout_comment">Comments</string>
+    <string name="movie_tab_layout_review">Reviews</string>
+    <string name="movie_tab_layout_recommendations">Recommendations</string>
+    <string name="movie_tab_layout_similar">Similar</string>
 </resources>

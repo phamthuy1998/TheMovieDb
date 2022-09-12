@@ -1,21 +1,16 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment
+package com.thuypham.ptithcm.baseapp.ui.fragment.image
 
 import android.annotation.SuppressLint
-import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.widget.PopupMenu
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentImagesBinding
-import com.thuypham.ptithcm.baseapp.extension.getBitMap
 import com.thuypham.ptithcm.baseapp.ui.adapter.ImageAdapter
 import com.thuypham.ptithcm.baseapp.util.NavConstant
-import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
-import com.thuypham.ptithcm.baselib.base.extension.shareImageFromUrlToOtherApp
 
 class ImagesFragment : BaseFragment<FragmentImagesBinding>(R.layout.fragment_images) {
 

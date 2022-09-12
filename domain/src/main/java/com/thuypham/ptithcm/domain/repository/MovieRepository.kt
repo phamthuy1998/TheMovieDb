@@ -5,6 +5,7 @@ import androidx.paging.PagingData
 import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
 import com.thuypham.ptithcm.data.remote.response.ListResponse
 import com.thuypham.ptithcm.data.remote.response.Movie
+import com.thuypham.ptithcm.data.remote.response.MovieDetail
 import com.thuypham.ptithcm.data.remote.response.MovieGenres
 
 interface MovieRepository {
@@ -20,5 +21,8 @@ interface MovieRepository {
     suspend fun getMovieUpComingPaging(): LiveData<PagingData<Movie>>
     suspend fun getMoviePopularPaging(): LiveData<PagingData<Movie>>
     suspend fun getMovieTopRatePaging(): LiveData<PagingData<Movie>>
-    suspend fun getMovieByGenreId(genreId: Int):  LiveData<PagingData<Movie>>
+    suspend fun getMovieByGenreId(genreId: Int): LiveData<PagingData<Movie>>
+    suspend fun getMovieDetail(movieID: Int): ResponseHandler<MovieDetail>
+    suspend fun getMoviesRecommendation(movieID: Int): ResponseHandler<ListResponse<Movie>>
+    suspend fun getSimilarMovies(movieID: Int): ResponseHandler<ListResponse<Movie>>
 }

@@ -6,19 +6,6 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MovieResponse(
-    @SerializedName("page")
-    var page: Int?,
-    @SerializedName("results")
-    var results: ArrayList<Movie>?,
-    @SerializedName("total_pages")
-    var totalPages: Int?,
-    @SerializedName("total_results")
-    var totalResults: Int?
-) : Parcelable
-
-
-@Parcelize
 class Movie(
     @SerializedName("adult")
     var adult: Boolean?,
@@ -61,3 +48,33 @@ class Movie(
 ) : Parcelable {
 
 }
+
+data class MovieVideo(
+    @SerializedName("id")
+    val id: Int? = null,
+    @SerializedName("results")
+    val results: List<Video>? = null
+)
+
+data class Video(
+    @SerializedName("id")
+    val id: String? = null,
+    @SerializedName("iso_3166_1")
+    val iso31661: String? = null,
+    @SerializedName("iso_639_1")
+    val iso6391: String? = null,
+    @SerializedName("key")
+    val key: String? = null,
+    @SerializedName("name")
+    val name: String? = null,
+    @SerializedName("official")
+    val official: Boolean? = null,
+    @SerializedName("published_at")
+    val publishedAt: String? = null,
+    @SerializedName("site")
+    val site: String? = null,
+    @SerializedName("size")
+    val size: Int? = null,
+    @SerializedName("type")
+    val type: String? = null
+)

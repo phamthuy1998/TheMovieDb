@@ -36,4 +36,8 @@
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="expandAvtSize">135dp</dimen>
     <dimen name="collapseImageSize">48dp</dimen>
+    <dimen name="trailer_rev_height">150dp</dimen>
+    <dimen name="icon_32">32dp</dimen>
+    <dimen name="icon_48">48dp</dimen>
+    <dimen name="collapse_image_height">250dp</dimen>
 </resources>
