@@ -35,9 +35,9 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
             lifecycleOwner = viewLifecycleOwner
             executePendingBindings()
         }
+        setupView()
         getData()
         setupDataObserver()
-        setupView()
         setupToolbar()
     }
 

@@ -2,7 +2,6 @@ package com.thuypham.ptithcm.data.remote.api
 
 import com.thuypham.ptithcm.data.param.LoginParam
 import com.thuypham.ptithcm.data.remote.response.*
-import com.thuypham.ptithcm.data.util.ApiHelper
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -91,12 +90,14 @@ interface MovieV3Api {
     @GET("/3/movie/{movie_id}/recommendations")
     suspend fun getMoviesRecommendation(
         @Path("movie_id") movieId: Int,
+        @Query("page") page: Int = 1,
     ): Response<ListResponse<Movie>>
 
 
     @GET("/3/movie/{movie_id}/similar")
     suspend fun getSimilarMovies(
         @Path("movie_id") movieId: Int,
+        @Query("page") page: Int = 1,
     ): Response<ListResponse<Movie>>
 
     @POST("authentication/token/validate_with_login")

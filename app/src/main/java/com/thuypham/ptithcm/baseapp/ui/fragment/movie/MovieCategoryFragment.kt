@@ -1,6 +1,7 @@
 package com.thuypham.ptithcm.baseapp.ui.fragment.movie
 
 import androidx.core.view.isVisible
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
@@ -82,23 +83,8 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
         logD("setupView")
         setupRecyclerViewByType()
 
-        movieAdapterGridView.addLoadStateListener {
-            binding.apply {
-                when (it.refresh) {
-                    is LoadState.NotLoading -> {
-                        updateShimmer(false)
-                    }
-                    LoadState.Loading -> {
-                        updateShimmer(true)
-                    }
-
-                    is LoadState.Error -> {
-                        updateShimmer(false)
-                        showEmptyData(true)
-                    }
-                }
-            }
-        }
+        movieAdapterGridView.addLoadStateListener(loadStateListener)
+        movieAdapterLinear.addLoadStateListener(loadStateListener)
     }
 
     override fun setupToolbar() {
@@ -225,9 +211,33 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
         }
     }
 
+    private val loadStateListener: (CombinedLoadStates) -> Unit = object : Function1<CombinedLoadStates, Unit> {
+        override fun invoke(loadStates: CombinedLoadStates) {
+            binding.apply {
+                when (loadStates.refresh) {
+                    is LoadState.NotLoading -> {
+                        updateShimmer(false)
+                    }
+                    LoadState.Loading -> {
+                        updateShimmer(true)
+                    }
+
+                    is LoadState.Error -> {
+                        updateShimmer(false)
+                        showEmptyData(true)
+                    }
+                }
+            }
+        }
+    }
+
+
     override fun clearData() {
         super.clearData()
         binding.rvMovies.adapter = null
+
+        movieAdapterGridView.removeLoadStateListener(loadStateListener)
+        movieAdapterLinear.removeLoadStateListener(loadStateListener)
     }
 
 }

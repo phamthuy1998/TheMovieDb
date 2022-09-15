@@ -131,6 +131,27 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
         }
     }
 
+    override suspend fun getMoviesRecommendationPaging(movieID: Int): LiveData<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
+            initialKey = 1,
+            pagingSourceFactory = {
+                GetRecommendationMoviePagingSource(movieAPI, movieID)
+            }
+        ).liveData
+    }
+
+    override suspend fun getSimilarMoviesPaging(movieID: Int): LiveData<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
+            initialKey = 1,
+            pagingSourceFactory = {
+                GetSimilarMoviePagingSource(movieAPI, movieID)
+            }
+        ).liveData
+
+    }
+
     override suspend fun getSimilarMovies(movieID: Int): ResponseHandler<ListResponse<Movie>> {
         return withContext(Dispatchers.IO) {
             wrapApiCall { movieAPI.getSimilarMovies(movieID) }

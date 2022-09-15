@@ -13,6 +13,7 @@
             android:scaleType="centerCrop"
             android:layout_width="@dimen/iv_person_avt_height"
             android:layout_height="@dimen/iv_person_avt_height"
+            android:elevation="@dimen/default_elevation"
             tools:src="@tools:sample/avatars" />
 
         <TextView

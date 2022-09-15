@@ -11,6 +11,7 @@
             android:id="@+id/ivMovie"
             android:layout_width="@dimen/item_home_movie_width"
             android:layout_height="@dimen/item_home_movie_height"
+            android:elevation="@dimen/default_elevation"
             android:scaleType="fitXY"
             app:riv_corner_radius="8dp"
             tools:src="@tools:sample/backgrounds/scenic" />

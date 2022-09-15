@@ -24,5 +24,7 @@ interface MovieRepository {
     suspend fun getMovieByGenreId(genreId: Int): LiveData<PagingData<Movie>>
     suspend fun getMovieDetail(movieID: Int): ResponseHandler<MovieDetail>
     suspend fun getMoviesRecommendation(movieID: Int): ResponseHandler<ListResponse<Movie>>
+    suspend fun getMoviesRecommendationPaging(movieID: Int): LiveData<PagingData<Movie>>
+    suspend fun getSimilarMoviesPaging(movieID: Int): LiveData<PagingData<Movie>>
     suspend fun getSimilarMovies(movieID: Int): ResponseHandler<ListResponse<Movie>>
 }
