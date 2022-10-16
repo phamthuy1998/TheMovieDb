@@ -49,4 +49,6 @@
     <color name="text_selected_tab_layout_color">#BA360C</color>
     <color name="semiTransparentBlack">#6e232323</color>
     <color name="color_img_shadow">#6C6C6C</color>
+
+    <color name="colorGray50">#801C1C1C</color>
 </resources>

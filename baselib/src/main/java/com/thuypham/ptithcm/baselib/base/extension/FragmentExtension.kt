@@ -50,16 +50,16 @@ fun Fragment.getScreenWidth(): Int {
     return displayMetrics.widthPixels
 }
 
-fun Activity.getDisplayMetrics(): DisplayMetrics {
-    val displayMetrics = DisplayMetrics()
-    windowManager.defaultDisplay.getMetrics(displayMetrics)
-    return displayMetrics
-}
-
 fun Fragment.getScreenHeight(): Int {
     val displayMetrics = DisplayMetrics()
     requireActivity().getDisplayMetrics()
     return displayMetrics.heightPixels
+}
+
+fun Activity.getDisplayMetrics(): DisplayMetrics {
+    val displayMetrics = DisplayMetrics()
+    windowManager.defaultDisplay.getMetrics(displayMetrics)
+    return displayMetrics
 }
 
 fun Fragment.shareImageFromUrlToOtherApp(imagePath: String) {

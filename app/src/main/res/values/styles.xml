@@ -20,6 +20,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TextTitle.Shadow.Selectable" parent="TextTitle.Shadow">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
     <style name="Text14.Shadow" parent="Shadow">
         <item name="android:textColor">@color/textColor1</item>
         <item name="android:textSize">14sp</item>
@@ -70,8 +76,24 @@
         <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
     </style>
 
+
+    <style name="TabIndicator" >
+        <item name="tabGravity">center</item>
+        <item name="tabIndicatorFullWidth">false</item>
+        <item name="tabIndicatorGravity">center</item>
+        <item name="tabIndicator">@null</item>
+        <item name="tabPaddingStart">@dimen/tabPadding</item>
+        <item name="tabPaddingEnd">@dimen/tabPadding</item>
+        <item name="tabBackground">@drawable/tab_indicator_selector</item>
+    </style>
+
     <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="Selectable">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
 </resources>

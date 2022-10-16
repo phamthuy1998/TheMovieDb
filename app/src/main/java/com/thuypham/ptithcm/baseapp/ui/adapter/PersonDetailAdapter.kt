@@ -9,7 +9,7 @@ import com.thuypham.ptithcm.baseapp.extension.loadImage
 import com.thuypham.ptithcm.baselib.base.base.BaseItemDiffUtilCallback
 import com.thuypham.ptithcm.baselib.base.base.BaseViewAdapter
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
-import com.thuypham.ptithcm.data.remote.response.Profile
+import com.thuypham.ptithcm.data.remote.response.ImageInfo
 
 class PersonDetailAdapter {
     fun setupKnowAsAdapter(): BaseViewAdapter<String> {
@@ -34,7 +34,7 @@ class PersonDetailAdapter {
         )
     }
 
-    fun setupPersonImageAdapter(glide: RequestManager, onItemClick: (imgPath: String) -> Unit): BaseViewAdapter<Profile> {
+    fun setupPersonImageAdapter(glide: RequestManager, onItemClick: (imgPath: String) -> Unit): BaseViewAdapter<ImageInfo> {
         return BaseViewAdapter(
             getItemViewTypeFunc = {
                 R.layout.item_person_image
@@ -48,7 +48,7 @@ class PersonDetailAdapter {
                 }
             },
             bindViewFunc = { binding, item, _ ->
-                item as Profile
+                item as ImageInfo
                 binding as ItemPersonImageBinding
                 binding.ivPerson.loadImage(glide, item.filePath)
             },

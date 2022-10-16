@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_person_about" />
     <fragment
         android:id="@+id/personFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.MovieListBaseFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.list.MovieListBaseFragment"
         android:label="PersonMoviesFragment"
         tools:layout="@layout/fragment_movie_list" />
 

@@ -1,4 +1,5 @@
 package com.thuypham.ptithcm.data.remote.response
+
 import com.google.gson.annotations.SerializedName
 
 
@@ -8,7 +9,7 @@ data class MovieDetail(
     @SerializedName("backdrop_path")
     val backdropPath: String = "",
     @SerializedName("belongs_to_collection")
-    val belongsToCollection: Any = Any(),
+    val belongsToCollection: Collection? = null,
     @SerializedName("budget")
     val budget: Int = 0,
     @SerializedName("genres")
@@ -53,7 +54,28 @@ data class MovieDetail(
     val voteAverage: Double = 0.0,
     @SerializedName("vote_count")
     val voteCount: Int = 0
-)
+) {
+    fun getProductionCountries(): String {
+        var result = ""
+        productionCountries.forEachIndexed { index, productionCountry ->
+            result += productionCountry
+            if (index > productionCountries.size - 1) {
+                result += ","
+            }
+        }
+        return result
+    }
+    fun getProductionCompany(): String {
+        var result = ""
+        productionCompanies.forEachIndexed { index, productionCompany ->
+            result += productionCompany
+            if (index > productionCompanies.size - 1) {
+                result += ","
+            }
+        }
+        return result
+    }
+}
 
 data class Genre(
     @SerializedName("id")
@@ -66,7 +88,7 @@ data class ProductionCompany(
     @SerializedName("id")
     val id: Int = 0,
     @SerializedName("logo_path")
-    val logoPath: Any = Any(),
+    val logoPath: String = "",
     @SerializedName("name")
     val name: String = "",
     @SerializedName("origin_country")
@@ -87,4 +109,15 @@ data class SpokenLanguage(
     val iso6391: String = "",
     @SerializedName("name")
     val name: String = ""
+)
+
+data class Collection(
+    @SerializedName("backdrop_path")
+    val backdropPath: String? = null,
+    @SerializedName("id")
+    val id: Int? = null,
+    @SerializedName("name")
+    val name: String? = null,
+    @SerializedName("poster_path")
+    val posterPath: String? = null
 )

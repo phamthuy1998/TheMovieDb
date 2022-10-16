@@ -49,10 +49,12 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
     protected open fun clearData() {}
 
     fun showLoading() {
+        logD("showLoading")
         runOnUiThread { dialog.show() }
     }
 
     fun hideLoading() {
+        logD("hideLoading")
         runOnUiThread {
             if (dialog.isShowing) {
                 dialog.dismiss()

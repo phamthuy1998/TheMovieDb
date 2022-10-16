@@ -3,10 +3,11 @@
     <dimen name="home_recycler_height">150dp</dimen>
     <dimen name="default_margin">12dp</dimen>
     <dimen name="default_margin_l">16dp</dimen>
+    <dimen name="default_margin_xl">24dp</dimen>
     <dimen name="default_padding">12dp</dimen>
     <dimen name="small_margin">8dp</dimen>
-    <dimen name="mall_padding">8dp</dimen>
-    <dimen name="x_mall_padding">4dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="x_small_padding">4dp</dimen>
     <dimen name="margin24">24dp</dimen>
 
     <dimen name="item_home_movie_width">120dp</dimen>
@@ -34,11 +35,29 @@
     <dimen name="avt_corner">16dp</dimen>
 
     <dimen name="text_size_18">18sp</dimen>
-    <dimen name="expandAvtSize">135dp</dimen>
-    <dimen name="collapseImageSize">48dp</dimen>
     <dimen name="trailer_rev_height">150dp</dimen>
+
     <dimen name="icon_32">32dp</dimen>
     <dimen name="icon_48">48dp</dimen>
-    <dimen name="collapse_image_height">250dp</dimen>
+
+    <!-- Collapse -->
+    <dimen name="collapse_image_height">200dp</dimen>
+    <dimen name="collapse_image_margin_indicator">170dp</dimen>
+    <dimen name="collapse_image_margin">100dp</dimen>
+    <dimen name="collapseImageSize">48dp</dimen>
+    <dimen name="expandAvtSize">135dp</dimen>
+
     <dimen name="default_elevation">6dp</dimen>
+
+    <!-- Tab indicator -->
+    <dimen name="tabIndicatorHeight">8dp</dimen>
+    <dimen name="tabPadding">6dp</dimen>
+    <dimen name="tabIndicator">3dp</dimen>
+    <dimen name="tabIndicatorSelected">4dp</dimen>
+    <dimen name="itemMovieCorner">8dp</dimen>
+
+    <dimen name="rcTrailerHeight">155dp</dimen>
+    <dimen name="itemTrailerWidth">240dp</dimen>
+    <dimen name="itemTrailerHeight">130dp</dimen>
+    <dimen name="item_title_trailer_height">20dp</dimen>
 </resources>

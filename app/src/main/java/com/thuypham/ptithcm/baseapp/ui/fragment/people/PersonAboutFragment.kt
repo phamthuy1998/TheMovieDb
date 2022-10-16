@@ -25,8 +25,8 @@ class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fr
 
     private val personAdapter by lazy { PersonDetailAdapter() }
     private val knowAsAdapter: BaseViewAdapter<String> by lazy { personAdapter.setupKnowAsAdapter() }
-    private val imageAdapter: BaseViewAdapter<Profile> by lazy { personAdapter.setupPersonImageAdapter(Glide.with(this), ::onImageItemClick) }
-    private val movieKnowForAdapter: BaseViewAdapter<Movie> by lazy { MovieHorizontalAdapter().setupKnowForAdapter(Glide.with(this), ::onMovieClick) }
+    private val imageAdapter: BaseViewAdapter<ImageInfo> by lazy { personAdapter.setupPersonImageAdapter(glide, ::onImageItemClick) }
+    private val movieKnowForAdapter: BaseViewAdapter<Movie> by lazy { MovieHorizontalAdapter().setupKnowForAdapter(glide, ::onMovieClick) }
 
     private var isCollapse = true
     private lateinit var knowForMovie: List<Movie>
@@ -89,7 +89,7 @@ class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fr
         binding.run {
             tvBtnShowMore.setOnClickListener(biographyClickListener)
             tvBiography.setOnClickListener(biographyClickListener)
-            layoutImages.setOnSingleClickListener {
+            tvImage.setOnSingleClickListener {
                 navigateToImageList(personViewModel.getPersonImagePath())
             }
         }
@@ -123,7 +123,7 @@ class PersonAboutFragment : BaseFragment<FragmentPersonAboutBinding>(R.layout.fr
 
     private fun setupPersonImage(personImages: PersonImage?) {
         if (personImages?.profiles != null) {
-            binding.layoutImages.show()
+            binding.tvImage.show()
             binding.rvImages.show()
             imageAdapter.submitList(personImages.profiles)
         }

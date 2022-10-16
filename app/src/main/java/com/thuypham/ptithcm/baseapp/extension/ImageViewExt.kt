@@ -11,27 +11,12 @@ import com.bumptech.glide.request.target.Target.SIZE_ORIGINAL
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.data.util.ApiHelper
 
-fun Fragment.loadImage(imageView: ImageView, imagePath: String?, shouldShowDefaultImg: Boolean = true) {
-    if (imagePath.isNullOrEmpty()) {
-        if (shouldShowDefaultImg)
-            Glide.with(this)
-                .load(R.drawable.ic_image_placeholder)
-                .centerInside()
-                .dontAnimate()
-                .into(imageView)
-    } else {
-        Glide.with(this)
-            .load(ApiHelper.getImagePath(imagePath))
-            .centerInside()
-            .placeholder(R.drawable.ic_image_placeholder)
-            .format(DecodeFormat.PREFER_RGB_565)
-            .dontAnimate()
-            .into(imageView)
-    }
+fun Fragment.loadImage(imageView: ImageView, imagePath: String?, shouldShowDefaultImg: Boolean = true, isYoutubeImage: Boolean = false) {
+    imageView.loadImage(Glide.with(this), imagePath, shouldShowDefaultImg)
 }
 
 
-fun ImageView.loadImage(glide: RequestManager, imagePath: String?, shouldShowDefaultImg: Boolean = true) {
+fun ImageView.loadImage(glide: RequestManager, imagePath: String?, shouldShowDefaultImg: Boolean = true, isYoutubeImage: Boolean = false) {
     if (imagePath.isNullOrEmpty()) {
         if (shouldShowDefaultImg)
             glide.load(R.drawable.ic_image_placeholder)
@@ -39,9 +24,15 @@ fun ImageView.loadImage(glide: RequestManager, imagePath: String?, shouldShowDef
                 .dontAnimate()
                 .into(this)
     } else {
-        glide.load(ApiHelper.getImagePath(imagePath))
+        if (shouldShowDefaultImg)
+            glide.load(if (isYoutubeImage) imagePath else ApiHelper.getImagePath(imagePath))
+                .centerInside()
+                .placeholder(R.drawable.ic_image_placeholder)
+                .format(DecodeFormat.PREFER_RGB_565)
+                .dontAnimate()
+                .into(this)
+        else glide.load(if (isYoutubeImage) imagePath else ApiHelper.getImagePath(imagePath))
             .centerInside()
-            .placeholder(R.drawable.ic_image_placeholder)
             .format(DecodeFormat.PREFER_RGB_565)
             .dontAnimate()
             .into(this)
@@ -49,7 +40,7 @@ fun ImageView.loadImage(glide: RequestManager, imagePath: String?, shouldShowDef
 }
 
 
-fun Fragment.loadImageHighResolution(imageView: ImageView, imagePath: String?, shouldShowDefaultImg: Boolean = true) {
+fun Fragment.loadImageHighResolution(imageView: ImageView, imagePath: String?, shouldShowDefaultImg: Boolean = true, isYoutubeImage: Boolean = false) {
     if (imagePath.isNullOrEmpty()) {
         if (shouldShowDefaultImg)
             Glide.with(this)
@@ -59,7 +50,7 @@ fun Fragment.loadImageHighResolution(imageView: ImageView, imagePath: String?, s
                 .into(imageView)
     } else {
         Glide.with(this)
-            .load(ApiHelper.getImagePath(imagePath))
+            .load(if (isYoutubeImage) imagePath else ApiHelper.getImagePath(imagePath))
             .placeholder(R.drawable.ic_image_placeholder)
             .override(SIZE_ORIGINAL, SIZE_ORIGINAL)
             .centerInside()

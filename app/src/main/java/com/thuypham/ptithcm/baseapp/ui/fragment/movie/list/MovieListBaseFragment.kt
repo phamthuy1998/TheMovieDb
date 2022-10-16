@@ -1,4 +1,4 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment.movie
+package com.thuypham.ptithcm.baseapp.ui.fragment.movie.list
 
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.GridLayoutManager
@@ -23,11 +23,11 @@ abstract class MovieListBaseFragment : BaseFragment<FragmentMovieListBinding>(R.
 
     private val personAdapter by lazy { PersonMovieAdapter() }
     private val movieAdapterGridView: BaseViewAdapter<Movie> by lazy {
-        personAdapter.initGridMovieAdapter(Glide.with(this)) { position -> onItemMovieClick(movieAdapterGridView.getItemAtPos(position)) }
+        personAdapter.initGridMovieAdapter(glide) { position -> onItemMovieClick(movieAdapterGridView.getItemAtPos(position)) }
     }
 
     private val movieAdapterLinear: BaseViewAdapter<Movie> by lazy {
-        personAdapter.initVerticalMovieAdapter(Glide.with(this)) { position -> onItemMovieClick(movieAdapterLinear.getItemAtPos(position)) }
+        personAdapter.initVerticalMovieAdapter(glide) { position -> onItemMovieClick(movieAdapterLinear.getItemAtPos(position)) }
     }
 
     private fun onItemMovieClick(movie: Movie?) {

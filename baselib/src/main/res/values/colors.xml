@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
 
+    <color name="icBackground">#B2222222</color>
+
     <color name="gray">#B6B6B6</color>
+    <color name="tabIndicatorSelected">#E4E4E4</color>
+    <color name="tabIndicator">#CB9F9F9F</color>
 </resources>

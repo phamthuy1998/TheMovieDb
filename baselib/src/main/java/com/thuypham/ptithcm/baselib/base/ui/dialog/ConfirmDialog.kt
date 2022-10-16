@@ -5,10 +5,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.thuypham.ptithcm.baselib.R
 import com.thuypham.ptithcm.baselib.base.base.BaseDialogFragment
-import com.thuypham.ptithcm.baselib.base.extension.getScreenWidth
 import com.thuypham.ptithcm.baselib.base.extension.show
 import com.thuypham.ptithcm.baselib.databinding.DialogConfirmBinding
-import kotlin.math.roundToInt
 
 
 class ConfirmDialog(

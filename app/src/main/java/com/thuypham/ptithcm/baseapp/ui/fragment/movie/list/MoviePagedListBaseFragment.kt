@@ -26,7 +26,7 @@ abstract class MoviePagedListBaseFragment : BaseFragment<FragmentMovieListBindin
     private val sharedPrf: IStorage by inject()
 
     private val movieAdapterGridView: BasePagedAdapter<Movie> by lazy {
-        MovieAdapter().initMovieAdapter(Glide.with(this)) { position ->
+        MovieAdapter().initMovieAdapter(glide) { position ->
             onItemMovieClick(
                 movieAdapterGridView.getItemAtPosition(position)
             )
@@ -34,7 +34,7 @@ abstract class MoviePagedListBaseFragment : BaseFragment<FragmentMovieListBindin
     }
 
     private val movieAdapterLinear: BasePagedAdapter<Movie> by lazy {
-        MovieAdapterVertical().initMovieAdapter(Glide.with(this)) { position ->
+        MovieAdapterVertical().initMovieAdapter(glide) { position ->
             movieAdapterLinear.getItemAtPosition(
                 position
             )

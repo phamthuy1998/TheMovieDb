@@ -1,5 +1,7 @@
 package com.thuypham.ptithcm.baselib.base.extension
 
+import android.content.Context
+import com.thuypham.ptithcm.baselib.R
 import org.joda.time.LocalDate
 import org.joda.time.Years
 import java.text.SimpleDateFormat
@@ -11,6 +13,30 @@ fun Long.milliSecondToDateFormat(): String {
     val dateFormat = SimpleDateFormat("dd MMM, yyyy", Locale.getDefault())
     val date = Date(this)
     return dateFormat.format(date)
+}
+
+fun Int.toMovieDuration(context: Context): String {
+    val hours = this / 60
+    val minute = this - 60 * hours
+    return if (hours > 1) {
+        if (minute > 1) {
+            context.getString(R.string.movieDurationHourMinute, hours, context.getString(R.string.hours), minute, context.getString(R.string.minutes))
+        } else if (minute == 1) {
+            context.getString(R.string.movieDurationHourMinute, hours, context.getString(R.string.hours), minute, context.getString(R.string.minutes))
+        } else {
+            context.getString(R.string.movieDurationHour, hours, context.getString(R.string.hours))
+        }
+    } else if (hours == 1) {
+        if (minute > 1) {
+            context.getString(R.string.movieDurationHourMinute, hours, context.getString(R.string.hours), minute, context.getString(R.string.minutes))
+        } else if (minute == 1) {
+            context.getString(R.string.movieDurationHourMinute, hours, context.getString(R.string.hours), minute, context.getString(R.string.minutes))
+        } else {
+            context.getString(R.string.movieDurationHour, hours, context.getString(R.string.hours))
+        }
+    } else {
+        context.getString(R.string.movieDurationHour, minute, context.getString(R.string.minutes))
+    }
 }
 
 fun Long.getAge(): Int {

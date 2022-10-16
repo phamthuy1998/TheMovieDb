@@ -44,7 +44,7 @@ fun provideClient(): OkHttpClient {
 
                 val url = request.url.newBuilder()
                     .addQueryParameter("api_key", ApiHelper.movieApiKey())
-                    .addQueryParameter("language", ApiHelper.getCurrentLanguage())
+//                    .addQueryParameter("language", ApiHelper.getCurrentLanguage())
                     .build()
 
                 val requestBuilder = request.newBuilder().url(url)

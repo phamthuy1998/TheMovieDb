@@ -9,10 +9,7 @@ import com.thuypham.ptithcm.baselib.base.extension.logD
 import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
 import com.thuypham.ptithcm.data.remote.api.MovieV3Api
 import com.thuypham.ptithcm.data.remote.api.wrapApiCall
-import com.thuypham.ptithcm.data.remote.response.ListResponse
-import com.thuypham.ptithcm.data.remote.response.Movie
-import com.thuypham.ptithcm.data.remote.response.MovieDetail
-import com.thuypham.ptithcm.data.remote.response.MovieGenres
+import com.thuypham.ptithcm.data.remote.response.*
 import com.thuypham.ptithcm.domain.datasource.movie.*
 import com.thuypham.ptithcm.domain.repository.MovieRepository
 import com.thuypham.ptithcm.domain.util.Constant
@@ -155,6 +152,22 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
     override suspend fun getSimilarMovies(movieID: Int): ResponseHandler<ListResponse<Movie>> {
         return withContext(Dispatchers.IO) {
             wrapApiCall { movieAPI.getSimilarMovies(movieID) }
+        }
+    }
+
+    override suspend fun getMovieImages(movieID: Int): ResponseHandler<MovieImage> {
+        return withContext(Dispatchers.IO) {
+            wrapApiCall {
+                movieAPI.getMovieImages(movieID)
+            }
+        }
+    }
+
+    override suspend fun getMovieVideo(movieID: Int): ResponseHandler<MovieVideo> {
+        return withContext(Dispatchers.IO) {
+            wrapApiCall {
+                movieAPI.getMovieVideo(movieID)
+            }
         }
     }
 }

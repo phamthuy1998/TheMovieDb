@@ -13,4 +13,11 @@
     <string name="movie_top_rate">Top Rate</string>
     <string name="movie_genres">Genres</string>
     <string name="popular_people">Popular people</string>
+
+    <string name="hour">hour</string>
+    <string name="hours">hours</string>
+    <string name="minute">minute</string>
+    <string name="minutes">minutes</string>
+    <string name="movieDurationHourMinute">%1d %2s, %3d %4s</string>
+    <string name="movieDurationHour">%d %s</string>
 </resources>

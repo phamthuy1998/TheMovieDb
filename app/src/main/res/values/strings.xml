@@ -23,6 +23,10 @@
         ]]>
     </string>
     <string name="show_more">Show more</string>
+    <string name="onePoster">1 poster</string>
+    <string name="posters">%d posters</string>
+    <string name="oneBackdrop">1 backdrop</string>
+    <string name="backdrops">%d backdrops</string>
     <string name="show_less">Show less</string>
     <string name="also_know_as">Also know as</string>
     <string name="images">Images</string>
@@ -38,4 +42,21 @@
     <string name="movie_tab_layout_review">Reviews</string>
     <string name="movie_tab_layout_recommendations">Recommendations</string>
     <string name="movie_tab_layout_similar">Similar</string>
+
+    <string name="duration">Duration: %s</string>
+    <string name="movie_info">Movie info</string>
+    <string name="trailers">Trailers</string>
+    <string name="media">Media</string>
+    <string name="go_to_collection">Go to collection</string>
+
+    <!-- Movie info-->
+    <string name="original_title">Original title</string>
+    <string name="status">Status</string>
+    <string name="run_time">Run time</string>
+    <string name="original_language">Original language</string>
+    <string name="production_countries">Production countries</string>
+    <string name="certificate">Certificate</string>
+    <string name="company">Company</string>
+    <string name="budge">Budget</string>
+    <string name="revenue">Revenue</string>
 </resources>

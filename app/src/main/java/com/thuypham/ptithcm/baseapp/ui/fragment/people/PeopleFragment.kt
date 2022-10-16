@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_people) {
 
     private val peopleViewModel: PeopleViewModel by viewModel()
-    private val peopleAdapter by lazy { PeopleAdapter().initPeopleAdapter(Glide.with(this), ::onPersonItemClick) }
+    private val peopleAdapter by lazy { PeopleAdapter().initPeopleAdapter(glide, ::onPersonItemClick) }
 
     private var title: String = ""
 

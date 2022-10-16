@@ -77,4 +77,6 @@ data class Video(
     val size: Int? = null,
     @SerializedName("type")
     val type: String? = null
-)
+){
+    fun getImagePath() = "https://img.youtube.com/vi/$key/0.jpg"
+}

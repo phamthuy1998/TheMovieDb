@@ -1,6 +1,5 @@
 package com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail
 
-import com.thuypham.ptithcm.baseapp.ui.fragment.movie.MovieListBaseFragment
 import com.thuypham.ptithcm.baseapp.ui.fragment.movie.list.MoviePagedListBaseFragment
 import com.thuypham.ptithcm.baseapp.util.NavConstant
 import com.thuypham.ptithcm.baseapp.viewmodel.MovieViewModel

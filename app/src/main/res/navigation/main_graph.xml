@@ -27,7 +27,7 @@
         tools:layout="@layout/fragment_watchlist" />
     <fragment
         android:id="@+id/movieCategoryFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.MovieCategoryFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.list.MovieCategoryFragment"
         android:label="MovieCategoryFragment"
         tools:layout="@layout/fragment_movie_category" />
     <fragment

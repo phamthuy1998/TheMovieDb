@@ -4,7 +4,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.ui.dialog.ImageDetailDialogFragment
-import com.thuypham.ptithcm.baseapp.ui.fragment.movie.MovieCategoryFragment
+import com.thuypham.ptithcm.baseapp.ui.fragment.movie.list.MovieCategoryFragment
 import com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieDetailFragment
 import com.thuypham.ptithcm.baselib.base.extension.navigateTo
 import com.thuypham.ptithcm.data.remote.response.Movie
@@ -37,7 +37,7 @@ fun Fragment.navigateToMovieDetail(movie: Movie) {
             })
             .commit()
     } else {
-        navigateTo(R.id.movieDatailFragment, bundle = bundleOf(NavConstant.MOVIE_ID to movie, NavConstant.MOVIE_ID to movie.id))
+        navigateTo(R.id.movieDatailFragment, bundle = bundleOf(NavConstant.MOVIE to movie, NavConstant.MOVIE_ID to movie.id))
 
     }
 }

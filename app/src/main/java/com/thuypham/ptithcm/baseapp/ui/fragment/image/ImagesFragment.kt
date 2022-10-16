@@ -15,7 +15,7 @@ import com.thuypham.ptithcm.baseapp.util.NavConstant
 class ImagesFragment : BaseFragment<FragmentImagesBinding>(R.layout.fragment_images) {
 
 
-    private val imageAdapter by lazy { ImageAdapter().initImageAdapter(::onImageClick, Glide.with(this)) }
+    private val imageAdapter by lazy { ImageAdapter().initImageAdapter(::onImageClick, glide) }
     private var listImagePath: List<String>? = null
 
     override fun setupFirst() {

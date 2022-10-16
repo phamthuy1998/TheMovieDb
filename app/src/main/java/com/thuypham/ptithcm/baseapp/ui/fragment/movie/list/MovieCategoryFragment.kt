@@ -1,4 +1,4 @@
-package com.thuypham.ptithcm.baseapp.ui.fragment.movie
+package com.thuypham.ptithcm.baseapp.ui.fragment.movie.list
 
 import androidx.core.view.isVisible
 import androidx.paging.CombinedLoadStates
@@ -34,7 +34,7 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
     private val movieViewModel: MovieCategoryViewModel by viewModel()
 
     private val movieAdapterGridView: BasePagedAdapter<Movie> by lazy {
-        MovieAdapter().initMovieAdapter(Glide.with(this)) { position ->
+        MovieAdapter().initMovieAdapter(glide) { position ->
             onItemMovieClick(
                 movieAdapterGridView.getItemAtPosition(position)
             )
@@ -46,7 +46,7 @@ class MovieCategoryFragment : BaseFragment<FragmentMovieCategoryBinding>(R.layou
     }
 
     private val movieAdapterLinear: BasePagedAdapter<Movie> by lazy {
-        MovieAdapterVertical().initMovieAdapter(Glide.with(this)) { position ->
+        MovieAdapterVertical().initMovieAdapter(glide) { position ->
             movieAdapterLinear.getItemAtPosition(
                 position
             )

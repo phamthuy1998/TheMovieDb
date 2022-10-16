@@ -15,7 +15,7 @@ class ProgressDialog {
             dialog.setContentView(inflate)
 //            dialog.setCancelable(false)
             dialog.setCanceledOnTouchOutside(false)
-            dialog.window!!.setBackgroundDrawable(
+            dialog.window?.setBackgroundDrawable(
                 ColorDrawable(Color.TRANSPARENT)
             )
             return dialog

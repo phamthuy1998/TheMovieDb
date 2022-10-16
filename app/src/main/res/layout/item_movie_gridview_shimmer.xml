@@ -15,13 +15,13 @@
             app:layout_constraintDimensionRatio="1:1.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:riv_corner_radius="8dp" />
+            app:riv_corner_radius="@dimen/itemMovieCorner" />
 
         <View
             android:id="@+id/tvMovieName"
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:layout_marginTop="@dimen/x_mall_padding"
+            android:layout_marginTop="@dimen/x_small_padding"
             android:background="@color/color_shimmer_item"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ivMovie" />
@@ -29,7 +29,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="12dp"
-            android:layout_marginTop="@dimen/x_mall_padding"
+            android:layout_marginTop="@dimen/x_small_padding"
             android:layout_marginEnd="40dp"
             android:background="@color/color_shimmer_item"
             app:layout_constraintStart_toStartOf="parent"
