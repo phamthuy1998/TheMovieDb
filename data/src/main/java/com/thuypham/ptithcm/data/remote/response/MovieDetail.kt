@@ -11,7 +11,7 @@ data class MovieDetail(
     @SerializedName("belongs_to_collection")
     val belongsToCollection: Collection? = null,
     @SerializedName("budget")
-    val budget: Int = 0,
+    val budget: Long = 0,
     @SerializedName("genres")
     val genres: List<Genre> = listOf(),
     @SerializedName("homepage")
@@ -37,7 +37,7 @@ data class MovieDetail(
     @SerializedName("release_date")
     val releaseDate: String = "",
     @SerializedName("revenue")
-    val revenue: Int = 0,
+    val revenue: Long = 0,
     @SerializedName("runtime")
     val runtime: Int = 0,
     @SerializedName("spoken_languages")
@@ -58,19 +58,20 @@ data class MovieDetail(
     fun getProductionCountries(): String {
         var result = ""
         productionCountries.forEachIndexed { index, productionCountry ->
-            result += productionCountry
-            if (index > productionCountries.size - 1) {
-                result += ","
+            result += productionCountry.name
+            if (index < productionCountries.size - 1) {
+                result += ", \n"
             }
         }
         return result
     }
+
     fun getProductionCompany(): String {
         var result = ""
         productionCompanies.forEachIndexed { index, productionCompany ->
-            result += productionCompany
-            if (index > productionCompanies.size - 1) {
-                result += ","
+            result += productionCompany.name
+            if (index < productionCompanies.size - 1) {
+                result += ", \n"
             }
         }
         return result

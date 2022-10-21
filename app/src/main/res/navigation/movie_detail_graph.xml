@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/movieDetailFragment"
+    android:id="@+id/movie_detail_graph">
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieDetailFragment"
+        android:label="MovieDetailFragment"
+        tools:layout="@layout/fragment_movie_detail" />
+
+    <fragment
+        android:id="@+id/movieVideoDetailFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieVideoFragment"
+        android:label="TrailerFragment"
+        tools:layout="@layout/fragment_movie_video" />
+
+    <fragment
+        android:id="@+id/movieAboutFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieAboutFragment"
+        android:label="MovieAboutFragment"
+        tools:layout="@layout/fragment_movie_about" />
+
+    <fragment
+        android:id="@+id/movieCastFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieCastFragment"
+        android:label="MovieAboutFragment"
+        tools:layout="@layout/fragment_movie_cast" />
+
+    <fragment
+        android:id="@+id/movieCommentFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieCommentFragment"
+        android:label="MovieCommentFragment"
+        tools:layout="@layout/fragment_movie_comment" />
+
+    <fragment
+        android:id="@+id/movieReviewFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieReviewFragment"
+        android:label="MovieReviewFragment"
+        tools:layout="@layout/fragment_movie_review" />
+
+    <fragment
+        android:id="@+id/recommendationFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.RecommendationsMovieFragment"
+        android:label="RecommendationsMovieFragment"
+        tools:layout="@layout/fragment_movie_list" />
+
+    <fragment
+        android:id="@+id/similarFragment"
+        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.SimilarMovieFragment"
+        android:label="SimilarMovieFragment"
+        tools:layout="@layout/fragment_movie_list" />
+</navigation>

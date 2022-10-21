@@ -9,19 +9,16 @@ import com.thuypham.ptithcm.baseapp.databinding.ItemMovieInfoBinding
 import com.thuypham.ptithcm.baseapp.extension.loadImage
 import com.thuypham.ptithcm.baseapp.ui.adapter.MovieGenreAdapter
 import com.thuypham.ptithcm.baseapp.viewmodel.MovieViewModel
-import com.thuypham.ptithcm.baselib.base.extension.logD
-import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
-import com.thuypham.ptithcm.baselib.base.extension.show
-import com.thuypham.ptithcm.baselib.base.extension.toMovieDuration
+import com.thuypham.ptithcm.baselib.base.extension.*
 import com.thuypham.ptithcm.data.remote.response.MovieDetail
 import com.thuypham.ptithcm.data.remote.response.MovieImage
 import com.thuypham.ptithcm.data.remote.response.MovieVideo
 import com.thuypham.ptithcm.data.remote.response.Video
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.navigation.koinNavGraphViewModel
 
 class MovieAboutFragment : BaseFragment<FragmentMovieAboutBinding>(R.layout.fragment_movie_about) {
 
-    private val movieViewModel: MovieViewModel by sharedViewModel()
+    private val movieViewModel: MovieViewModel by koinNavGraphViewModel(R.id.movie_detail_graph)
     private var isCollapse = true
 
     private val trailerAdapter by lazy { TrailerAdapter().setupAdapter(glide, ::onItemTrailerClick) }
@@ -51,7 +48,7 @@ class MovieAboutFragment : BaseFragment<FragmentMovieAboutBinding>(R.layout.frag
 
     private fun onDetailMovieResponse(movie: MovieDetail) {
         logD("onDetailMovieResponse")
-        movieViewModel.getMovieVideo(movie.id)
+        movieViewModel.getMovieVideo()
 
         binding.run {
             tvOverView.text = movie.overview
@@ -87,12 +84,11 @@ class MovieAboutFragment : BaseFragment<FragmentMovieAboutBinding>(R.layout.frag
         result.add(Pair(getString(R.string.original_title), movie.originalTitle))
         result.add(Pair(getString(R.string.status), movie.status))
         result.add(Pair(getString(R.string.run_time), movie.runtime.toMovieDuration(requireContext())))
-        result.add(Pair(getString(R.string.original_language), movie.originalLanguage))
+        result.add(Pair(getString(R.string.original_language), movie.spokenLanguages.findLast { it.iso6391 == movie.originalLanguage }?.englishName ?: ""))
         result.add(Pair(getString(R.string.production_countries), movie.getProductionCountries()))
-//        result.add(Pair(getString(R.string.certificate), movie.cer))
         result.add(Pair(getString(R.string.company), movie.getProductionCompany()))
-        result.add(Pair(getString(R.string.budge), movie.budget.toString()))
-        result.add(Pair(getString(R.string.revenue), movie.revenue.toString()))
+        result.add(Pair(getString(R.string.budge), movie.budget.getCurrency()))
+        result.add(Pair(getString(R.string.revenue), movie.revenue.getCurrency()))
         return result
     }
 

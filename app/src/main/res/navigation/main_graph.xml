@@ -41,20 +41,7 @@
         android:label="PeopleFragment"
         tools:layout="@layout/fragment_people" />
 
-    <fragment
-        android:id="@+id/movieDatailFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieDetailFragment"
-        android:label="MovieDetailFragment"
-        tools:layout="@layout/fragment_movie_detail" />
-
-
-    <fragment
-        android:id="@+id/movieVideoDetailFragment"
-        android:name="com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.MovieVideoFragment"
-        android:label="TrailerFragment"
-        tools:layout="@layout/fragment_movie_video" />
-
-
     <include app:graph="@navigation/person_graph" />
+    <include app:graph="@navigation/movie_detail_graph" />
 
 </navigation>

@@ -14,13 +14,14 @@ import com.thuypham.ptithcm.baselib.base.extension.logD
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.data.remote.response.MovieDetail
 import com.thuypham.ptithcm.data.remote.response.MovieImage
+import org.koin.androidx.navigation.koinNavGraphViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 abstract class BaseDetailFragment<T : ViewDataBinding>(layoutId: Int) : BaseFragment<T>(layoutId) {
 
     protected var movieId: Int = 0
     protected var movieDetail: MovieDetail? = null
-    protected val movieViewModel: MovieViewModel by sharedViewModel()
+    protected val movieViewModel: MovieViewModel by koinNavGraphViewModel(R.id.movie_detail_graph)
 
     private lateinit var pagerAdapter: MovieDetailPagerAdapter
     private val tabTitles by lazy {

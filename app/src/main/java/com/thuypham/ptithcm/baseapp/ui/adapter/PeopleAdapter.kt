@@ -7,6 +7,7 @@ import com.thuypham.ptithcm.baseapp.databinding.ItemPeopleBinding
 import com.thuypham.ptithcm.baseapp.extension.loadImage
 import com.thuypham.ptithcm.baselib.base.base.BaseItemDiffUtilCallback
 import com.thuypham.ptithcm.baselib.base.base.BasePagedAdapter
+import com.thuypham.ptithcm.baselib.base.extension.logD
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 import com.thuypham.ptithcm.data.remote.response.Person
 import com.thuypham.ptithcm.data.util.ApiHelper
@@ -26,6 +27,7 @@ class PeopleAdapter {
                 }
             },
             bindViewFunc = { binding, item, _ ->
+                logD("bindViewFunc")
                 item as Person
                 binding as ItemPeopleBinding
                 binding.run {

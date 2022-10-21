@@ -30,4 +30,5 @@ interface MovieRepository {
     suspend fun getMovieImages(movieID: Int): ResponseHandler<MovieImage>
 
     suspend fun getMovieVideo(movieID: Int): ResponseHandler<MovieVideo>
+    suspend fun getMovieCast(movieID: Int):  LiveData<PagingData<Person>>
 }

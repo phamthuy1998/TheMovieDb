@@ -2,7 +2,6 @@ package com.thuypham.ptithcm.baseapp.ui.fragment.people
 
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentPeopleBinding
@@ -11,6 +10,7 @@ import com.thuypham.ptithcm.baseapp.util.NavConstant
 import com.thuypham.ptithcm.baseapp.util.navigateToPersonDetail
 import com.thuypham.ptithcm.baseapp.viewmodel.PeopleViewModel
 import com.thuypham.ptithcm.baselib.base.extension.goBack
+import com.thuypham.ptithcm.baselib.base.extension.logD
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_people) {
@@ -59,7 +59,8 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_peo
     }
 
     override fun setupDataObserver() {
-        peopleViewModel.movieListPaging?.observe(viewLifecycleOwner) { person ->
+        peopleViewModel.peoplePaging?.observe(viewLifecycleOwner) { person ->
+            logD("peoplePaging: person: $person")
             hideLoading()
             peopleAdapter.submitData(lifecycle, person)
         }

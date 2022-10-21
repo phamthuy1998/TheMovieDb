@@ -4,6 +4,7 @@ import android.content.Context
 import com.thuypham.ptithcm.baselib.R
 import org.joda.time.LocalDate
 import org.joda.time.Years
+import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -41,6 +42,13 @@ fun Int.toMovieDuration(context: Context): String {
 
 fun Long.getAge(): Int {
     return Years.yearsBetween(LocalDate(this), LocalDate()).years
+}
+
+
+fun Long.getCurrency(): String {
+    val currency = NumberFormat.getCurrencyInstance(Locale("en", "US"))
+    currency.maximumFractionDigits = 0
+    return currency.format(this)
 }
 
 fun String.toMillisecond(): Long? {

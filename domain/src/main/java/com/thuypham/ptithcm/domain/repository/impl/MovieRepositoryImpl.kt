@@ -170,4 +170,14 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
             }
         }
     }
+
+    override suspend fun getMovieCast(movieID: Int): LiveData<PagingData<Person>> {
+        return Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
+            pagingSourceFactory = {
+                GetMovieCastPagingSource(movieAPI, movieID)
+            }
+        ).liveData
+    }
+
 }

@@ -1,18 +1,16 @@
 package com.thuypham.ptithcm.baseapp.ui.adapter
 
-import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.google.android.youtube.player.internal.f
 import com.thuypham.ptithcm.baseapp.ui.fragment.movie.detail.*
 import com.thuypham.ptithcm.baseapp.ui.fragment.people.PersonTVShowFragment
 import com.thuypham.ptithcm.baseapp.util.NavConstant
 
 
-class MovieDetailPagerAdapter(private val movieId : Int, fragment: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragment, lifecycle) {
+class MovieDetailPagerAdapter(private val movieId: Int, fragment: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragment, lifecycle) {
     companion object {
         const val pageSize = 6
     }
@@ -22,7 +20,7 @@ class MovieDetailPagerAdapter(private val movieId : Int, fragment: FragmentManag
     }
 
     override fun createFragment(position: Int): Fragment {
-        val fragment =  when (position) {
+        val fragment = when (position) {
             0 -> MovieAboutFragment()
             1 -> MovieCastFragment()
             2 -> MovieCommentFragment()

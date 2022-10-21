@@ -17,6 +17,7 @@ abstract class BaseRemotePagingSource<O : Any> : PagingSource<Int, O>() {
     init {
         logD("init -BaseRemotePagingSource")
     }
+
     companion object {
         const val DEFAULT_PAGE_INDEX = 1
     }
@@ -36,11 +37,21 @@ abstract class BaseRemotePagingSource<O : Any> : PagingSource<Int, O>() {
                 when (val response = wrapApiCall { createApiCall(page) }) {
                     is ResponseHandler.Success -> {
                         logD("thuyyyyyy -ResponseHandler.Success")
-                        LoadResult.Page(
-                            response.data.results ?: arrayListOf(),
-                            prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
-                            nextKey = if (response.data.results?.isNullOrEmpty() == true) null else page + 1
-                        )
+                        if (shouldCallDataOneTime) {
+                            logD("shouldCallDataOneTime")
+                            LoadResult.Page(
+                                response.data.results ?: arrayListOf(),
+                                prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
+                                nextKey = null
+                            )
+                        } else {
+                            LoadResult.Page(
+                                response.data.results ?: arrayListOf(),
+                                prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
+                                nextKey = if (response.data.results?.isEmpty() == true) null else page + 1
+                            )
+
+                        }
                     }
                     else -> {
                         logD("thuyyyyyy -ResponseHandler. else")
@@ -61,4 +72,5 @@ abstract class BaseRemotePagingSource<O : Any> : PagingSource<Int, O>() {
     }
 
     protected abstract suspend fun createApiCall(page: Int): Response<ListResponse<O>>
+    open var shouldCallDataOneTime = false
 }

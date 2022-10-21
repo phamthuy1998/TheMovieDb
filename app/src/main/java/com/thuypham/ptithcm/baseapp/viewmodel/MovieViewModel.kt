@@ -1,22 +1,16 @@
 package com.thuypham.ptithcm.baseapp.viewmodel
 
-import android.text.method.TextKeyListener.clear
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.thuypham.ptithcm.baseapp.di.viewModelModule
 import com.thuypham.ptithcm.baselib.base.base.BaseViewModel
 import com.thuypham.ptithcm.baselib.base.extension.logD
 import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
-import com.thuypham.ptithcm.data.remote.response.Movie
-import com.thuypham.ptithcm.data.remote.response.MovieDetail
-import com.thuypham.ptithcm.data.remote.response.MovieImage
-import com.thuypham.ptithcm.data.remote.response.MovieVideo
+import com.thuypham.ptithcm.data.remote.response.*
 import com.thuypham.ptithcm.domain.repository.MovieRepository
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.getViewModelFactory
 
 class MovieViewModel(private val movieRepository: MovieRepository) : BaseViewModel() {
 
@@ -30,6 +24,7 @@ class MovieViewModel(private val movieRepository: MovieRepository) : BaseViewMod
 
 
     var moviesResponse: LiveData<PagingData<Movie>> = MutableLiveData()
+    var movieCastData: LiveData<PagingData<Person>>? = null
 
     fun getMovieDetail(movieId: Int) = viewModelScope.launch {
         _movieDetail.value = movieRepository.getMovieDetail(movieId)
@@ -39,17 +34,22 @@ class MovieViewModel(private val movieRepository: MovieRepository) : BaseViewMod
         movieImages.value = movieRepository.getMovieImages(movieId)
     }
 
-    fun getMovieVideo(movieID: Int) = viewModelScope.launch {
+    fun getMovieVideo() = viewModelScope.launch {
         logD("getMovieVideo")
-        movieVideo.value = movieRepository.getMovieVideo(movieID)
+        movieVideo.value = movieRepository.getMovieVideo(movieId)
     }
 
-    fun getMovieRecommendation(movieId: Int) = viewModelScope.launch {
+    fun getMovieRecommendation() = viewModelScope.launch {
         moviesResponse = movieRepository.getMoviesRecommendationPaging(movieId).cachedIn(viewModelScope)
     }
 
-    fun getSimilarMovies(movieId: Int) = viewModelScope.launch {
+    fun getSimilarMovies() = viewModelScope.launch {
         moviesResponse = movieRepository.getSimilarMoviesPaging(movieId).cachedIn(viewModelScope)
+    }
+
+    fun getMovieCast() = viewModelScope.launch {
+        logD("getMovieCast: movieID: $movieId")
+        movieCastData = movieRepository.getMovieCast(movieId).cachedIn(viewModelScope)
     }
 
     fun clearData() {

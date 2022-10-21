@@ -37,7 +37,7 @@ fun Fragment.navigateToMovieDetail(movie: Movie) {
             })
             .commit()
     } else {
-        navigateTo(R.id.movieDatailFragment, bundle = bundleOf(NavConstant.MOVIE to movie, NavConstant.MOVIE_ID to movie.id))
+        navigateTo(R.id.movie_detail_graph, bundle = bundleOf(NavConstant.MOVIE to movie, NavConstant.MOVIE_ID to movie.id))
 
     }
 }

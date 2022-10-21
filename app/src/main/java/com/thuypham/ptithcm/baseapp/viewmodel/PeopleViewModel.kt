@@ -10,11 +10,11 @@ import com.thuypham.ptithcm.domain.repository.PeopleRepository
 import kotlinx.coroutines.launch
 
 class PeopleViewModel(private val peopleRepository: PeopleRepository) : BaseViewModel() {
-    var movieListPaging: LiveData<PagingData<Person>>? = null
+    var peoplePaging: LiveData<PagingData<Person>>? = null
 
     fun getPopularPeople() {
         viewModelScope.launch {
-            movieListPaging = peopleRepository.getPopularPeoplePaging().cachedIn(viewModelScope)
+            peoplePaging = peopleRepository.getPopularPeoplePaging().cachedIn(viewModelScope)
         }
     }
 }

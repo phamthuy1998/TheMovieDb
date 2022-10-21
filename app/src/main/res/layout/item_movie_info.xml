@@ -10,14 +10,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/small_padding">
+        android:paddingBottom="@dimen/padding_l">
 
         <TextView
             android:id="@+id/tvTitle"
             style="@style/TextPersonInfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
+            android:layout_weight="0.4"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
@@ -29,7 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/default_margin"
-            android:layout_weight="0.7"
+            android:layout_weight="0.6"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
