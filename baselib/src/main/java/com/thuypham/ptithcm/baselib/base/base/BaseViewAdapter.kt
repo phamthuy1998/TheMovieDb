@@ -24,6 +24,10 @@ class BaseViewAdapter<T : Any>(
         }
     }
 
+    fun getItemAtPosition(position: Int): T? {
+        return getItem(position)
+    }
+
     class ItemViewHolder(
         val mBinding: ViewDataBinding,
         private val bindFunc: ((binding: ViewDataBinding, item: Any, position: Int) -> Unit)? = null,

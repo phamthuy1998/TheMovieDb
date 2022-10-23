@@ -36,17 +36,17 @@ abstract class BaseRemotePagingSource<O : Any> : PagingSource<Int, O>() {
             withContext(Dispatchers.IO) {
                 when (val response = wrapApiCall { createApiCall(page) }) {
                     is ResponseHandler.Success -> {
-                        logD("thuyyyyyy -ResponseHandler.Success")
+                        logD("thuyyyyyy -ResponseHandler.Success - ${response.data.results}")
                         if (shouldCallDataOneTime) {
                             logD("shouldCallDataOneTime")
                             LoadResult.Page(
-                                response.data.results ?: arrayListOf(),
+                                response.data.results ?: throw NullPointerException(),
                                 prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
                                 nextKey = null
                             )
                         } else {
                             LoadResult.Page(
-                                response.data.results ?: arrayListOf(),
+                                response.data.results ?: throw NullPointerException(),
                                 prevKey = if (page == DEFAULT_PAGE_INDEX) null else page - 1,
                                 nextKey = if (response.data.results?.isEmpty() == true) null else page + 1
                             )
@@ -63,9 +63,11 @@ abstract class BaseRemotePagingSource<O : Any> : PagingSource<Int, O>() {
             }
         } catch (exception: IOException) {
             logD("thuyyyyyy -exception")
-
             return LoadResult.Error(exception)
         } catch (exception: HttpException) {
+            logD("thuyyyyyy -exception")
+            return LoadResult.Error(exception)
+        } catch (exception: Exception) {
             logD("thuyyyyyy -exception")
             return LoadResult.Error(exception)
         }

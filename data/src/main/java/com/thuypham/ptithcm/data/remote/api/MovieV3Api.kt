@@ -63,9 +63,8 @@ interface MovieV3Api {
     @GET("movie/{movie_id}/credits")
     suspend fun getMovieCast(
         @Path("movie_id") movieId: Int,
-        @Query("page") page: Int = 1,
         @Query("language") language: String = ApiHelper.getCurrentLanguage(),
-    ): Response<ListResponse<Person>>
+    ): Response<MovieCast>
 
 
     @GET("person/{person_id}")

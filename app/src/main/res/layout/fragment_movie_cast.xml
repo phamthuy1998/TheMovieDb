@@ -12,7 +12,6 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPeople"
             android:layout_width="match_parent"
-            android:background="@color/gray"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:orientation="vertical"
@@ -21,25 +20,25 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_people" />
 
-<!--        <ViewStub-->
-<!--            android:id="@+id/viewStubEmpty"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:gravity="center"-->
-<!--            android:inflatedId="@+id/viewStubEmpty"-->
-<!--            android:layout="@layout/layout_empty_data"-->
-<!--            android:orientation="vertical"-->
-<!--            app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+        <ViewStub
+            android:id="@+id/viewStubEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:inflatedId="@+id/viewStubEmpty"
+            android:layout="@layout/layout_empty_data"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-<!--        <ViewStub-->
-<!--            android:id="@+id/viewStubShimmer"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:gravity="center"-->
-<!--            android:inflatedId="@+id/viewStubShimmer"-->
-<!--            android:layout="@layout/layout_empty_data"-->
-<!--            android:orientation="vertical"-->
-<!--            app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+        <ViewStub
+            android:id="@+id/viewStubShimmer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:inflatedId="@+id/viewStubShimmer"
+            android:layout="@layout/layout_empty_data"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -24,7 +24,7 @@ class MovieViewModel(private val movieRepository: MovieRepository) : BaseViewMod
 
 
     var moviesResponse: LiveData<PagingData<Movie>> = MutableLiveData()
-    var movieCastData: LiveData<PagingData<Person>>? = null
+    var movieCastData: MutableLiveData<ResponseHandler<MovieCast>> = MutableLiveData(ResponseHandler.Loading)
 
     fun getMovieDetail(movieId: Int) = viewModelScope.launch {
         _movieDetail.value = movieRepository.getMovieDetail(movieId)
@@ -49,7 +49,7 @@ class MovieViewModel(private val movieRepository: MovieRepository) : BaseViewMod
 
     fun getMovieCast() = viewModelScope.launch {
         logD("getMovieCast: movieID: $movieId")
-        movieCastData = movieRepository.getMovieCast(movieId).cachedIn(viewModelScope)
+        movieCastData.value = movieRepository.getMovieCast(movieId)
     }
 
     fun clearData() {
