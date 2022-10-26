@@ -154,6 +154,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
                             /**/
                             /* hide top titles on toolbar*/
                             binding.tvTitleToolbar.visibility = View.INVISIBLE
+                            binding.ivBack.visibility = View.VISIBLE
+                            binding.icBack.visibility = View.INVISIBLE
                             binding.backgroundToolbar.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.transparent))
                         }
                         TO_COLLAPSED -> {
@@ -168,6 +170,8 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
                                 alpha = 0F
                                 animate().setDuration(500).alpha(1.0f)
                             }
+                            binding.ivBack.visibility = View.INVISIBLE
+                            binding.icBack.visibility = View.VISIBLE
                         }
                     }
                     cashCollapseState = Pair(first, SWITCHED)
@@ -209,6 +213,9 @@ class PersonDetailFragment : BaseFragment<FragmentPersonDetailBinding>(R.layout.
     override fun setupToolbar() {
         super.setupToolbar()
         binding.icBack.setOnSingleClickListener {
+            goBack()
+        }
+        binding.ivBack.setOnSingleClickListener {
             goBack()
         }
     }

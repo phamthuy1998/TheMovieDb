@@ -18,6 +18,7 @@ class MovieCastFragment : BaseFragment<FragmentMovieCastBinding>(R.layout.fragme
 
     private fun onPersonItemClick(position: Int) {
         val person = peopleAdapter.getItemAtPosition(position)
+        logD("onPersonItemClick-person: $person")
         navigateToPersonDetail(person = person)
     }
 
