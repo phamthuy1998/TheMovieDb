@@ -11,6 +11,13 @@ class SimilarMovieFragment : MoviePagedListBaseFragment() {
 
     private val movieViewModel: MovieViewModel by koinNavGraphViewModel(R.id.movie_detail_graph)
 
+    override val emptyMessage: Pair<String, String> by lazy {
+        Pair(
+            getString(R.string.empty_msg, getString(R.string.movie_tab_layout_similar)),
+            getString(R.string.empty_msg_detail, getString(R.string.movie_tab_layout_similar))
+        )
+    }
+
     override fun getData() {
         movieViewModel.getSimilarMovies()
     }

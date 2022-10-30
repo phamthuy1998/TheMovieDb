@@ -24,9 +24,8 @@
             android:id="@+id/layoutEmpty"
             layout="@layout/layout_empty_data"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:visibility="gone"
-            app:isPersonEmptyData="@{true}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <include

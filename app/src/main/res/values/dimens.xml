@@ -10,6 +10,7 @@
     <dimen name="small_padding">8dp</dimen>
     <dimen name="x_small_padding">4dp</dimen>
     <dimen name="margin24">24dp</dimen>
+    <dimen name="margin32">32dp</dimen>
 
     <dimen name="item_home_movie_width">120dp</dimen>
     <dimen name="item_home_movie_height">180dp</dimen>

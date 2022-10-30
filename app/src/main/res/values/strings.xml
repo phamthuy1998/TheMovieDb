@@ -63,4 +63,7 @@
 
     <string name="see_more">See more</string>
 
+    <string name="empty_msg">No %1s</string>
+    <string name="empty_msg_detail">We could not find any %1s for this item.</string>
+
 </resources>

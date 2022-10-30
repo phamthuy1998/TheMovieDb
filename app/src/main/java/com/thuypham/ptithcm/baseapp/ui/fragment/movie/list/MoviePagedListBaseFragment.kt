@@ -23,6 +23,7 @@ import org.koin.android.ext.android.inject
 abstract class MoviePagedListBaseFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragment_movie_list) {
 
     private val sharedPrf: IStorage by inject()
+    protected open val emptyMessage: Pair<String, String> by lazy { Pair("", "") }
 
     private val movieAdapterGridView: BasePagedAdapter<Movie> by lazy {
         MovieAdapter().initMovieAdapter(glide) { position ->
@@ -52,23 +53,43 @@ abstract class MoviePagedListBaseFragment : BaseFragment<FragmentMovieListBindin
 
     override fun setupView() {
         updateShimmer(true)
+        setupRecyclerViewByType()
+
+        binding.layoutEmpty.apply {
+            tvEmptyMessage.text = emptyMessage.first
+            tvEmptyMessageDescription.text = emptyMessage.second
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        removeLoadStateListener()
+        addLoadStateListener()
+    }
+
+    private fun addLoadStateListener() {
         movieAdapterGridView.addLoadStateListener(loadStateListener)
         movieAdapterLinear.addLoadStateListener(loadStateListener)
+    }
 
-        setupRecyclerViewByType()
+    private fun removeLoadStateListener() {
+        movieAdapterGridView.removeLoadStateListener(loadStateListener)
+        movieAdapterLinear.removeLoadStateListener(loadStateListener)
     }
 
     private val loadStateListener: (CombinedLoadStates) -> Unit = object : Function1<CombinedLoadStates, Unit> {
         override fun invoke(loadStates: CombinedLoadStates) {
             binding.apply {
+                if (loadStates.append.endOfPaginationReached) {
+                    showEmptyData(movieAdapterGridView.itemCount < 1 && movieAdapterLinear.itemCount < 1)
+                }
                 when (loadStates.refresh) {
                     is LoadState.NotLoading -> {
                         updateShimmer(false)
                     }
-                    LoadState.Loading -> {
+                    is LoadState.Loading -> {
                         updateShimmer(true)
                     }
-
                     is LoadState.Error -> {
                         updateShimmer(false)
                         showEmptyData(true)
@@ -151,17 +172,9 @@ abstract class MoviePagedListBaseFragment : BaseFragment<FragmentMovieListBindin
         }
     }
 
-    private fun getIconResource(): Int {
-        return if (isRecyclerviewGridLayout) R.drawable.ic_linearlayout_list else R.drawable.ic_gridview_list
-    }
-
-
     override fun clearData() {
         super.clearData()
         binding.rvMovies.adapter = null
-        movieAdapterGridView.removeLoadStateListener(loadStateListener)
-        movieAdapterLinear.removeLoadStateListener(loadStateListener)
+       removeLoadStateListener()
     }
-
-
 }
