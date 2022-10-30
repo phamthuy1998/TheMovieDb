@@ -28,7 +28,7 @@ abstract class BaseDetailFragment<T : ViewDataBinding>(layoutId: Int) : BaseFrag
         arrayListOf(
             getString(R.string.movie_tab_layout_about),
             getString(R.string.movie_tab_layout_cast),
-            getString(R.string.movie_tab_layout_comment),
+//            getString(R.string.movie_tab_layout_comment),
             getString(R.string.movie_tab_layout_review),
             getString(R.string.movie_tab_layout_recommendations),
             getString(R.string.movie_tab_layout_similar),

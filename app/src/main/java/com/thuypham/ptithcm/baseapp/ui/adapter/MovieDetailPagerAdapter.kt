@@ -12,7 +12,7 @@ import com.thuypham.ptithcm.baseapp.util.NavConstant
 
 class MovieDetailPagerAdapter(private val movieId: Int, fragment: FragmentManager, lifecycle: Lifecycle) : FragmentStateAdapter(fragment, lifecycle) {
     companion object {
-        const val pageSize = 6
+        const val pageSize = 5
     }
 
     override fun getItemCount(): Int {
@@ -23,10 +23,10 @@ class MovieDetailPagerAdapter(private val movieId: Int, fragment: FragmentManage
         val fragment = when (position) {
             0 -> MovieAboutFragment()
             1 -> MovieCastFragment()
-            2 -> MovieCommentFragment()
-            3 -> MovieReviewFragment()
-            4 -> RecommendationsMovieFragment()
-            5 -> SimilarMovieFragment()
+//            2 -> MovieCommentFragment()
+            2 -> MovieReviewFragment()
+            3 -> RecommendationsMovieFragment()
+            4 -> SimilarMovieFragment()
             else -> {
                 PersonTVShowFragment()
             }
