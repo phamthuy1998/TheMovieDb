@@ -16,29 +16,9 @@
             android:clipToPadding="false"
             android:orientation="vertical"
             android:paddingVertical="@dimen/default_margin"
-            android:paddingStart="@dimen/grid_item_decoration"
+            android:paddingHorizontal="@dimen/grid_item_decoration"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_people" />
-
-        <ViewStub
-            android:id="@+id/viewStubEmpty"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:inflatedId="@+id/viewStubEmpty"
-            android:layout="@layout/layout_empty_data"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-        <ViewStub
-            android:id="@+id/viewStubShimmer"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:inflatedId="@+id/viewStubShimmer"
-            android:layout="@layout/layout_empty_data"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

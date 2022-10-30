@@ -179,4 +179,15 @@ class MovieRepositoryImpl(private val movieAPI: MovieV3Api) : MovieRepository {
         }
     }
 
+    override suspend fun getMovieReview(movieID: Int): LiveData<PagingData<Review>> {
+        return Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = Constant.DEFAULT_PAGE_SIZE),
+            initialKey = 1,
+            pagingSourceFactory = {
+                GetReviewMoviePagingSource(movieAPI, movieID)
+            }
+        ).liveData
+
+    }
+
 }

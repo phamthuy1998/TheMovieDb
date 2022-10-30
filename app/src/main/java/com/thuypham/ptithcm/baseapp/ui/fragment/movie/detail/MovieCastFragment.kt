@@ -23,6 +23,7 @@ class MovieCastFragment : BaseFragment<FragmentMovieCastBinding>(R.layout.fragme
     }
 
     override fun setupView() {
+        showLoading()
         setupRecyclerView()
     }
 
@@ -36,12 +37,12 @@ class MovieCastFragment : BaseFragment<FragmentMovieCastBinding>(R.layout.fragme
 
     override fun getData() {
         logD("get data")
-        showLoading()
         movieViewModel.getMovieCast()
     }
 
     override fun setupDataObserver() {
         movieViewModel.movieCastData.observerData { person ->
+            hideLoading()
             peopleAdapter.submitList(person.cast)
         }
     }

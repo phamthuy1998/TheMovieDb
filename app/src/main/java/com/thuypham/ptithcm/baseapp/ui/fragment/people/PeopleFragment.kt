@@ -33,11 +33,11 @@ class PeopleFragment : BaseFragment<FragmentPeopleBinding>(R.layout.fragment_peo
     }
 
     override fun getData() {
-        showLoading()
         peopleViewModel.getPopularPeople()
     }
 
     override fun setupView() {
+        showLoading()
         setupRecyclerView()
     }
 

@@ -6,7 +6,6 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentMovieListBinding
@@ -27,17 +26,13 @@ abstract class MoviePagedListBaseFragment : BaseFragment<FragmentMovieListBindin
 
     private val movieAdapterGridView: BasePagedAdapter<Movie> by lazy {
         MovieAdapter().initMovieAdapter(glide) { position ->
-            onItemMovieClick(
-                movieAdapterGridView.getItemAtPosition(position)
-            )
+            onItemMovieClick(movieAdapterGridView.getItemAtPosition(position))
         }
     }
 
     private val movieAdapterLinear: BasePagedAdapter<Movie> by lazy {
         MovieAdapterVertical().initMovieAdapter(glide) { position ->
-            movieAdapterLinear.getItemAtPosition(
-                position
-            )
+            onItemMovieClick(movieAdapterLinear.getItemAtPosition(position))
         }
     }
 

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="review"
+            type="com.thuypham.ptithcm.data.remote.response.Review" />
+
+        <variable
+            name="adapter"
+            type="com.thuypham.ptithcm.baseapp.ui.adapter.MovieReviewAdapter" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/default_margin"
+        android:background="@drawable/bg_round_corner"
+        android:backgroundTint="@color/grayEEEEEE"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_l">
+
+        <TextView
+            android:id="@+id/tvAuthorName"
+            style="@style/TextTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:text="@{review.author}"
+            tools:text="Author's name" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvRate"
+                style="@style/TextItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:drawablePadding="@dimen/x_small_padding"
+                android:text="@{String.valueOf(review.authorDetails.rating)}"
+                android:textColor="@color/colorBlue"
+                app:drawableStartCompat="@drawable/ic_star"
+                tools:text="7.0" />
+
+            <TextView
+                android:id="@+id/tvTime"
+                style="@style/TextItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="@dimen/default_margin"
+                android:drawablePadding="@dimen/x_small_padding"
+                android:textColor="@color/textColor1Shadow"
+                app:dateTimeText="@{review.createdAt}"
+                tools:text="22/2/2021" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvContentReview"
+            style="@style/TextPersonInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:ellipsize="end"
+            android:maxLines="7"
+            android:textColorLink="@color/colorBlue"
+            app:linkClickAbleText="@{review.content}"
+            app:selectableBackground="@{true}"
+            tools:text="Content review" />
+
+        <TextView
+            android:id="@+id/tvReadMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/x_small_padding"
+            android:text="@string/show_more"
+            android:textColor="@color/colorBlue"
+            android:visibility="@{review.content.length() > 200 ?  View.VISIBLE : View.GONE}"
+            app:selectableBackground="@{true}"
+            tools:visibility="visible" />
+    </LinearLayout>
+</layout>

@@ -51,4 +51,6 @@
     <color name="color_img_shadow">#6C6C6C</color>
 
     <color name="colorGray50">#801C1C1C</color>
+    <color name="colorBlue">#1B68A5</color>
+    <color name="grayEEEEEE">#EEEEEE</color>
 </resources>

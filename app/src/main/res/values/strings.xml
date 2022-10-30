@@ -23,6 +23,7 @@
         ]]>
     </string>
     <string name="show_more">Show more</string>
+    <string name="read_more">Read more</string>
     <string name="onePoster">1 poster</string>
     <string name="posters">%d posters</string>
     <string name="oneBackdrop">1 backdrop</string>
@@ -59,4 +60,7 @@
     <string name="company">Company</string>
     <string name="budge">Budget</string>
     <string name="revenue">Revenue</string>
+
+    <string name="see_more">See more</string>
+
 </resources>

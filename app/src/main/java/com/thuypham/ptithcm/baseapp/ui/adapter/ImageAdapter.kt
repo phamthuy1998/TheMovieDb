@@ -15,9 +15,6 @@ import com.thuypham.ptithcm.data.util.ApiHelper
 class ImageAdapter {
     fun initImageAdapter(onItemClick: (item: String) -> Unit, glide: RequestManager): BaseViewAdapter<String> {
         return BaseViewAdapter(
-            getItemViewTypeFunc = {
-                R.layout.item_image
-            },
             onCreateViewHolderFunc = { viewGroup, _ ->
                 val inflater = LayoutInflater.from(viewGroup.context)
                 ItemImageBinding.inflate(inflater, viewGroup, false)

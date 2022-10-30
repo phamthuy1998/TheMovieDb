@@ -1,6 +1,61 @@
 package com.thuypham.ptithcm.baseapp.util
 
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.Guideline
-
+import android.text.TextUtils
+import android.text.method.LinkMovementMethod
+import android.util.TypedValue
+import android.view.View
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.thuypham.ptithcm.baseapp.R
+import com.thuypham.ptithcm.baselib.base.extension.milliSecondToDateFormat
+import com.thuypham.ptithcm.baselib.base.extension.toMillisecond
+
+
+@BindingAdapter("app:isEnableMarqueeForever")
+fun isEnableMarqueeForever(view: TextView, isEnable: Boolean) {
+    if (isEnable) {
+        view.apply {
+            ellipsize = TextUtils.TruncateAt.MARQUEE
+            marqueeRepeatLimit = -1
+            isSingleLine = true
+            isSelected = true
+        }
+    }
+}
+
+@BindingAdapter("app:dateTimeText")
+fun dateTimeText(view: TextView, dateTimeText: String) {
+    view.text = dateTimeText.toMillisecond()?.milliSecondToDateFormat()
+}
+
+@BindingAdapter("app:linkClickAbleText")
+fun linkClickAbleText(textView: TextView, linkClickAbleText: String) {
+    textView.text = linkClickAbleText
+    TextViewHelper.autoLink(textView, object : TextViewHelper.OnClickListener {
+        override fun onLinkClicked(link: String?) {
+
+        }
+    })
+}
+
+@BindingAdapter("app:maxShowLine")
+fun isShowTVShowMore(textView: TextView,  maxShowLine: Int) {
+    //textView.context.getString(R.string.show_less)
+    TextViewHelper.makeTextViewResizable(textView, maxShowLine,
+        textView.context.getString(R.string.show_more), true)
+}
+
+@BindingAdapter("selectableBackground")
+fun selectableBackground(view: View, selectableBackground: Boolean) {
+    if (selectableBackground) {
+        view.apply {
+            isClickable = true
+            isFocusable = true
+            with(TypedValue()) {
+                context.theme.resolveAttribute(android.R.attr.selectableItemBackground, this, true)
+                setBackgroundResource(resourceId)
+            }
+        }
+    }
+}
+

@@ -71,10 +71,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/item_home_movie_width"
-                        android:ellipsize="marquee"
+                        android:ellipsize="end"
                         android:fadingEdge="horizontal"
-                        android:marqueeRepeatLimit="marquee_forever"
-                        android:maxLines="2"
                         android:paddingStart="@dimen/default_margin_xl"
                         android:paddingTop="@dimen/default_margin_l"
                         android:paddingEnd="@dimen/default_padding"
@@ -144,10 +142,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/default_margin"
-                            android:ellipsize="marquee"
+                            app:isEnableMarqueeForever="@{true}"
                             android:fadingEdge="horizontal"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:singleLine="true"
                             tools:text="Title" />
 
                     </LinearLayout>
