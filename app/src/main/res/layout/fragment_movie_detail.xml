@@ -105,14 +105,6 @@
 
                 </LinearLayout>
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/ivBack"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:src="@drawable/ic_back_circle_light"
-                    app:layout_collapseMode="pin" />
-
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
@@ -133,6 +125,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="12dp"
+                            android:visibility="invisible"
                             android:padding="4dp"
                             android:src="@drawable/ic_back" />
 
@@ -149,6 +142,14 @@
                     </LinearLayout>
 
                 </androidx.appcompat.widget.Toolbar>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="12dp"
+                    android:src="@drawable/ic_back_circle_light"
+                    app:layout_collapseMode="pin" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
