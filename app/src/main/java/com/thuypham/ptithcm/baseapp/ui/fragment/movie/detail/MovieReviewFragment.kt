@@ -41,6 +41,5 @@ class MovieReviewFragment : BaseFragment<FragmentMovieReviewBinding>(R.layout.fr
         movieViewModel.errorLiveData.observe(viewLifecycleOwner) {
             showSnackBar(it.message)
         }
-
     }
 }

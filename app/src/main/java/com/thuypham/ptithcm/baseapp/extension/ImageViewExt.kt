@@ -15,23 +15,35 @@ fun Fragment.loadImage(imageView: ImageView, imagePath: String?, shouldShowDefau
     imageView.loadImage(Glide.with(this), imagePath, shouldShowDefaultImg)
 }
 
+fun ImageView.loadImage(glide: RequestManager, imageResource: Int) {
+    glide.load(imageResource).into(this)
+}
 
-fun ImageView.loadImage(glide: RequestManager, imagePath: String?, shouldShowDefaultImg: Boolean = true, isYoutubeImage: Boolean = false) {
+fun ImageView.loadImage(
+    glide: RequestManager, imagePath: String?,
+    shouldShowDefaultImg: Boolean = true,
+    isYoutubeImage: Boolean = false,
+    defaultImage: Int? = null
+) {
     if (imagePath.isNullOrEmpty()) {
         if (shouldShowDefaultImg)
-            glide.load(R.drawable.ic_image_placeholder)
+            glide.load(defaultImage ?: R.drawable.ic_image_placeholder)
                 .centerInside()
                 .dontAnimate()
                 .into(this)
     } else {
+        val url = if (isYoutubeImage) imagePath
+        else if (imagePath.contains("https")) imagePath.removePrefix("/")
+        else ApiHelper.getImagePath(imagePath)
+
         if (shouldShowDefaultImg)
-            glide.load(if (isYoutubeImage) imagePath else ApiHelper.getImagePath(imagePath))
+            glide.load(url)
                 .centerInside()
-                .placeholder(R.drawable.ic_image_placeholder)
+                .placeholder(defaultImage ?: R.drawable.ic_image_placeholder)
                 .format(DecodeFormat.PREFER_RGB_565)
                 .dontAnimate()
                 .into(this)
-        else glide.load(if (isYoutubeImage) imagePath else ApiHelper.getImagePath(imagePath))
+        else glide.load(url)
             .centerInside()
             .format(DecodeFormat.PREFER_RGB_565)
             .dontAnimate()

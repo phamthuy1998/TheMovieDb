@@ -62,4 +62,5 @@
     <dimen name="itemTrailerWidth">240dp</dimen>
     <dimen name="itemTrailerHeight">130dp</dimen>
     <dimen name="item_title_trailer_height">20dp</dimen>
+    <dimen name="reviewAvtSize">46dp</dimen>
 </resources>

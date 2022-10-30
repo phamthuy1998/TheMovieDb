@@ -26,14 +26,30 @@
         android:orientation="vertical"
         android:padding="@dimen/padding_l">
 
-        <TextView
-            android:id="@+id/tvAuthorName"
-            style="@style/TextTitle"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="@{review.author}"
-            tools:text="Author's name" />
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivAvatar"
+                android:layout_width="@dimen/reviewAvtSize"
+                android:layout_height="@dimen/reviewAvtSize"
+                android:scaleType="centerCrop"
+                app:imageUrl="@{review.authorDetails.avatarPath}"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/tvAuthorName"
+                style="@style/TextTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/default_margin"
+                android:text="@{review.author}"
+                tools:text="Author's name" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -46,7 +62,6 @@
                 style="@style/TextItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:drawablePadding="@dimen/x_small_padding"
                 android:text="@{String.valueOf(review.authorDetails.rating)}"
                 android:textColor="@color/colorBlue"
@@ -58,7 +73,6 @@
                 style="@style/TextItemTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
                 android:layout_marginStart="@dimen/default_margin"
                 android:drawablePadding="@dimen/x_small_padding"
                 android:textColor="@color/textColor1Shadow"
