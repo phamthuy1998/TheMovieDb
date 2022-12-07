@@ -13,13 +13,14 @@ import com.thuypham.ptithcm.baselib.base.extension.*
 import com.thuypham.ptithcm.data.remote.response.Movie
 import com.thuypham.ptithcm.data.remote.response.MovieGenre
 import com.thuypham.ptithcm.data.remote.response.Person
+import org.koin.androidx.navigation.koinNavGraphViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
-    private val homeViewModel: HomeViewModel by viewModel()
+    private val homeViewModel: HomeViewModel by koinNavGraphViewModel(R.id.main_graph)
 
     private val homeAdapter by lazy {
         HomeCategoryAdapter().initHomeCategoryAdapter(::onCategoryClick, ::onChildItemClick, glide)
@@ -49,8 +50,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
 
     override fun setupView() {
         binding.run {
+            homeAdapter.hashmapScrollPosition = homeViewModel.hashmapScrollPosition
             rvMainHome.adapter = homeAdapter
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        homeViewModel.hashmapScrollPosition = homeAdapter.hashmapScrollPosition
     }
 
     private fun onCategoryClick(item: Any) {

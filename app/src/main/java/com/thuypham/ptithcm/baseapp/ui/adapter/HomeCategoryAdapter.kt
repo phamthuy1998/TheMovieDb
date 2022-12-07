@@ -1,9 +1,12 @@
 package com.thuypham.ptithcm.baseapp.ui.adapter
 
+import android.annotation.SuppressLint
+import android.os.Build
+import android.os.Parcelable
 import android.view.LayoutInflater
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestManager
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.databinding.ItemGenreBinding
@@ -24,6 +27,9 @@ import com.thuypham.ptithcm.data.remote.response.MovieGenre
 import com.thuypham.ptithcm.data.remote.response.Person
 
 class HomeCategoryAdapter {
+
+
+    @SuppressLint("NewApi")
     fun initHomeCategoryAdapter(
         onCategoryItemClick: (item: Any) -> Unit,
         onChildItemClick: (item: Any) -> Unit,
@@ -48,7 +54,7 @@ class HomeCategoryAdapter {
                     }
                 }
             },
-            bindViewFunc = { binding, item, _ ->
+            bindViewFuncWithScrollState = { binding, item, hashmapScrollPosition ->
                 item as HomeCategoryData
                 binding as ItemMoviesCategoryBinding
                 binding.run {
@@ -83,6 +89,17 @@ class HomeCategoryAdapter {
                         layoutParams.height = rvHeight
                     }
                     itemAdapter.submitList(item.listItems)
+
+
+                    // Save scroll position
+                    val state = hashmapScrollPosition[item.id]
+                    if (state != null) {
+                        rvItem.layoutManager?.onRestoreInstanceState(state)
+                    }
+
+                    rvItem.setOnScrollChangeListener { _, _, _, _, _ ->
+                        hashmapScrollPosition[item.id] = rvItem.layoutManager?.onSaveInstanceState()
+                    }
                 }
             },
             diffUtilCallback = {

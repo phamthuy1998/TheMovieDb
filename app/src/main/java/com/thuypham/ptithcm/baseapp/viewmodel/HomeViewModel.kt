@@ -1,6 +1,7 @@
 package com.thuypham.ptithcm.baseapp.viewmodel
 
 import android.content.Context
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -33,6 +34,7 @@ class HomeViewModel(
     private var homeCategoryItems: ArrayList<HomeCategoryData> = arrayListOf()
     private val _homeCategories = MutableLiveData<ArrayList<HomeCategoryData>>()
     val homeCategories: LiveData<ArrayList<HomeCategoryData>> = _homeCategories
+    var hashmapScrollPosition: HashMap<Int, Parcelable?> = hashMapOf()
 
     fun getAllDataHome(context: WeakReference<Context>) = viewModelScope.launch(Dispatchers.IO) {
 
