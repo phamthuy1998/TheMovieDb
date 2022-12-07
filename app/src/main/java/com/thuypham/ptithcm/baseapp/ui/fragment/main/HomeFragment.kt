@@ -1,20 +1,22 @@
 package com.thuypham.ptithcm.baseapp.ui.fragment.main
 
-import com.bumptech.glide.Glide
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.thuypham.ptithcm.baseapp.R
 import com.thuypham.ptithcm.baseapp.base.BaseFragment
 import com.thuypham.ptithcm.baseapp.databinding.FragmentHomeBinding
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryData
 import com.thuypham.ptithcm.baseapp.model.HomeCategoryType
 import com.thuypham.ptithcm.baseapp.ui.adapter.HomeCategoryAdapter
-import com.thuypham.ptithcm.baseapp.util.*
+import com.thuypham.ptithcm.baseapp.util.navigateToMovieDetail
+import com.thuypham.ptithcm.baseapp.util.navigateToMovieList
+import com.thuypham.ptithcm.baseapp.util.navigateToPeople
+import com.thuypham.ptithcm.baseapp.util.navigateToPersonDetail
 import com.thuypham.ptithcm.baseapp.viewmodel.HomeViewModel
 import com.thuypham.ptithcm.baselib.base.extension.*
 import com.thuypham.ptithcm.data.remote.response.Movie
 import com.thuypham.ptithcm.data.remote.response.MovieGenre
 import com.thuypham.ptithcm.data.remote.response.Person
 import org.koin.androidx.navigation.koinNavGraphViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.lang.ref.WeakReference
 
 
@@ -53,6 +55,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
             homeAdapter.hashmapScrollPosition = homeViewModel.hashmapScrollPosition
             rvMainHome.adapter = homeAdapter
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        homeViewModel.lastAdapterScrollPosition = (binding.rvMainHome.layoutManager as? LinearLayoutManager)?.findLastVisibleItemPosition()
+        logD("homeViewModel.lastAdapterScrollPosition: ${homeViewModel.lastAdapterScrollPosition}")
     }
 
     override fun onDestroyView() {
@@ -104,7 +112,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 // Show Empty view when homeCategories is empty
             } else {
                 homeAdapter.submitList(homeCategories.toList())
-                homeAdapter.notifyDataSetChanged()
+                val lastAdapterScrollPosition = homeViewModel.lastAdapterScrollPosition
+                if (lastAdapterScrollPosition != null) {
+                    logD("Scroll to lastAdapterScrollPosition: $lastAdapterScrollPosition")
+                    binding.rvMainHome.scrollToPosition(lastAdapterScrollPosition)
+                }
             }
         }
 

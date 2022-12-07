@@ -35,6 +35,7 @@ class HomeViewModel(
     private val _homeCategories = MutableLiveData<ArrayList<HomeCategoryData>>()
     val homeCategories: LiveData<ArrayList<HomeCategoryData>> = _homeCategories
     var hashmapScrollPosition: HashMap<Int, Parcelable?> = hashMapOf()
+    var lastAdapterScrollPosition: Int? = null
 
     fun getAllDataHome(context: WeakReference<Context>) = viewModelScope.launch(Dispatchers.IO) {
 
