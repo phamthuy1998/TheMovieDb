@@ -1,15 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.thuypham.ptithcm.baseapp.ui.fragment.main.ProfileFragment" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/bot_nav_profile" />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMyProfile"
+            android:layout_width="@dimen/icon_48"
+            android:layout_height="@dimen/icon_48"
+            android:layout_margin="@dimen/default_margin_l"
+            android:scaleType="centerCrop"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/backgrounds/scenic" />
 
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/TextTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin_l"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivMyProfile"
+            app:layout_constraintTop_toTopOf="@id/ivMyProfile"
+            tools:text="@string/empty_data" />
+
+        <TextView
+            android:id="@+id/tvProfileDescription"
+            style="@style/Text14"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin_l"
+            android:textColor="@color/textColor2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivMyProfile"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="@string/profileLoginDescription" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="ivMyProfile, tvProfileDescription" />
+
+        <Button
+            android:id="@+id/tvLoginBtn"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_l"
+            android:background="@drawable/bg_button"
+            android:text="@string/sign_in"
+            app:layout_constraintTop_toBottomOf="@id/barrierUsername" />
+
+        <TextView
+            android:id="@+id/tvList"
+            style="@style/TextTitle.16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_l"
+            android:text="@string/lists"
+            app:layout_constraintTop_toBottomOf="@id/tvLoginBtn" />
+
+        <include
+            android:id="@+id/layoutListItem"
+            layout="@layout/layout_list_item_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_l"
+            android:layout_marginTop="@dimen/default_margin_l"
+            app:fragment="@{fragment}"
+            app:layout_constraintTop_toBottomOf="@id/tvList" />
+
+        <TextView
+            android:id="@+id/tvSetting"
+            style="@style/TextTitle.16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_l"
+            android:text="@string/settings"
+            app:layout_constraintTop_toBottomOf="@id/layoutListItem" />
+
+        <include
+            android:id="@+id/layoutSetting"
+            layout="@layout/layout_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/default_margin_l"
+            android:layout_marginTop="@dimen/default_margin_l"
+            app:layout_constraintTop_toBottomOf="@id/tvSetting" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.thuypham.ptithcm.baseapp.ui.fragment.main.ProfileFragment" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_corner_stroke_gray"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvWatchList"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/watch_list"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin32"
+            android:background="@color/mr_cast_route_divider_dark" />
+
+        <TextView
+            android:id="@+id/tvHistory"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/history"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin32"
+            android:background="@color/mr_cast_route_divider_dark" />
+
+        <TextView
+            android:id="@+id/tvCollection"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/collection"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin32"
+            android:background="@color/mr_cast_route_divider_dark" />
+
+        <TextView
+            android:id="@+id/tvRating"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/ratings"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin32"
+            android:background="@color/mr_cast_route_divider_dark" />
+
+        <TextView
+            android:id="@+id/tvPersonalList"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/personal_lists"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+    </LinearLayout>
+</layout>

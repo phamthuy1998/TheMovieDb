@@ -35,6 +35,7 @@
     <dimen name="text_size_14">14sp</dimen>
     <dimen name="large_icon_size">32dp</dimen>
     <dimen name="avt_corner">16dp</dimen>
+    <dimen name="btn_corner">8dp</dimen>
 
     <dimen name="text_size_18">18sp</dimen>
     <dimen name="trailer_rev_height">150dp</dimen>

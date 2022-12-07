@@ -7,6 +7,11 @@
         <item name="android:textColor">@color/textColor</item>
     </style>
 
+    <style name="TextTitle.16" parent="TextTitle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
     <style name="Shadow">
         <item name="android:shadowDx">10</item>
         <item name="android:shadowDy">10</item>
@@ -96,4 +101,20 @@
         <item name="android:focusable">true</item>
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
+
+    <style name="Button">
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="TextPersonalItem" parent="Text16">
+        <item name="android:background">@drawable/bg_ripple</item>
+        <item name="drawableEndCompat">@drawable/ic_arrow_right</item>
+        <item name="android:clickable">true</item>
+        <item name="android:selectable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingHorizontal">@dimen/padding_l</item>
+        <item name="android:paddingVertical">@dimen/default_padding</item>
+        <item name="android:drawablePadding">@dimen/default_padding</item>
+    </style>
+
 </resources>

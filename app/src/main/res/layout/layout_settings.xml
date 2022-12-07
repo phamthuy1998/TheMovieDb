@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="fragment"
+            type="com.thuypham.ptithcm.baseapp.ui.fragment.main.ProfileFragment" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rounded_corner_stroke_gray"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvGetPremium"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/get_premium"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin32"
+            android:background="@color/mr_cast_route_divider_dark" />
+
+        <TextView
+            android:id="@+id/tvSetting"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/settings"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin32"
+            android:background="@color/mr_cast_route_divider_dark" />
+
+        <TextView
+            android:id="@+id/tvHelp"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/help_feedback"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="@dimen/margin32"
+            android:background="@color/mr_cast_route_divider_dark" />
+
+        <TextView
+            android:id="@+id/tvAbout"
+            style="@style/TextPersonalItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/about"
+            app:drawableStartCompat="@drawable/ic_home" />
+
+    </LinearLayout>
+</layout>

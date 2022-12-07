@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -35,9 +36,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin32"
             android:gravity="center"
-            android:text="@string/empty_data"
             android:textColor="@color/textColor"
-            app:layout_constraintTop_toBottomOf="@id/animationView" />
+            app:layout_constraintTop_toBottomOf="@id/animationView"
+            tools:text="@string/empty_data" />
 
         <TextView
             android:id="@+id/tvEmptyMessageDescription"
@@ -47,9 +48,9 @@
             android:layout_marginHorizontal="@dimen/margin32"
             android:layout_marginTop="@dimen/default_margin"
             android:gravity="center"
-            android:text="@string/empty_data"
             android:textColor="@color/textColor"
-            app:layout_constraintTop_toBottomOf="@id/tvEmptyMessage" />
+            app:layout_constraintTop_toBottomOf="@id/tvEmptyMessage"
+            tools:text="@string/empty_data" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

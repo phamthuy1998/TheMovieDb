@@ -6,6 +6,8 @@ import com.thuypham.ptithcm.baseapp.databinding.FragmentProfileBinding
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     override fun setupView() {
+        binding.run {
 
+        }
     }
 }

@@ -105,10 +105,16 @@ abstract class CommonBaseFragment<T : ViewDataBinding>(private val layoutId: Int
     }
 
     override fun onDestroyView() {
+        super.onDestroyView()
+        logD("onDestroyView")
         clearData()
         hideKeyboard()
         clearViewBinding()
-        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        logD("onDestroy")
     }
 
     /**
