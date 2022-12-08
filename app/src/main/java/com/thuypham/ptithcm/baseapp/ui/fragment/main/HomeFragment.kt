@@ -71,30 +71,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
     private fun onCategoryClick(item: Any) {
         (item as? HomeCategoryData)?.apply {
             when (item.listItems?.first()) {
-                is Movie -> {
-                    navigateToMovieList(type, title)
-                }
-                is MovieGenre -> {
-                    navigateTo(R.id.genresFragment)
-                }
-                is Person -> {
-                    navigateToPeople(title)
-                }
+                is Movie -> navigateToMovieList(type, title)
+                is MovieGenre -> navigateTo(R.id.genresFragment)
+                is Person -> navigateToPeople(title)
             }
         }
     }
 
     private fun onChildItemClick(item: Any) {
         when (item) {
-            is Movie -> {
-                navigateToMovieDetail(item)
-            }
-            is MovieGenre -> {
-                navigateToMovieList(HomeCategoryType.MOVIE_GENRES, item.name, item.id)
-            }
-            is Person -> {
-                navigateToPersonDetail(person = item)
-            }
+            is Movie -> navigateToMovieDetail(item)
+            is MovieGenre -> navigateToMovieList(HomeCategoryType.MOVIE_GENRES, item.name, item.id)
+            is Person -> navigateToPersonDetail(person = item)
         }
     }
 
@@ -119,7 +107,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(R.layout.fragment_home) {
                 }
             }
         }
-
     }
 
     override fun clearData() {
