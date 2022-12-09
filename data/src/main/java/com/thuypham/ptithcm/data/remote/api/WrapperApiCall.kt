@@ -1,6 +1,6 @@
 package com.thuypham.ptithcm.data.remote.api
 
-import android.util.Log
+import com.thuypham.ptithcm.baselib.base.extension.printErrorLog
 import com.thuypham.ptithcm.baselib.base.model.AppException
 import com.thuypham.ptithcm.baselib.base.model.ResponseHandler
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +38,7 @@ suspend inline fun <reified T> wrapApiCall(
             }
         }
     } catch (exp: Exception) {
-        Log.e("wrapApiCall", "Error: ${exp.printStackTrace()}")
+        exp.printErrorLog("wrapApiCall")
         return when (exp) {
             is HttpException -> {
                 ResponseHandler.Error(AppException.NoNetwork)

@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.snackbar.Snackbar
+import com.thuypham.ptithcm.baselib.base.extension.printErrorLog
 import com.thuypham.ptithcm.baselib.base.extension.setOnSingleClickListener
 
 abstract class BaseDialogFragment<T : ViewDataBinding>(private val layoutId: Int) :
@@ -51,7 +52,7 @@ abstract class BaseDialogFragment<T : ViewDataBinding>(private val layoutId: Int
                 hideKeyboard()
             }
         } catch (e: Exception) {
-            Log.e(this::javaClass.name, e.printStackTrace().toString())
+            e.printErrorLog("onViewCreated")
         }
     }
 

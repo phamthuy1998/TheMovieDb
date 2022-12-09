@@ -18,7 +18,7 @@ fun Fragment.navigateTo(destination: Int, bundle: Bundle? = null, option: NavOpt
     try {
         findNavController().navigate(destination, bundle, option)
     } catch (ex: Exception) {
-        Log.d(this.tag, ex.printStackTrace().toString())
+        ex.printErrorLog("navigateTo")
     }
 }
 
@@ -26,7 +26,7 @@ fun Fragment.goBack() {
     try {
         findNavController().popBackStack()
     } catch (ex: Exception) {
-        Log.d(this.tag, ex.printStackTrace().toString())
+        ex.printErrorLog("goBack")
     }
 }
 
@@ -35,7 +35,7 @@ fun Fragment.navigateToWithAction(action: NavDirections) {
     try {
         findNavController().navigate(action)
     } catch (ex: Exception) {
-        Log.d(this.tag, ex.printStackTrace().toString())
+        ex.printErrorLog("navigateToWithAction")
     }
 }
 
